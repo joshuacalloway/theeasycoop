@@ -1,0 +1,14 @@
+@(coopForm: Form[(String,String)])
+@import helper._
+
+
+@main("start a coop") {
+<h1> Start a coop </h1>
+
+  @form(routes.Application.newCoop) {
+  @inputText(coopForm("name"))
+  @inputText(coopForm("manager"))
+  <input type="submit" value="Create">
+  }
+
+}

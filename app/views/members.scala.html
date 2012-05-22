@@ -1,0 +1,24 @@
+@(members: List[Member], memberForm: Form[String])
+
+@import helper._
+
+@main("Todo list") {
+  <h1>@members.size Member(s) </h1>
+  <ul>
+    @members.map { member =>
+    <li>
+      @member.name
+      @form(routes.Application.deleteMember(member.id)) {
+      <input type="submit" value="Delete">
+      }
+    </li>
+    }
+  </ul>
+
+  <h2>Add a new member</h2>
+
+  @form(routes.Application.newMember) {
+  @inputText(memberForm("name"))
+  <input type="submit" value="Create">
+  }
+}

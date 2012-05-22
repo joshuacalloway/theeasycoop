@@ -4,6 +4,12 @@
 
 # Home page
 GET     /                           controllers.Application.index
+GET     /start                      controllers.Application.start
+GET     /test                       controllers.Application.test
+POST    /coops 			    controllers.Application.newCoop()
+GET     /members                    controllers.Application.members
+POST    /members                  controllers.Application.newMember()
+POST    /members/:id/delete       controllers.Application.deleteMember(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
