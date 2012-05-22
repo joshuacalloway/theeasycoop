@@ -1,0 +1,16 @@
+bin/
+data/
+db/
+dist/
+logs/
+test-result/
+lib/
+tmp/
+modules/
+project/project
+project/target
+target
+tmp
+.history
+dist
+*.*~
