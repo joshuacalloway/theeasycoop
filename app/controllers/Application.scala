@@ -19,6 +19,7 @@ object Application extends Controller {
   val coopForm = Form(
     tuple(
       "name" -> nonEmptyText,
+      "description" -> nonEmptyText,
       "manager" -> nonEmptyText
     ))
 
@@ -43,8 +44,8 @@ object Application extends Controller {
   def newCoop = Action { implicit request =>
     coopForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.start(formWithErrors)),
-      {case (name, manager) => {
-        Coop.create(name, manager)
+      {case (name, description, manager) => {
+        Coop.create(name, description, manager)
         Redirect(routes.Application.start())
       }}
      )

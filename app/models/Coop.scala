@@ -5,15 +5,16 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Coop(id: Long, name: String, manager: Long)
+case class Coop(id: Long, name: String, description: String, manager: String)
 
 object Coop {
   
   val coop = {
     get[Long]("id") ~
     get[String]("name") ~
-    get[Long]("manager") map {
-      case id~name~manager => Coop(id, name, manager)
+    get[String]("description") ~
+    get[String]("manager") map {
+      case id~name~description~manager => Coop(id, name, description, manager)
     }
   }
 
@@ -21,10 +22,12 @@ object Coop {
     SQL("select * from coop").as(coop *)
                                            }
 
-  def create(name: String, manager : String) {
+  def create(name: String, description: String, manager : String) {
     DB.withConnection { implicit c =>
-      SQL("insert into Coop (name, manager_id) values ({name}, 1)").on(
-        'name -> name
+      SQL("insert into Coop (name, description, manager_id) select {name}, {description}, id from member where name = {manager}").on(
+        'name -> name,
+        'description -> description,
+        'manager -> manager
       ).executeUpdate()
                      }
   }
