@@ -25,8 +25,10 @@ object CoopController extends Controller {
     val coopOption = Coop.findById(id)
     coopOption match {
       case None => Ok("no coop exists")
-      case Some(coop) => Ok(html.coop.show("hello show coop", coop))
-    }
-//    
+      case Some(coop) => {
+        val members = Member.findByCoopId(coop.id)
+        Ok(html.coop.show(coop, members))
+      }
+    }    
   }
 }

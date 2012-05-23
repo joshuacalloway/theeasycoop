@@ -16,6 +16,11 @@ object Member {
     }
   }
 
+  def findByCoopId(coopId: Long): List[Member] = DB.withConnection
+  {
+    implicit c => SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coopId}").on('coopId -> coopId).as(member *)
+  }
+
   def all(): List[Member] = DB.withConnection { implicit c =>
     SQL("select * from member").as(member *)
                                            }

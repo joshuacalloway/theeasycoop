@@ -1,10 +1,18 @@
-@(message: String, coop: Coop)
+@(coop: Coop, members: List[Member])
 
-@main("Welcome to Play 2.0") {
+@main("Showing Coop") {
     
 @{coop.name}
 <br>
 @{coop.description}
 <br>
 @{coop.manager}
+
+<br>
+Members:
+<ul>
+  @members.map { member =>
+    <li>@member.name
+              }
+</ul>
 }
