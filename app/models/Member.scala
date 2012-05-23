@@ -5,15 +5,21 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Member(id: Long, name: String)
+case class Member(id: Long, name: String, email: Option[String])
 
 object Member {
   
   val member = {
     get[Long]("id") ~
-    get[String]("name") map {
-      case id~name => Member(id, name)
+    get[String]("name") ~
+    get[Option[String]]("email") map {
+      case id~name~email => Member(id, name, email)
     }
+  }
+
+  def findById(id: Long): Option[Member] = DB.withConnection
+  {
+    implicit c => SQL("select * from member where id = {id}").on('id -> id).as(member.singleOpt)
   }
 
   def findByCoopId(coopId: Long): List[Member] = DB.withConnection

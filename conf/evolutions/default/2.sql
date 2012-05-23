@@ -12,6 +12,7 @@ CREATE TABLE coop (
        id integer PRIMARY KEY DEFAULT nextval('coop_id_seq'),
        name varchar(255),
        description varchar(1024),
+       created_at timestamp default now(),
        coop_type_id integer references coop_type(id),
        manager_id integer references member(id)
 );
@@ -21,6 +22,7 @@ CREATE SEQUENCE coop_member_id_seq;
 CREATE TABLE coop_member (
        id integer PRIMARY KEY DEFAULT nextval('coop_member_id_seq'),
        coop_id integer references coop(id),
+       joined_at timestamp default now(),
        member_id integer references member(id)
 );
 

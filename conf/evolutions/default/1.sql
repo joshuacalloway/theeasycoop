@@ -25,8 +25,10 @@ insert into member_status (member_status) values ('SUSPENDED');
 CREATE SEQUENCE member_id_seq;
 CREATE TABLE member (
        id integer PRIMARY KEY DEFAULT nextval('member_id_seq'),
-       name varchar(255),
-       email varchar(255),
+       name varchar(64),
+       email varchar(64),
+       cell varchar(16),
+       address varchar(255),
        member_status_id integer references member_status(id),
        member_type_id integer references member_type(id)
 );
