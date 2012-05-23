@@ -5,17 +5,22 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Coop(id: Long, name: String, description: String, manager: String)
+case class Coop(id: Long, name: String, description: Option[String], manager: String)
 
 object Coop {
   
   val coop = {
     get[Long]("id") ~
     get[String]("name") ~
-    get[String]("description") ~
+    get[Option[String]]("description") ~
     get[String]("manager") map {
       case id~name~description~manager => Coop(id, name, description, manager)
     }
+  }
+
+  def findById(id: Long): Option[Coop] = DB.withConnection
+  {
+    implicit c => SQL("select c.*, m.name as manager from coop c, member m where c.manager_id = m.id and c.id = {id}").on('id -> id).as(Coop.coop.singleOpt)
   }
 
   def all(): List[Coop] = DB.withConnection { implicit c =>
