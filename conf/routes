@@ -7,7 +7,9 @@ GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
 GET     /bulkitems 		    controllers.BulkitemController.list
+GET    	/bulkitems/new     	    controllers.BulkitemController.newRecord
 GET     /bulkitems/:id 		    controllers.BulkitemController.show(id: Long)
+POST    /bulkitems     		    controllers.BulkitemController.saveRecord
 
 GET     /coops 			    controllers.CoopController.list
 GET     /coops/:id 	            controllers.CoopController.show(id: Long)

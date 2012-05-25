@@ -6,11 +6,20 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
+import anorm._
 import views._
 
 import models.Bulkitem
 
 object BulkitemController extends Controller {
+  
+  val form: Form[Bulkitem] = Form(
+    mapping(
+      "id" -> ignored(NotAssigned:Pk[Long]),
+      "name" -> text,
+      "description" -> text,
+      "url" -> text)
+    (Bulkitem.apply)(Bulkitem.unapply))
 
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
@@ -29,4 +38,17 @@ object BulkitemController extends Controller {
       }
     }    
   }
+
+  def newRecord = Action {
+    Ok(html.bulkitem.newRecord(form))
+  }
+
+  def saveRecord = Action { implicit request =>
+    form.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.bulkitem.newRecord(formWithErrors)),
+      bulkitem => {
+        Bulkitem.save(bulkitem)
+        Ok(html.bulkitem.show(bulkitem))
+      }
+      )}
 }

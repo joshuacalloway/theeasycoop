@@ -6,17 +6,17 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Bulkitem(id: Long, name: String, description: Option[String], cost: BigDecimal, url: Option[String])
+case class Bulkitem(id: Pk[Long], name: String, description: String, url: String)
 
 object Bulkitem {
   
   val mapping = {
-    get[Long]("id") ~
+    get[Pk[Long]]("id") ~
     get[String]("name") ~
-    get[Option[String]]("description") ~
-    get[BigDecimal]("cost") ~
-    get[Option[String]]("url") map {
-      case id~name~description~cost~url => Bulkitem(id, name, description, cost, url)
+    get[String]("description") ~
+//    get[BigDecimal]("cost") ~
+    get[String]("url") map {
+      case id~name~description~url => Bulkitem(id, name, description, url)
     }
   }
 
@@ -29,13 +29,18 @@ object Bulkitem {
     SQL("select * from bulkitem").as(mapping *)
                                                }
 
-  def create(name: String, description: Option[String], cost: BigDecimal, url: Option[String]) {
+  def save(bulkitem: Bulkitem) {
+    //if (bulkitem.id == -1) {
+      create(bulkitem.name, bulkitem.description, bulkitem.url)
+    //}
+  }
+
+  def create(name: String, description: String, url: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into bulkitem (name, description, cost, url) select {name}, {description}, {cost}, {url}").on(
+      SQL("insert into bulkitem (name, description, cost, url) select {name}, {description}, 0.99, {url}").on(
         'name -> name,
         'description -> description,
-        'cost -> cost,
-        'url -> url
+         'url -> url
       ).executeUpdate()
                      }
   }
@@ -48,3 +53,4 @@ object Bulkitem {
   }
 
 }
+
