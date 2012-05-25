@@ -5,6 +5,10 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
+
+GET     /bulkitems 		    controllers.BulkitemController.list
+GET     /bulkitems/:id 		    controllers.BulkitemController.show(id: Long)
+
 GET     /coops 			    controllers.CoopController.list
 GET     /coops/:id 	            controllers.CoopController.show(id: Long)
 GET     /coops/:id/members          controllers.CoopController.members(id: Long)
