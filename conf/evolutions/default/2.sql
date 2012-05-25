@@ -26,10 +26,13 @@ CREATE TABLE coop_member (
        member_id integer references member(id)
 );
 
+insert into coop(id, name, description, manager_id) values (0, 'Global Coop', 'Global Coop Open to Anyone', 0);
+
 # --- !Downs
-DROP SEQUENCE coop_type_id_seq;
-DROP TABLE coop_type;
-DROP SEQUENCE coop_id_seq;
-DROP SEQUENCE coop_member_id_seq;
 DROP TABLE coop;
+DROP SEQUENCE coop_id_seq;
+DROP TABLE coop_type;
+DROP SEQUENCE coop_type_id_seq;
 DROP TABLE coop_member;
+DROP SEQUENCE coop_member_id_seq;
+

@@ -9,18 +9,11 @@ create TABLE member_type (
        member_type varchar(64)
        );
 
-insert into member_type (member_type) values ('MANAGER');
-insert into member_type (member_type) values ('REGULAR_MEMBER');
-
 create SEQUENCE member_status_id_seq;
 CREATE TABLE member_status (
        id integer PRIMARY KEY DEFAULT nextval('member_status_id_seq'),
        member_status varchar(255)
 );
-
-insert into member_status (member_status) values ('ACTIVE');
-insert into member_status (member_status) values ('SUSPENDED');
-
 
 CREATE SEQUENCE member_id_seq;
 CREATE TABLE member (
@@ -32,6 +25,13 @@ CREATE TABLE member (
        member_status_id integer references member_status(id),
        member_type_id integer references member_type(id)
 );
+
+
+insert into member_type (member_type) values ('MANAGER');
+insert into member_type (member_type) values ('REGULAR_MEMBER');
+insert into member_status (member_status) values ('ACTIVE');
+insert into member_status (member_status) values ('SUSPENDED');
+insert into member(id, name, member_status_id, member_type_id) values (0, 'Supreme', 1, 1); 
 
 # --- !Downs
 
