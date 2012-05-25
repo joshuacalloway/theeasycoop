@@ -4,13 +4,13 @@
 CREATE SEQUENCE coop_type_id_seq;
 CREATE TABLE coop_type (
        id integer PRIMARY KEY DEFAULT nextval('coop_type_id_seq'),
-       coop_type varchar(255)
+       coop_type varchar(128)
 );
 
 CREATE SEQUENCE coop_id_seq;
 CREATE TABLE coop (
        id integer PRIMARY KEY DEFAULT nextval('coop_id_seq'),
-       name varchar(255),
+       name varchar(128),
        description varchar(1024),
        created_at timestamp default now(),
        coop_type_id integer references coop_type(id),
