@@ -26,6 +26,13 @@ object Coop {
   def all(): List[Coop] = DB.withConnection { implicit c =>
     SQL("select * from coop").as(coop *)
                                            }
+  def addMember(id: Long, member: Member) {
+    DB.withConnection { implicit c =>
+      SQL("insert into coop_member (coop_id, member_id) values ({coop_id}, {member_id})").on(
+        'coop_id -> id,
+        'member_id -> member.id).executeUpdate()
+                     }
+  }
 
   def create(name: String, description: String, manager : String) {
     DB.withConnection { implicit c =>

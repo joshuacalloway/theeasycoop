@@ -17,6 +17,11 @@ object Member {
     }
   }
 
+  def findByName(name: String): Option[Member] = DB.withConnection
+  {
+    implicit c => SQL("select * from member where name = {name}").on('name -> name).as(member.singleOpt)
+  }
+
   def findById(id: Long): Option[Member] = DB.withConnection
   {
     implicit c => SQL("select * from member where id = {id}").on('id -> id).as(member.singleOpt)

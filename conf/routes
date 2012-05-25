@@ -7,6 +7,11 @@ GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 GET     /coops 			    controllers.CoopController.list
 GET     /coops/:id 	            controllers.CoopController.show(id: Long)
+GET     /coops/:id/members          controllers.CoopController.members(id: Long)
+GET     /coops/:id/members/new      controllers.CoopController.newMember(id: Long)
+POST    /coops/:id/members          controllers.CoopController.saveMember(id: Long)
+
+
 POST    /coops 			    controllers.Application.newCoop
 GET     /members                    controllers.Application.members
 GET     /members/:id                controllers.MemberController.show(id: Long)
