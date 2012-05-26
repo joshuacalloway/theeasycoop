@@ -18,9 +18,13 @@ import views._
 import models.AbstractModel
 import helpers.CustomFormats._
 
+//abstract class AbstractForm[+T <: AbstractModel] extends Form[T] {
+//  val mapping: play.api.data.Mapping[T]
+//}
+
 trait AbstractCRUDController extends Controller {
-  type model <: AbstractModel
-  type FormType <: Form[model]
+  type ModelType <: AbstractModel
+  type FormType <: Form[ModelType]
   val form: FormType
   protected val listView = views.html.base.list(model_all)
   protected val indexView = "Your new application is ready."

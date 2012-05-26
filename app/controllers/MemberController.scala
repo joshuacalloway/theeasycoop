@@ -14,7 +14,7 @@ import views._
 import models.Member
 
 object MemberController extends AbstractCRUDController {
-  override type model = Member
+  override type ModelType = Member
   override type FormType = Form[Member]
   val form: Form[Member] = Form(
     mapping(
