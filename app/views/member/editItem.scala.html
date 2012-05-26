@@ -1,0 +1,13 @@
+@(id: Long, theform: Form[Member])
+
+@import helper._
+
+@main("stuff") {
+    
+@form(routes.MemberController.updateItem(id)) {
+@inputText(theform("name"))
+@inputText(theform("email"))
+<input type="submit" value="Update">
+}
+}
+	

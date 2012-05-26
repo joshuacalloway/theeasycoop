@@ -6,47 +6,43 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
+import anorm._
+import anorm.SqlParser._
+
 import views._
 
 import models.Member
-import models.Coop
 
-object MemberController extends Controller {
+object MemberController extends AbstractCRUDController {
+  type model = Member
+  val form: Form[Member] = Form(
+    mapping(
+      "id" -> ignored(NotAssigned:Pk[Long]),
+      "name" -> nonEmptyText,
+      "email" -> optional(text))(Member.apply)(Member.unapply))
 
-  val form = Form(
-    "name" -> nonEmptyText
-  )
+  protected def model_all() = Member.all
+  protected def model_findById(id: Long) = Member.findById(id)
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  override protected val listView = views.html.member.list(model_all)
+
+  def newItem = Action {
+    Ok(html.member.newItem(form))
   }
 
-  def list = Action {
-    Ok(html.member.list(Member.all(), form))
-  }
-
-
-  def showItem(id: Long) = Action {
-    val memberOption = Member.findById(id)
-    memberOption match {
-      case None => Ok("no member exists")
-      case Some(member) => {
-        Ok(html.member.showItem(member))
-      }
-    }    
-  }
-
-  def newItem = Action { implicit request =>
-    form.bindFromRequest.fold(
-      errors => BadRequest(html.member.list(Member.all(), errors)),
-      name => {
-        Member.create(name)
-        Redirect(routes.CoopController.list)
-      }
-    )
-                      }
   def deleteItem(id: Long) = Action {
     Member.delete(id)
-    Redirect(routes.CoopController.list)
+    Redirect(routes.MemberController.list)
+  }
+
+  // def form_fill(item: models.Member) : play.api.data.Form[Member] =
+  //   {
+  //     form.fill(item)
+  //   }
+
+  def editItem(id: Long) = Action {
+    Member.findById(id).map { item =>
+      Ok(html.member.editItem(id, form.fill(item)))
+                           }.getOrElse(NotFound)
   }
 }

@@ -1,4 +1,4 @@
-@(members: List[Member], memberForm: Form[String])
+@(members: List[Member])
 
 @import helper._
 
@@ -7,18 +7,12 @@
   <ul>
     @members.map { member =>
     <li>
-      @member.name
-      @form(routes.MemberController.deleteItem(member.id)) {
+      @member.name - @member.email
+      @form(routes.MemberController.deleteItem(member.id.get)) {
       <input type="submit" value="Delete">
       }
     </li>
     }
   </ul>
 
-  <h2>Add a new member</h2>
-
-  @form(routes.MemberController.newItem) {
-  @inputText(memberForm("name"))
-  <input type="submit" value="Create">
-  }
 }

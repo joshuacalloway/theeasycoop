@@ -7,21 +7,24 @@ GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
 GET     /bulkitems 		    controllers.BulkitemController.list
+POST    /bulkitems     		    controllers.BulkitemController.saveItem
 GET    	/bulkitems/new     	    controllers.BulkitemController.newItem
 GET     /bulkitems/:id 		    controllers.BulkitemController.showItem(id: Long)
-POST    /bulkitems     		    controllers.BulkitemController.saveItem
 
 GET     /bulkitems/:id/edit         controllers.BulkitemController.editItem(id:Long)
 GET     /bulkitems/:id/update       controllers.BulkitemController.updateItem(id:Long)
 
 
 GET     /members                    controllers.MemberController.list
-GET     /members/:id                controllers.MemberController.showItem(id: Long)
-POST    /members                    controllers.MemberController.newItem
-POST    /members/:id/delete         controllers.MemberController.deleteItem(id: Long)
-
+POST    /members                    controllers.MemberController.saveItem
+GET     /members/new 		    controllers.MemberController.newItem
+POST    /members/:id/delete         controllers.MemberController.deleteItem(id:Long)
+GET     /members/:id/edit           controllers.MemberController.editItem(id:Long)
+GET     /members/:id/update         controllers.MemberController.updateItem(id:Long)
+GET     /members/:id                controllers.MemberController.showItem(id:Long)
 
 GET     /coops 			    controllers.CoopController.list
+GET     /coops/ 		    controllers.CoopController.list
 GET     /coops/new 		    controllers.CoopController.newItem
 POST    /coops     		    controllers.CoopController.saveItem
 GET     /coops/:id/edit             controllers.CoopController.editItem(id:Long)

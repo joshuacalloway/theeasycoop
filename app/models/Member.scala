@@ -4,13 +4,22 @@ import anorm._
 import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
+import play.Logger
 
-case class Member(id: Long, name: String, email: Option[String])
+case class Member(id: Pk[Long], name: String, email: Option[String]) extends AbstractModel {
+  
+  def save = {
+    Member.save(this)
+  }
+  def update(id: Long) = {
+    Member.update(id, this)
+  }
+}
 
 object Member {
   
   val member = {
-    get[Long]("id") ~
+    get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[Option[String]]("email") map {
       case id~name~email => Member(id, name, email)
@@ -36,10 +45,15 @@ object Member {
     SQL("select * from member").as(member *)
                                            }
 
-  def create(name: String) {
+  def save(item: Member) {
+    Logger.info("save entry version 1.0... item.id: " + item.id)
+    create(item)
+  }
+
+  def create(item: Member) {
     DB.withConnection { implicit c =>
       SQL("insert into member (name) values ({name})").on(
-        'name -> name
+        'name -> item.name
       ).executeUpdate()
                      }
   }
@@ -50,5 +64,17 @@ object Member {
       ).executeUpdate()
                      }
   }
+
+  def update(id: Long, item: Member) {
+    Logger.info("updating member : " + id + " with email : " + item.email)
+    DB.withConnection { implicit c =>
+      SQL("update member set name={name}, email={email} where id={id}").on(
+        'name -> item.name,
+        'email -> item.email,
+        'id -> id
+      ).executeUpdate()
+                     }
+  }
+
 
 }
