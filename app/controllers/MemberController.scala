@@ -14,7 +14,8 @@ import views._
 import models.Member
 
 object MemberController extends AbstractCRUDController {
-  type model = Member
+  override type model = Member
+  override type FormType = Form[Member]
   val form: Form[Member] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
@@ -23,16 +24,12 @@ object MemberController extends AbstractCRUDController {
 
   protected def model_all() = Member.all
   protected def model_findById(id: Long) = Member.findById(id)
+  protected def model_delete(id: Long) = Member.delete(id)
 
   override protected val listView = views.html.member.list(model_all)
 
   def newItem = Action {
     Ok(html.member.newItem(form))
-  }
-
-  def deleteItem(id: Long) = Action {
-    Member.delete(id)
-    Redirect(routes.MemberController.list)
   }
 
   // def form_fill(item: models.Member) : play.api.data.Form[Member] =

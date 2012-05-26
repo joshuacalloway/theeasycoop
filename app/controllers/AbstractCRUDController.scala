@@ -20,15 +20,17 @@ import helpers.CustomFormats._
 
 trait AbstractCRUDController extends Controller {
   type model <: AbstractModel
-  val form: Form[model]
+  type FormType <: Form[model]
+  val form: FormType
   protected val listView = views.html.base.list(model_all)
   protected val indexView = "Your new application is ready."
   protected val showItemView = views.html.base.showItem
-  protected val newItemView = views.html.base.newItem
   protected val editItemView = views.html.base.editItem
 
-  protected def model_all() : List[AbstractModel]; 
-  protected def model_findById(id: Long) : Option[AbstractModel]; 
+//  protected def newItemView(form: FormType): play.api.mvc.SimpleResult[play.api.templates.Html]
+  protected def model_delete(id: Long) 
+  protected def model_all() : List[AbstractModel] 
+  protected def model_findById(id: Long) : Option[AbstractModel] 
 
 
   def list: play.api.mvc.Action[play.api.mvc.AnyContent] = Action {
@@ -51,10 +53,6 @@ trait AbstractCRUDController extends Controller {
     }    
 
   def newItem: play.api.mvc.Action[play.api.mvc.AnyContent]
-
- // = Action {
- //    Ok(view.newItem(form))
- //  }
 
   def saveItem: play.api.mvc.Action[play.api.mvc.AnyContent] = Action { implicit request =>
     form.bindFromRequest.fold(
@@ -84,4 +82,11 @@ trait AbstractCRUDController extends Controller {
       }
     )
           }
+
+
+  def deleteItem(id: Long): play.api.mvc.Action[play.api.mvc.AnyContent] = Action {
+    model_delete(id)
+    Ok(listView)
+  }
+
 }
