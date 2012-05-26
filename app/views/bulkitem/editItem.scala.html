@@ -1,0 +1,15 @@
+@(id: Long, theform: Form[Bulkitem])
+
+@import helper._
+
+@main("stuff") {
+    
+@form(routes.BulkitemController.updateItem(id)) {
+@inputText(theform("name"))
+@inputText(theform("description"))
+@inputText(theform("cost"))
+@inputText(theform("url"))
+<input type="submit" value="Update">
+}
+}
+	

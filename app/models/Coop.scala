@@ -25,7 +25,7 @@ object Coop {
   }
 
   def all(): List[Coop] = DB.withConnection { implicit c =>
-    SQL("select * from coop").as(mapping *)
+    SQL("select c.*, m.name as manager from coop c, member m where c.manager_id = m.id").as(mapping *)
                                            }
   def addMember(id: Long, member: Member) {
     DB.withConnection { implicit c =>

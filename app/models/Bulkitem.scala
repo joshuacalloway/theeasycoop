@@ -38,19 +38,17 @@ object Bulkitem {
 
   def save(bulkitem: Bulkitem) {
     Logger.info("save entry version 1.0... bulkitem.id: " + bulkitem.id)
-    if (bulkitem.id == NotAssigned) {
-      create(bulkitem)
-    } else 
-      update(bulkitem)
+    create(bulkitem)
   }
 
-  def update(bulkitem: Bulkitem) {
+  def update(id: Long, bulkitem: Bulkitem) {
     DB.withConnection { implicit c =>
-      SQL("update bulkitem set name={name}, description={description}, cost=1.99, url={url} where id={id}").on(
+      SQL("update bulkitem set name={name}, description={description}, cost={cost}, url={url} where id={id}").on(
         'name -> bulkitem.name,
         'description -> bulkitem.description,
-         'url -> bulkitem.url,
-        'id -> bulkitem.id
+        'url -> bulkitem.url,
+        'cost -> bulkitem.cost,
+        'id -> id
       ).executeUpdate()
                      }
   }

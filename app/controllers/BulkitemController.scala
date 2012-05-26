@@ -33,7 +33,7 @@ object BulkitemController extends Controller {
   }
 
   def list = Action {
-    Ok("listing bulkitems")
+    Ok(html.bulkitem.list(Bulkitem.all))
   }
 
   def showItem(id: Long) = Action {
@@ -58,4 +58,23 @@ object BulkitemController extends Controller {
         Ok(html.bulkitem.showItem(bulkitem))
       }
       )}
+
+
+  def editItem(id: Long) = Action {
+    Bulkitem.findById(id).map { item =>
+      Ok(html.bulkitem.editItem(id, form.fill(item)))
+                         }.getOrElse(NotFound)
+  }
+
+  def updateItem(id: Long) = Action { implicit request =>
+    form.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.bulkitem.editItem(id, formWithErrors)),
+      item => {
+        Bulkitem.update(id, item)
+        Ok("saved...")
+      }
+    )
+  }
+
+
 }

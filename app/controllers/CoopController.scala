@@ -59,8 +59,8 @@ object CoopController extends Controller {
   def updateItem(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(html.coop.editItem(id, formWithErrors)),
-      coop => {
-        Coop.update(id, coop)
+      item => {
+        Coop.update(id, item)
         Ok("saved...")
       }
     )
@@ -114,8 +114,8 @@ object CoopController extends Controller {
   }
 
   def editItem(id: Long) = Action {
-    Coop.findById(id).map { coop =>
-      Ok(html.coop.editItem(id, form.fill(coop)))
+    Coop.findById(id).map { item =>
+      Ok(html.coop.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)
   }
 
