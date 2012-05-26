@@ -8,7 +8,7 @@
     @members.map { member =>
     <li>
       @member.name
-      @form(routes.Application.deleteMember(member.id)) {
+      @form(routes.MemberController.deleteItem(member.id)) {
       <input type="submit" value="Delete">
       }
     </li>
@@ -17,7 +17,7 @@
 
   <h2>Add a new member</h2>
 
-  @form(routes.Application.newMember) {
+  @form(routes.MemberController.newItem) {
   @inputText(memberForm("name"))
   <input type="submit" value="Create">
   }

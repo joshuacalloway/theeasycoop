@@ -44,7 +44,8 @@ object CoopController extends Controller {
   }
 
   def list = Action {
-    Ok("listing coops")
+    val items = Coop.all
+    Ok(html.coop.list(items))
   }
 
   val newMemberForm = Form(
