@@ -48,5 +48,6 @@ object CustomFormats
 
 
   implicit val money: Mapping[BigDecimal] = of[BigDecimal]
+  implicit val double: Mapping[Double] = of[Double]
 
 }

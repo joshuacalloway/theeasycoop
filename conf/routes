@@ -12,13 +12,16 @@ GET     /bulkitems/:id 		    controllers.BulkitemController.show(id: Long)
 POST    /bulkitems     		    controllers.BulkitemController.saveRecord
 
 GET     /coops 			    controllers.CoopController.list
+GET     /coops/new 		    controllers.CoopController.newRecord
+POST    /coops     		    controllers.CoopController.saveRecord
+
+
 GET     /coops/:id 	            controllers.CoopController.show(id: Long)
 GET     /coops/:id/members          controllers.CoopController.members(id: Long)
 GET     /coops/:id/members/new      controllers.CoopController.newMember(id: Long)
 POST    /coops/:id/members          controllers.CoopController.saveMember(id: Long)
 
 
-POST    /coops 			    controllers.Application.newCoop
 GET     /members                    controllers.Application.members
 GET     /members/:id                controllers.MemberController.show(id: Long)
 POST    /members                  controllers.Application.newMember()

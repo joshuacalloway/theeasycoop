@@ -1,11 +1,11 @@
-@(coopForm: Form[(String,String,String)])
+@(coopForm: Form[Coop])
 @import helper._
 
 
 @main("start a coop") {
 <h1> Start a coop </h1>
 
-  @form(routes.Application.newCoop) {
+  @form(routes.CoopController.saveRecord) {
   @inputText(coopForm("name"))
   @inputText(coopForm("manager"))
   @textarea(coopForm("description"))
