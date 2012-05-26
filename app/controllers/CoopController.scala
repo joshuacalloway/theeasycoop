@@ -51,13 +51,13 @@ object CoopController extends Controller {
     "name" -> nonEmptyText
   )
 
-  def newRecord = Action {
-    Ok(html.coop.newRecord(form))
+  def newItem = Action {
+    Ok(html.coop.newItem(form))
   }
 
-  def updateRecord(id: Long) = Action { implicit request =>
+  def updateItem(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.coop.editForm(id, formWithErrors)),
+      formWithErrors => BadRequest(html.coop.editItem(id, formWithErrors)),
       coop => {
         Coop.update(id, coop)
         Ok("saved...")
@@ -65,9 +65,9 @@ object CoopController extends Controller {
     )
   }
 
-  def saveRecord = Action { implicit request =>
+  def saveItem = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.coop.newRecord(formWithErrors)),
+      formWithErrors => BadRequest(views.html.coop.newItem(formWithErrors)),
       coop => {
         Coop.save(coop)
         Redirect(routes.Application.start())
@@ -85,7 +85,7 @@ object CoopController extends Controller {
         Coop.addMember(id, memberOption.get)
         val members = Member.findByCoopId(id)
         val coop = Coop.findById(id)
-        Ok(html.coop.show(coop.get, members))
+        Ok(html.coop.showItem(coop.get, members))
       }}
      )
                                    }
@@ -96,25 +96,25 @@ object CoopController extends Controller {
       case None => Ok("no coop exists")
       case Some(coop) => {
         val members = Member.findByCoopId(coop.id.get)
-        Ok(html.coop.show(coop, members))
+        Ok(html.coop.showItem(coop, members))
       }
     }    
   }
 
-  def showRecord(id: Long) = Action {
+  def showItem(id: Long) = Action {
     val coopOption = Coop.findById(id)
     coopOption match {
       case None => Ok("no coop exists")
       case Some(coop) => {
         val members = Member.findByCoopId(coop.id.get)
-        Ok(html.coop.show(coop, members))
+        Ok(html.coop.showItem(coop, members))
       }
     }    
   }
 
-  def editRecord(id: Long) = Action {
+  def editItem(id: Long) = Action {
     Coop.findById(id).map { coop =>
-      Ok(html.coop.editForm(id, form.fill(coop)))
+      Ok(html.coop.editItem(id, form.fill(coop)))
                          }.getOrElse(NotFound)
   }
 

@@ -5,7 +5,7 @@
 @main("Todo list") {
   <h2>Add a new bulk item</h2>
 
-  @form(routes.BulkitemController.saveRecord()) {
+  @form(routes.BulkitemController.saveItem()) {
   @inputText(theform("name"))
   @inputText(theform("description"))
   @inputText(theform("cost"))

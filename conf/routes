@@ -7,18 +7,18 @@ GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
 GET     /bulkitems 		    controllers.BulkitemController.list
-GET    	/bulkitems/new     	    controllers.BulkitemController.newRecord
-GET     /bulkitems/:id 		    controllers.BulkitemController.show(id: Long)
-POST    /bulkitems     		    controllers.BulkitemController.saveRecord
+GET    	/bulkitems/new     	    controllers.BulkitemController.newItem
+GET     /bulkitems/:id 		    controllers.BulkitemController.showItem(id: Long)
+POST    /bulkitems     		    controllers.BulkitemController.saveItem
 
 GET     /coops 			    controllers.CoopController.list
-GET     /coops/new 		    controllers.CoopController.newRecord
-POST    /coops     		    controllers.CoopController.saveRecord
-GET     /coops/:id/edit             controllers.CoopController.editRecord(id:Long)
-GET     /coops/:id/update           controllers.CoopController.updateRecord(id:Long)
+GET     /coops/new 		    controllers.CoopController.newItem
+POST    /coops     		    controllers.CoopController.saveItem
+GET     /coops/:id/edit             controllers.CoopController.editItem(id:Long)
+GET     /coops/:id/update           controllers.CoopController.updateItem(id:Long)
 
 
-GET     /coops/:id 	            controllers.CoopController.showRecord(id: Long)
+GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
 GET     /coops/:id/members          controllers.CoopController.members(id: Long)
 GET     /coops/:id/members/new      controllers.CoopController.newMember(id: Long)
 POST    /coops/:id/members          controllers.CoopController.saveMember(id: Long)

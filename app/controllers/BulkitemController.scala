@@ -36,26 +36,26 @@ object BulkitemController extends Controller {
     Ok("listing bulkitems")
   }
 
-  def show(id: Long) = Action {
+  def showItem(id: Long) = Action {
     val option = Bulkitem.findById(id)
     option match {
       case None => Ok("no bulkitem exists")
       case Some(item) => {
-        Ok(html.bulkitem.show(item))
+        Ok(html.bulkitem.showItem(item))
       }
     }    
   }
 
-  def newRecord = Action {
-    Ok(html.bulkitem.newRecord(form))
+  def newItem = Action {
+    Ok(html.bulkitem.newItem(form))
   }
 
-  def saveRecord = Action { implicit request =>
+  def saveItem = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.bulkitem.newRecord(formWithErrors)),
+      formWithErrors => BadRequest(html.bulkitem.newItem(formWithErrors)),
       bulkitem => {
         Bulkitem.save(bulkitem)
-        Ok(html.bulkitem.show(bulkitem))
+        Ok(html.bulkitem.showItem(bulkitem))
       }
       )}
 }
