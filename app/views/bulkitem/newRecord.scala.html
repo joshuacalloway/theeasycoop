@@ -1,0 +1,15 @@
+@(theform: Form[Bulkitem])
+
+@import helper._
+
+@main("Todo list") {
+  <h2>Add a new bulk item</h2>
+
+  @form(routes.BulkitemController.saveRecord()) {
+  @inputText(theform("name"))
+  @inputText(theform("description"))
+  @inputText(theform("cost"))
+  @inputText(theform("url"))
+  <input type="submit" value="Create">
+  }
+}

@@ -1,23 +1,30 @@
 package controllers
 
+import play.api.db._
+import play.api.Play.current
+
 import play.api._
 import play.api.mvc._
 
+import java.math.BigDecimal
 import play.api.data._
 import play.api.data.Forms._
 
 import anorm._
+import anorm.SqlParser._
 import views._
 
 import models.Bulkitem
+import helpers.CustomFormats._
 
 object BulkitemController extends Controller {
-  
+
   val form: Form[Bulkitem] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> text,
       "description" -> text,
+      "cost" -> money,
       "url" -> text)
     (Bulkitem.apply)(Bulkitem.unapply))
 

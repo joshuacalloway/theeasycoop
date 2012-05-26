@@ -4,19 +4,26 @@ import java.math.BigDecimal
 import anorm._
 import anorm.SqlParser._
 import play.api.db._
+import play.api.data.FormError
 import play.api.Play.current
+import play.Logger
 
-case class Bulkitem(id: Pk[Long], name: String, description: String, url: String)
+case class Bulkitem(id: Pk[Long] = null, name: String, description: String, cost: BigDecimal, url: String) {
+  def save() {
+    Bulkitem.save(this)
+  }
+}
 
 object Bulkitem {
-  
+
+
   val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[String]("description") ~
-//    get[BigDecimal]("cost") ~
+    get[BigDecimal]("cost") ~
     get[String]("url") map {
-      case id~name~description~url => Bulkitem(id, name, description, url)
+      case id~name~cost~description~url => Bulkitem(id, name, cost,description, url)
     }
   }
 
@@ -30,17 +37,31 @@ object Bulkitem {
                                                }
 
   def save(bulkitem: Bulkitem) {
-    //if (bulkitem.id == -1) {
-      create(bulkitem.name, bulkitem.description, bulkitem.url)
-    //}
+    Logger.info("save entry version 1.0... bulkitem.id: " + bulkitem.id)
+    if (bulkitem.id == NotAssigned) {
+      create(bulkitem)
+    } else 
+      update(bulkitem)
   }
 
-  def create(name: String, description: String, url: String) {
+  def update(bulkitem: Bulkitem) {
     DB.withConnection { implicit c =>
-      SQL("insert into bulkitem (name, description, cost, url) select {name}, {description}, 0.99, {url}").on(
-        'name -> name,
-        'description -> description,
-         'url -> url
+      SQL("update bulkitem set name={name}, description={description}, cost=1.99, url={url} where id={id}").on(
+        'name -> bulkitem.name,
+        'description -> bulkitem.description,
+         'url -> bulkitem.url,
+        'id -> bulkitem.id
+      ).executeUpdate()
+                     }
+  }
+
+  def create(bulkitem: Bulkitem) {
+    DB.withConnection { implicit c =>
+      SQL("insert into bulkitem (name, description, cost, url) select {name}, {description}, {cost}, {url}").on(
+        'name -> bulkitem.name,
+        'description -> bulkitem.description,
+        'cost -> bulkitem.cost,
+         'url -> bulkitem.url
       ).executeUpdate()
                      }
   }
