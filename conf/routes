@@ -14,9 +14,11 @@ POST    /bulkitems     		    controllers.BulkitemController.saveRecord
 GET     /coops 			    controllers.CoopController.list
 GET     /coops/new 		    controllers.CoopController.newRecord
 POST    /coops     		    controllers.CoopController.saveRecord
+GET     /coops/:id/edit             controllers.CoopController.editRecord(id:Long)
+GET     /coops/:id/update           controllers.CoopController.updateRecord(id:Long)
 
 
-GET     /coops/:id 	            controllers.CoopController.show(id: Long)
+GET     /coops/:id 	            controllers.CoopController.showRecord(id: Long)
 GET     /coops/:id/members          controllers.CoopController.members(id: Long)
 GET     /coops/:id/members/new      controllers.CoopController.newMember(id: Long)
 POST    /coops/:id/members          controllers.CoopController.saveMember(id: Long)

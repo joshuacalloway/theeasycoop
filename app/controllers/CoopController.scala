@@ -55,6 +55,16 @@ object CoopController extends Controller {
     Ok(html.coop.newRecord(form))
   }
 
+  def updateRecord(id: Long) = Action { implicit request =>
+    form.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.coop.editForm(id, formWithErrors)),
+      coop => {
+        Coop.update(id, coop)
+        Ok("saved...")
+      }
+    )
+  }
+
   def saveRecord = Action { implicit request =>
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.coop.newRecord(formWithErrors)),
@@ -91,7 +101,7 @@ object CoopController extends Controller {
     }    
   }
 
-  def show(id: Long) = Action {
+  def showRecord(id: Long) = Action {
     val coopOption = Coop.findById(id)
     coopOption match {
       case None => Ok("no coop exists")
@@ -101,4 +111,11 @@ object CoopController extends Controller {
       }
     }    
   }
+
+  def editRecord(id: Long) = Action {
+    Coop.findById(id).map { coop =>
+      Ok(html.coop.editForm(id, form.fill(coop)))
+                         }.getOrElse(NotFound)
+  }
+
 }

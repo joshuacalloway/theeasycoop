@@ -4,6 +4,7 @@ import anorm._
 import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
+import play.Logger
 
 case class Coop(id: Pk[Long], name: String, description: Option[String], manager: String)
 
@@ -34,8 +35,20 @@ object Coop {
                      }
   }
   def save(coop: Coop) {
+    Logger.info("save entry version 1.0... coop.id: " + coop.id)
     create(coop)
   }
+
+  def update(id: Long, coop: Coop) {
+    DB.withConnection { implicit c =>
+      SQL("update Coop set name={name}, description={description} where id={id}").on(
+        'name -> coop.name,
+        'description -> coop.description,
+        'id -> id
+      ).executeUpdate()
+                     }
+  }
+
   def create(coop: Coop) {
     DB.withConnection { implicit c =>
       SQL("insert into Coop (name, description, manager_id) select {name}, {description}, id from member where name = {manager}").on(

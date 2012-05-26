@@ -1,0 +1,14 @@
+@(id: Long, theform: Form[Coop])
+
+@import helper._
+
+@main("stuff") {
+    
+@form(routes.CoopController.updateRecord(id)) {
+@inputText(theform("name"))
+@inputText(theform("description"))
+@inputText(theform("manager"))
+<input type="submit" value="Save this coop">
+}
+}
+	
