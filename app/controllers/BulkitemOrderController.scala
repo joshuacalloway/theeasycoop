@@ -42,9 +42,9 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
   override protected def model_delete(id: Long) = BulkitemOrder.delete(id)
   override protected def listView = views.html.bulkitemorder.list(model_all)
   
-  // def list = Action {
-  //   Ok(html.bulkitemorder.list(BulkitemOrder.all))
-  // }
+  def listByCoop(id: Long) = Action {
+    Ok(html.bulkitemorder.list(BulkitemOrder.findByCoopId(id)))
+  }
 
  def newItem = IsAuthenticated { _ => _ =>
       Ok(html.bulkitemorder.newItem(form)) 

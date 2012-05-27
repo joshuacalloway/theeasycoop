@@ -7,7 +7,7 @@
   <ul>
     @items.map { i =>
     <li>
-      @i.id | @i.bulkitem.name ( @i.bulkitem_id )  | @i.minimumbuyers | @i.deadline_by | @i.deliveryaddress | @i.created_at | @i.createdBy().name ( @i.created_by_id )
+      @i.id | @i.bulkitem.name ( @i.bulkitem_id )  | @i.minimumbuyers |@i.itemcost| @i.itemdescription| @i.deadline_by | @i.deliveryaddress | @i.created_at | @i.createdBy().name ( @i.created_by_id )
     </li>
     }
   </ul>

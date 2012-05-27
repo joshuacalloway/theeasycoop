@@ -10,7 +10,7 @@ import play.api.Play.current
 import play.Logger
 
 
-case class BulkitemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: Int, breakupcost: BigDecimal, breakupdescription: String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, coop_id: Int) extends AbstractModel {
+case class BulkitemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: Int, itemcost: BigDecimal, itemdescription: String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, coop_id: Int) extends AbstractModel {
   val name: String = "UNDEFINED"
 
   def save = {
@@ -46,6 +46,12 @@ object BulkitemOrder {
       case id~bulkitem_id~minimumbuyers~itemcost~itemdescription~deadline_by~deliveryaddress~created_at~created_by_id~coop_id => BulkitemOrder(id,bulkitem_id,minimumbuyers,itemcost,itemdescription,deadline_by,deliveryaddress,created_at,created_by_id,coop_id)
 
     }
+  }
+
+
+  def findByCoopId(id: Long): List[BulkitemOrder] = DB.withConnection
+  {
+    implicit c => SQL("select * from bulkitemorder where coop_id = {id}").on('id -> id).as(BulkitemOrder.mapping *)
   }
 
   def findById(id: Long): Option[BulkitemOrder] = DB.withConnection

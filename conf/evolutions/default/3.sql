@@ -33,7 +33,11 @@ create table bulkitemorder_member (
        bulkitemorder_id integer references bulkitemorder(id)
        );
 
+insert into bulkitemorder(id, bulkitem_id, minimumbuyers, itemcost, itemdescription, deadline_by, deliveryaddress, created_at, created_by_id, coop_id) values (1, 1, 10, 30.10, '1 lb of salmon each', '2012-09-01', '1515 N Wicker', now(), 0, 0);
+
+
 # --- !Downs
+
 
 drop table bulkitemorder_member;
 DROP TABLE bulkitemorder;
