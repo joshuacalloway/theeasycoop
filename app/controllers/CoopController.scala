@@ -9,8 +9,9 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc._
 import views._
+import actions.Secured
 
-object CoopController extends AbstractCRUDController {
+object CoopController extends AbstractCRUDController with Secured {
   override type ModelType = Coop
 
   val form: Form[Coop] = Form(
@@ -27,9 +28,9 @@ object CoopController extends AbstractCRUDController {
   override protected def listView = views.html.coop.list(model_all)
   
 
-  def newItem = Action {
-    Ok(html.coop.newItem(form))
-  }
+  def newItem = IsAuthenticated { _ => _ =>
+      Ok(html.coop.newItem(form)) 
+                               }
 
   override def showItem(id: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =
     Action {

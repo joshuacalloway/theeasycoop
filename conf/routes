@@ -6,6 +6,12 @@
 GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
+# Authentication
+GET     /login                              actions.LoginAction.login
+POST    /login                              actions.LoginAction.authenticate
+GET     /logout                             actions.LoginAction.logout
+
+
 GET     /bulkitems 		    controllers.BulkitemController.list
 POST    /bulkitems     		    controllers.BulkitemController.saveItem
 GET    	/bulkitems/new     	    controllers.BulkitemController.newItem

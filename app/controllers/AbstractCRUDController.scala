@@ -81,7 +81,9 @@ trait AbstractCRUDController extends Controller {
   // = {
  //    method(param)
  //  } 
-  def newItem: play.api.mvc.Action[play.api.mvc.AnyContent]
+  def newItem: play.api.mvc.Action[(play.api.mvc.Action[play.api.mvc.AnyContent], play.api.mvc.AnyContent)]
+
+// play.api.mvc.Action[play.api.mvc.AnyContent]
   // = {
   //   Ok(applyViewMethod(newItemView.apply _, form))
   // }

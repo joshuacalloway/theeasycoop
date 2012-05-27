@@ -7,8 +7,9 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc._
 import views._
+import actions.Secured
 
-object MemberController extends AbstractCRUDController {
+object MemberController extends AbstractCRUDController with Secured {
   override type ModelType = Member
   override type FormType = AbstractForm[Member]
   val form: Form[Member] = AbstractForm(
@@ -28,9 +29,11 @@ object MemberController extends AbstractCRUDController {
   override protected def model_delete(id: Long) = Member.delete(id)
   override protected def listView = views.html.member.list(model_all)
 
-  def newItem = Action {
-    Ok(html.member.newItem(form))
-  }
+
+  //def newItem = Action { Ok(html.member.newItem(form)) }
+  def newItem = IsAuthenticated { _ => _ =>
+      Ok(html.member.newItem(form)) 
+                               }
 
   def editItem(id: Long) = Action {
     Member.findById(id).map { item =>

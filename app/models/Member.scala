@@ -32,17 +32,23 @@ object Member {
     }
   }
   
-  // val mapping = {
-  //   get[Pk[Long]]("id") ~
-  //   get[String]("name") ~
-  //   get[Option[String]]("email") ~
-  //   get[String]("password")
-  //   get[Int]("member_status_id") ~
-  //   get[Int]("member_type_id") map {
-  //     case id~name~email~password~member_status_id~member_type_id => Member(id, name, email,password,member_status_id,member_type_id)
-  //   }
-  // }
-
+  /**
+   * Authenticate a User.
+   */
+  def authenticate(email: String, password: String): Option[Member] = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+         select * from member where 
+         email = {email} and password = {password}
+        """
+      ).on(
+        'email -> email,
+        'password -> password
+      ).as(Member.mapping.singleOpt)
+    }
+  }
+   
   /**
    * Construct the Map[String,String] needed to fill a select options set.
    */

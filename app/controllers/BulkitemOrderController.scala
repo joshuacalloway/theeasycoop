@@ -16,8 +16,10 @@ import views._
 
 import models.BulkitemOrder
 import helpers.CustomFormats._
+import actions.Secured
 
-object BulkitemOrderController extends AbstractCRUDController {
+
+object BulkitemOrderController extends AbstractCRUDController with Secured {
   override type ModelType = BulkitemOrder
 
   val form: Form[BulkitemOrder] = Form(
@@ -44,9 +46,9 @@ object BulkitemOrderController extends AbstractCRUDController {
   //   Ok(html.bulkitemorder.list(BulkitemOrder.all))
   // }
 
-  def newItem = Action {
-    Ok(html.bulkitemorder.newItem(form))
-  }
+ def newItem = IsAuthenticated { _ => _ =>
+      Ok(html.bulkitemorder.newItem(form)) 
+                              }
 
   def editItem(id: Long) = Action {
     BulkitemOrder.findById(id).map { item =>
