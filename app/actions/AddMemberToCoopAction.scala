@@ -1,30 +1,13 @@
 package actions
 
-import play.api._
-import play.api.mvc._
-
-import play.api.data._
-import play.api.data.Forms._
-
-import play.api.db._
-import play.api.Play.current
-
-import play.api._
-import play.api.mvc._
-
-import java.math.BigDecimal
-import play.api.data._
-import play.api.data.Forms._
-
-import anorm._
-import anorm.SqlParser._
-import views._
-
 import models.Coop
 import models.Member
-import helpers.CustomFormats._
-
-
+import play.api.Play.current
+import play.api._
+import play.api.data.Forms._
+import play.api.data._
+import play.api.mvc._
+import views._
 
 object AddMemberToCoopAction extends Controller {
 
@@ -33,12 +16,12 @@ object AddMemberToCoopAction extends Controller {
   )
 
   def actionForm(id: Long) = Action {
-    Ok(html.coop.newMember(id, form))
+    Ok(html.coop.addMember(id, form))
   }
 
   def submitForm(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.coop.newMember(id, formWithErrors)),
+      formWithErrors => BadRequest(views.html.coop.addMember(id, formWithErrors)),
       {case (name) => {
         val memberOption = Member.findByName(name)
         Coop.addMember(id, memberOption.get)

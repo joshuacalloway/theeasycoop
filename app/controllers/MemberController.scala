@@ -1,16 +1,12 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-
-import play.api.data._
-import play.api.data.Forms._
-
 import anorm._
-import anorm.SqlParser._
-
-import views._
 import models.Member
+import play.api._
+import play.api.data.Forms._
+import play.api.data._
+import play.api.mvc._
+import views._
 
 object MemberController extends AbstractCRUDController {
   override type ModelType = Member

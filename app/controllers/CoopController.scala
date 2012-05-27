@@ -1,34 +1,14 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-
-import play.api.data._
-import play.api.data.Forms._
-
-import views._
 import anorm._
-import anorm.SqlParser._
+import models.Coop
 import models.Member
-import models.Coop
-
-
-import play.api.db._
 import play.api.Play.current
-
 import play.api._
-import play.api.mvc._
-
-import java.math.BigDecimal
-import play.api.data._
 import play.api.data.Forms._
-
-import anorm._
-import anorm.SqlParser._
+import play.api.data._
+import play.api.mvc._
 import views._
-
-import models.Coop
-import helpers.CustomFormats._
 
 object CoopController extends AbstractCRUDController {
   override type ModelType = Coop
@@ -41,10 +21,6 @@ object CoopController extends AbstractCRUDController {
       "manager_id" -> number
     )(Coop.apply)(Coop.unapply))
 
-  val newMemberForm = Form(
-    "name" -> nonEmptyText
-  )
-
   override protected def model_all() = Coop.all
   override protected def model_findById(id: Long) = Coop.findById(id)
   override protected def model_delete(id: Long) = Coop.delete(id)
@@ -54,24 +30,6 @@ object CoopController extends AbstractCRUDController {
   def newItem = Action {
     Ok(html.coop.newItem(form))
   }
-
-  // def newMember(id: Long) = Action {
-  //   Ok(html.coop.newMember(id, newMemberForm))
-  // }
-
-  // def saveMember(id: Long) = Action { implicit request =>
-  //   newMemberForm.bindFromRequest.fold(
-  //     formWithErrors => BadRequest(views.html.coop.newMember(id, formWithErrors)),
-  //     {case (name) => {
-  //       val memberOption = Member.findByName(name)
-  //       Coop.addMember(id, memberOption.get)
-  //       val members = Member.findByCoopId(id)
-  //       val coop = Coop.findById(id)
-  //       Ok(html.coop.showItem(coop.get, members))
-  //     }}
-  //    )
-  //                                  }
-
 
   override def showItem(id: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =
     Action {
