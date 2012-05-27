@@ -9,13 +9,13 @@ import play.api.data._
 import play.api.mvc._
 import views._
 
-object AddMemberToCoopAction extends Controller {
+object AddMemberToCoopAction extends Controller with Secured {
 
   val form = Form(
     "name" -> nonEmptyText
   )
 
-  def actionForm(id: Long) = Action {
+  def actionForm(id: Long) = IsManagerOf(id) { _ => _ =>
     Ok(html.coop.addMember(id, form))
   }
 
