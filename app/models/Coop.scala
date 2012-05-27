@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Coop(id: Pk[Long], name: String, description: Option[String], manager: String) extends AbstractModel {
+case class Coop(id: Pk[Long], name: String, description: Option[String], manager_id: Int) extends AbstractModel {
 
   def save = {
     Coop.save(this)
@@ -16,6 +16,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], manager
   }
   def all = Coop.all
 
+  def manager = Member.findById(manager_id).get
 }
 
 object Coop {
@@ -24,8 +25,8 @@ object Coop {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[Option[String]]("description") ~
-    get[String]("manager") map {
-      case id~name~description~manager => Coop(id, name, description, manager)
+    get[Int]("manager_id") map {
+      case id~name~description~manager_id => Coop(id, name, description, manager_id)
     }
   }
 

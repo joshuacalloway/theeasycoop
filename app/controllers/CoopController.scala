@@ -38,7 +38,7 @@ object CoopController extends AbstractCRUDController {
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
       "description" -> optional(nonEmptyText),
-      "manager" -> nonEmptyText
+      "manager_id" -> number
     )(Coop.apply)(Coop.unapply))
 
   val newMemberForm = Form(
@@ -55,22 +55,22 @@ object CoopController extends AbstractCRUDController {
     Ok(html.coop.newItem(form))
   }
 
-  def newMember(id: Long) = Action {
-    Ok(html.coop.newMember(id, newMemberForm))
-  }
+  // def newMember(id: Long) = Action {
+  //   Ok(html.coop.newMember(id, newMemberForm))
+  // }
 
-  def saveMember(id: Long) = Action { implicit request =>
-    newMemberForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.coop.newMember(id, formWithErrors)),
-      {case (name) => {
-        val memberOption = Member.findByName(name)
-        Coop.addMember(id, memberOption.get)
-        val members = Member.findByCoopId(id)
-        val coop = Coop.findById(id)
-        Ok(html.coop.showItem(coop.get, members))
-      }}
-     )
-                                   }
+  // def saveMember(id: Long) = Action { implicit request =>
+  //   newMemberForm.bindFromRequest.fold(
+  //     formWithErrors => BadRequest(views.html.coop.newMember(id, formWithErrors)),
+  //     {case (name) => {
+  //       val memberOption = Member.findByName(name)
+  //       Coop.addMember(id, memberOption.get)
+  //       val members = Member.findByCoopId(id)
+  //       val coop = Coop.findById(id)
+  //       Ok(html.coop.showItem(coop.get, members))
+  //     }}
+  //    )
+  //                                  }
 
 
   override def showItem(id: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =

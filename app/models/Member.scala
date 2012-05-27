@@ -53,8 +53,9 @@ object Member {
 
   def create(item: Member) {
     DB.withConnection { implicit c =>
-      SQL("insert into member (name) values ({name})").on(
-        'name -> item.name
+      SQL("insert into member (name, email) values ({name}, {email})").on(
+        'name -> item.name,
+        'email -> item.email
       ).executeUpdate()
                      }
   }

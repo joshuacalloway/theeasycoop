@@ -38,8 +38,8 @@ GET     /coops/:id/update           controllers.CoopController.updateItem(id:Lon
 
 GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
 GET     /coops/:id/members          controllers.CoopController.members(id: Long)
-GET     /coops/:id/members/new      controllers.CoopController.newMember(id: Long)
-POST    /coops/:id/members          controllers.CoopController.saveMember(id: Long)
+GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id: Long)
+POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id: Long)
 
 
 

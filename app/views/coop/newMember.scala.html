@@ -1,11 +1,12 @@
 @(id: Long, memberForm: Form[String])
 
 @import helper._
+@import actions.routes._
 
 @main("Todo list") {
   <h2>Add a new member</h2>
 
-  @form(routes.CoopController.saveMember(id)) {
+  @form(AddMemberToCoopAction.submitForm(id)) {
   @inputText(memberForm("name"))
   <input type="submit" value="Create">
   }
