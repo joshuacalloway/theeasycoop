@@ -25,6 +25,8 @@ object BulkitemOrderController extends AbstractCRUDController {
       "id" -> ignored(NotAssigned:Pk[Long]),
       "bulkitem_id" -> number,
       "minimumbuyers" -> number,
+      "itemcost" -> money,
+      "itemdescription" -> text,
       "deadline_by" -> date("yyyy-MM-dd"),
       "deliveryaddress" -> text,
       "created_at" -> date("yyyy-MM-dd"),
