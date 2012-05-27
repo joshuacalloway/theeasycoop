@@ -30,7 +30,9 @@ import views._
 import models.Coop
 import helpers.CustomFormats._
 
-object CoopController extends Controller {
+object CoopController extends AbstractCRUDController {
+  override type ModelType = Coop
+
   val form: Form[Coop] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
@@ -39,40 +41,18 @@ object CoopController extends Controller {
       "manager" -> nonEmptyText
     )(Coop.apply)(Coop.unapply))
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
-  }
-
-  def list = Action {
-    val items = Coop.all
-    Ok(html.coop.list(items))
-  }
-
   val newMemberForm = Form(
     "name" -> nonEmptyText
   )
 
+  override protected def model_all() = Coop.all
+  override protected def model_findById(id: Long) = Coop.findById(id)
+  override protected def model_delete(id: Long) = Coop.delete(id)
+  override protected def listView = views.html.coop.list(model_all)
+
   def newItem = Action {
     Ok(html.coop.newItem(form))
   }
-
-  def updateItem(id: Long) = Action { implicit request =>
-    form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.coop.editItem(id, formWithErrors)),
-      item => {
-        Coop.update(id, item)
-        Ok("saved...")
-      }
-    )
-  }
-
-  def saveItem = Action { implicit request =>
-    form.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.coop.newItem(formWithErrors)),
-      coop => {
-        Coop.save(coop)
-        Redirect(routes.Application.start())
-      })}
 
   def newMember(id: Long) = Action {
     Ok(html.coop.newMember(id, newMemberForm))
@@ -92,17 +72,6 @@ object CoopController extends Controller {
                                    }
 
   def members(id: Long) = Action {
-    val coopOption = Coop.findById(id)
-    coopOption match {
-      case None => Ok("no coop exists")
-      case Some(coop) => {
-        val members = Member.findByCoopId(coop.id.get)
-        Ok(html.coop.showItem(coop, members))
-      }
-    }    
-  }
-
-  def showItem(id: Long) = Action {
     val coopOption = Coop.findById(id)
     coopOption match {
       case None => Ok("no coop exists")

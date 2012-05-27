@@ -21,7 +21,7 @@ object MemberController extends AbstractCRUDController {
       "name" -> nonEmptyText,
       "email" -> optional(text))(Member.apply)(Member.unapply))
 
-  protected def model_all() = {
+  override protected def model_all() = {
     Logger.info("model_all called")
     Member.all
   }

@@ -6,7 +6,17 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Coop(id: Pk[Long], name: String, description: Option[String], manager: String)
+case class Coop(id: Pk[Long], name: String, description: Option[String], manager: String) extends AbstractModel {
+
+  def save = {
+    Coop.save(this)
+  }
+  def update(id: Long) = {
+    Coop.update(id, this)
+  }
+  def all = Member.all
+
+}
 
 object Coop {
   
