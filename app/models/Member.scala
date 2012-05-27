@@ -15,6 +15,8 @@ case class Member(id: Pk[Long], name: String, email: Option[String]) extends Abs
     Member.update(id, this)
   }
   def all = Member.all
+
+  
 }
 
 object Member {
@@ -25,6 +27,13 @@ object Member {
     get[Option[String]]("email") map {
       case id~name~email => Member(id, name, email)
     }
+  }
+
+  /**
+   * Construct the Map[String,String] needed to fill a select options set.
+   */
+  def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
+    SQL("select * from member order by name").as(Member.member *).map(c => c.id.toString -> c.name)
   }
 
   def findByName(name: String): Option[Member] = DB.withConnection

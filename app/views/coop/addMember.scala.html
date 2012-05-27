@@ -1,4 +1,4 @@
-@(id: Long, memberForm: Form[String])
+@(id: Long, theform: Form[String])
 
 @import helper._
 @import actions.routes._
@@ -7,7 +7,13 @@
   <h2>Add a new member</h2>
 
   @form(AddMemberToCoopAction.submitForm(id)) {
-  @inputText(memberForm("name"))
+  @select(
+  theform("name"), 
+  Member.options,
+  '_label -> "Member", 
+  '_default -> "-- Choose a member --", 
+  '_showConstraints -> false)
+
   <input type="submit" value="Create">
   }
 }

@@ -22,8 +22,8 @@ object AddMemberToCoopAction extends Controller {
   def submitForm(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.coop.addMember(id, formWithErrors)),
-      {case (name) => {
-        val memberOption = Member.findByName(name)
+      {case (value) => {
+        val memberOption = Member.findById(value.toInt)
         Coop.addMember(id, memberOption.get)
         val members = Member.findByCoopId(id)
         val coop = Coop.findById(id)
