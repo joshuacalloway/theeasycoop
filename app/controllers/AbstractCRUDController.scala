@@ -1,27 +1,26 @@
 package controllers
 
-import play.api.db._
-import play.api.Play.current
 
-import play.api._
-import play.api.mvc._
-import play.api.data.Form
 
-import java.math.BigDecimal
-import play.api.data._
-import play.api.data.Forms._
 
-import anorm._
 import anorm.SqlParser._
+import anorm._
+import helpers.CustomFormats._
+import java.math.BigDecimal
+import models.AbstractModel
+import play.api.Play.current
+import play.api._
+import play.api.data.Form
+import play.api.data.Forms._
+import play.api.data._
+import play.api.db._
+import play.api.mvc._
 import views._
 
-import models.AbstractModel
-import helpers.CustomFormats._
 
 //abstract class AbstractForm[+T <: AbstractModel] extends Form[T] {
 //  val mapping: play.api.data.Mapping[T]
 //}
-import models.AbstractModel
 
 // val mapping: Mapping[AbstractModel] = Nil
 // val errors: Seq[FormError] = Nil
