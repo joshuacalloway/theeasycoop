@@ -11,6 +11,8 @@ CREATE TABLE bulkitem (
        url varchar(128)
 );
 
+insert into bulkitem(id, name, description, cost, url) values (1, 'Fresh Salmon Sushi Grade', '10 lbs the very best', 300.99, 'salmon.com');
+
 CREATE SEQUENCE bulkitemorder_id_seq;
 CREATE TABLE bulkitemorder (
        id integer PRIMARY KEY DEFAULT nextval('bulkitemorder_id_seq'),
