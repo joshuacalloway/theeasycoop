@@ -15,7 +15,7 @@ CREATE SEQUENCE bulkitemorder_id_seq;
 CREATE TABLE bulkitemorder (
        id integer PRIMARY KEY DEFAULT nextval('bulkitemorder_id_seq'),
        bulkitem_id integer references bulkitem(id),
-       miniumumbuyers integer,
+       minimumbuyers integer,
        deadline_by timestamp,
        deliveryaddress varchar(128),
        created_at timestamp default now(),

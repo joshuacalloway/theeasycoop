@@ -14,7 +14,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], manager
   def update(id: Long) = {
     Coop.update(id, this)
   }
-  def all = Member.all
+  def all = Coop.all
 
 }
 

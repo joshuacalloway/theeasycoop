@@ -1,0 +1,20 @@
+@(theform: Form[BulkitemOrder])
+
+@import helper._
+
+@main("Todo list") {
+  <h2>Add a new item</h2>
+
+  @form(routes.BulkitemOrderController.saveItem) {
+  @inputText(theform("bulkitem_id"))
+  @inputText(theform("minimumbuyers"))
+  @inputText(theform("deadline_by"))
+  @inputText(theform("deliveryaddress"))
+  @inputText(theform("created_at"))
+  @inputText(theform("created_by_id"))
+  @inputText(theform("coop_id"))
+    
+  <input type="submit" value="Create">
+  }
+
+}
