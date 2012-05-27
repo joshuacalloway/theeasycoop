@@ -7,6 +7,7 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc._
 import views._
+import models.Coop
 
 object LoginAction extends Controller {
 
@@ -73,6 +74,21 @@ trait Secured {
   def IsAuthenticated(f: => String => Request[AnyContent] => Result) = Security.Authenticated(username, onUnauthorized) { user =>
     Action(request => f(user)(request))
   }
+
+  def IsManagerOf(id: Long)(f: => String => Request[AnyContent] => Result) = IsAuthenticated { user => request =>
+    if(Coop.isManagerOf(id, user)) {
+      f(user)(request)
+    } else {
+      Results.Forbidden
+    }
+                                                                                              }
+
+  //   if(Project.isMember(project, user)) {
+  //     f(user)(request)
+  //   } else {
+  //     Results.Forbidden
+  //   }
+  // }
 
   // /**
   //  * Check if the connected user is a member of this project.

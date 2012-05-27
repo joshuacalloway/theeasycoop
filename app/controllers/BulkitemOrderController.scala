@@ -50,7 +50,7 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
       Ok(html.bulkitemorder.newItem(form)) 
                               }
 
-  def editItem(id: Long) = Action {
+  def editItem(id: Long) = IsAuthenticated { _ => _ =>
     BulkitemOrder.findById(id).map { item =>
       Ok(html.bulkitemorder.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)

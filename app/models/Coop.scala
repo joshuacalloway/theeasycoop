@@ -17,6 +17,10 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], manager
   def all = Coop.all
 
   def manager = Member.findById(manager_id).get
+
+  def isManager(member: Member) : Boolean = {
+    member.id == manager.id
+  }
 }
 
 object Coop {
@@ -30,6 +34,12 @@ object Coop {
     }
   }
 
+  def isManagerOf(id: Long , email: String): Boolean= {
+    val coop = Coop.findById(id).get
+    val ret = coop.isManager(Member.findByEmail(email).get)
+    Logger.info("isManagerOf, coop : " + coop.name +", email : " + email)
+    ret
+  }
   def findById(id: Long): Option[Coop] = DB.withConnection
   {
     implicit c => SQL("select c.*, m.name as manager from coop c, member m where c.manager_id = m.id and c.id = {id}").on('id -> id).as(Coop.mapping.singleOpt)

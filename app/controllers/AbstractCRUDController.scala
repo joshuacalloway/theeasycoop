@@ -1,8 +1,5 @@
 package controllers
 
-
-
-
 import anorm.SqlParser._
 import anorm._
 import helpers.CustomFormats._
@@ -98,7 +95,7 @@ trait AbstractCRUDController extends Controller {
 
   // def form_fill(item:model) : play.api.data.Form[model]
 
-  def editItem(id: Long): play.api.mvc.Action[play.api.mvc.AnyContent]
+  def editItem(id: Long): play.api.mvc.Action[(play.api.mvc.Action[play.api.mvc.AnyContent], play.api.mvc.AnyContent)]
   // = Action {
   //   model_findById(id).map { item =>
   //     Ok(editItemView(id, form_fill(item)))

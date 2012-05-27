@@ -56,7 +56,7 @@ object CoopController extends AbstractCRUDController with Secured {
     }    
   }
 
-  def editItem(id: Long) = Action {
+  def editItem(id: Long) = IsManagerOf(id) { _ => _ =>
     Coop.findById(id).map { item =>
       Ok(html.coop.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)

@@ -61,6 +61,11 @@ object Member {
     implicit c => SQL("select * from member where name = {name}").on('name -> name).as(mapping.singleOpt)
   }
 
+  def findByEmail(email: String): Option[Member] = DB.withConnection
+  {
+    implicit c => SQL("select * from member where email = {email}").on('email -> email).as(mapping.singleOpt)
+  }
+
   def findById(id: Long): Option[Member] = DB.withConnection
   {
     implicit c => SQL("select * from member where id = {id}").on('id -> id).as(mapping.singleOpt)
