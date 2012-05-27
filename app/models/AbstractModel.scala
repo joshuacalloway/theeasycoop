@@ -11,20 +11,8 @@ import play.Logger
 
 abstract class AbstractModel {
   val name: String
-  //val mapping: Mapping;
-
   def save
   def update(id: Long)
-  // def findById(id: Long): Option[AbstractModel];
-
-
-  // def save(item: AbstractModel);
-
-  // def update(id: Long, item: AbstractModel);
-
-  // def create(item: AbstractModel);
-
-  // def delete(id: Long);
-
+  def all : List[AbstractModel]
 }
 

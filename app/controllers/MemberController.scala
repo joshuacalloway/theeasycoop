@@ -10,32 +10,28 @@ import anorm._
 import anorm.SqlParser._
 
 import views._
-
 import models.Member
 
 object MemberController extends AbstractCRUDController {
   override type ModelType = Member
-  override type FormType = Form[Member]
-  val form: Form[Member] = Form(
+  override type FormType = AbstractForm[Member]
+  val form: Form[Member] = AbstractForm(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
       "email" -> optional(text))(Member.apply)(Member.unapply))
 
-  protected def model_all() = Member.all
-  protected def model_findById(id: Long) = Member.findById(id)
-  protected def model_delete(id: Long) = Member.delete(id)
-
-  override protected val listView = views.html.member.list(model_all)
+  protected def model_all() = {
+    Logger.info("model_all called")
+    Member.all
+  }
+  override protected def model_findById(id: Long) = Member.findById(id)
+  override protected def model_delete(id: Long) = Member.delete(id)
+  override protected def listView = views.html.member.list(model_all)
 
   def newItem = Action {
     Ok(html.member.newItem(form))
   }
-
-  // def form_fill(item: models.Member) : play.api.data.Form[Member] =
-  //   {
-  //     form.fill(item)
-  //   }
 
   def editItem(id: Long) = Action {
     Member.findById(id).map { item =>

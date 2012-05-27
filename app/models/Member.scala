@@ -14,6 +14,7 @@ case class Member(id: Pk[Long], name: String, email: Option[String]) extends Abs
   def update(id: Long) = {
     Member.update(id, this)
   }
+  def all = Member.all
 }
 
 object Member {
