@@ -15,7 +15,10 @@ object MemberController extends AbstractCRUDController {
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
-      "email" -> optional(text))(Member.apply)(Member.unapply))
+      "email" -> optional(text),
+      "password" -> nonEmptyText,
+      "member_status_id" -> number,
+      "member_type_id" -> number)(Member.apply)(Member.unapply))
 
   override protected def model_all() = {
     Logger.info("model_all called")

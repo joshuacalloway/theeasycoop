@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Member(id: Pk[Long], name: String, email: Option[String]) extends AbstractModel {
+case class Member(id: Pk[Long], name: String, email: Option[String], password: String, memberStatusId: Int, memberTypeId: Int) extends AbstractModel {
   
   def save = {
     Member.save(this)
@@ -20,39 +20,53 @@ case class Member(id: Pk[Long], name: String, email: Option[String]) extends Abs
 }
 
 object Member {
-  
-  val member = {
+
+  val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
-    get[Option[String]]("email") map {
-      case id~name~email => Member(id, name, email)
+    get[Option[String]]("email") ~
+    get[String]("password") ~
+    get[Int]("member_status_id") ~
+    get[Int]("member_type_id") map {
+      case id~name~email~password~member_status_id~member_type_id => Member(id, name, email,password,member_status_id,member_type_id)
     }
   }
+  
+  // val mapping = {
+  //   get[Pk[Long]]("id") ~
+  //   get[String]("name") ~
+  //   get[Option[String]]("email") ~
+  //   get[String]("password")
+  //   get[Int]("member_status_id") ~
+  //   get[Int]("member_type_id") map {
+  //     case id~name~email~password~member_status_id~member_type_id => Member(id, name, email,password,member_status_id,member_type_id)
+  //   }
+  // }
 
   /**
    * Construct the Map[String,String] needed to fill a select options set.
    */
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
-    SQL("select * from member order by name").as(Member.member *).map(c => c.id.toString -> c.name)
+    SQL("select * from member order by name").as(Member.mapping *).map(c => c.id.toString -> c.name)
   }
 
   def findByName(name: String): Option[Member] = DB.withConnection
   {
-    implicit c => SQL("select * from member where name = {name}").on('name -> name).as(member.singleOpt)
+    implicit c => SQL("select * from member where name = {name}").on('name -> name).as(mapping.singleOpt)
   }
 
   def findById(id: Long): Option[Member] = DB.withConnection
   {
-    implicit c => SQL("select * from member where id = {id}").on('id -> id).as(member.singleOpt)
+    implicit c => SQL("select * from member where id = {id}").on('id -> id).as(mapping.singleOpt)
   }
 
   def findByCoopId(coopId: Long): List[Member] = DB.withConnection
   {
-    implicit c => SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coopId}").on('coopId -> coopId).as(member *)
+    implicit c => SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coopId}").on('coopId -> coopId).as(mapping *)
   }
 
   def all(): List[Member] = DB.withConnection { implicit c =>
-    SQL("select * from member").as(member *)
+    SQL("select * from member").as(mapping *)
                                            }
 
   def save(item: Member) {

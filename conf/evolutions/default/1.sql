@@ -18,8 +18,9 @@ CREATE TABLE member_status (
 CREATE SEQUENCE member_id_seq;
 CREATE TABLE member (
        id integer PRIMARY KEY DEFAULT nextval('member_id_seq'),
-       name varchar(64),
-       email varchar(64),
+       name varchar(64) not null,
+       email varchar(64) not null,
+       password varchar(64),
        cell varchar(16),
        address varchar(255),
        member_status_id integer references member_status(id),
@@ -31,7 +32,8 @@ insert into member_type (member_type) values ('MANAGER');
 insert into member_type (member_type) values ('REGULAR_MEMBER');
 insert into member_status (member_status) values ('ACTIVE');
 insert into member_status (member_status) values ('SUSPENDED');
-insert into member(id, name, member_status_id, member_type_id) values (0, 'Supreme', 1, 1); 
+insert into member(id, name, email, password, member_status_id, member_type_id) values (0, 'Supreme', 'supreme@aol.com', 'password', 1, 1); 
+insert into member(id, name, email, password, member_status_id, member_type_id) values (1, 'joshua', 'joshua@gmail.com', 'password', 1, 1); 
 
 # --- !Downs
 
