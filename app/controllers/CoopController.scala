@@ -49,6 +49,7 @@ object CoopController extends AbstractCRUDController {
   override protected def model_findById(id: Long) = Coop.findById(id)
   override protected def model_delete(id: Long) = Coop.delete(id)
   override protected def listView = views.html.coop.list(model_all)
+  
 
   def newItem = Action {
     Ok(html.coop.newItem(form))
@@ -70,6 +71,20 @@ object CoopController extends AbstractCRUDController {
       }}
      )
                                    }
+
+
+  override def showItem(id: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =
+    Action {
+      val itemOption = model_findById(id)
+      itemOption match {
+      case None => Ok("no item exists")
+      case Some(item) => {
+        val members = Member.findByCoopId(item.id.get)
+        Ok(html.coop.showItem(item, members))
+      }
+      }
+    }    
+
 
   def members(id: Long) = Action {
     val coopOption = Coop.findById(id)
