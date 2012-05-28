@@ -35,10 +35,11 @@ object Coop {
   }
 
   def isManagerOf(id: Long , email: String): Boolean= {
-    val coop = Coop.findById(id).get
-    val ret = coop.isManager(Member.findByEmail(email).get)
-    Logger.info("isManagerOf, coop : " + coop.name +", email : " + email)
-    ret
+    val coop = Coop.findById(id)
+    val member = Member.findByEmail(email)
+    (coop, member) match {
+      case (Some(c), Some(m)) => return c.isManager(m)
+      case _ => return false }
   }
   def findById(id: Long): Option[Coop] = DB.withConnection
   {

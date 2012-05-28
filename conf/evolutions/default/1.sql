@@ -22,9 +22,7 @@ CREATE TABLE member (
        email varchar(64) not null,
        password varchar(64),
        cell varchar(16),
-       address varchar(255),
-       member_status_id integer references member_status(id),
-       member_type_id integer references member_type(id)
+       address varchar(255)
 );
 
 
@@ -32,8 +30,8 @@ insert into member_type (member_type) values ('MANAGER');
 insert into member_type (member_type) values ('REGULAR_MEMBER');
 insert into member_status (member_status) values ('ACTIVE');
 insert into member_status (member_status) values ('SUSPENDED');
-insert into member(id, name, email, password, member_status_id, member_type_id, address) values (0, 'Supreme', 'supreme@aol.com', 'password', 1, 1, 'heaven'); 
-insert into member(id, name, email, password, member_status_id, member_type_id, address) values (1, 'joshua', 'joshua@gmail.com', 'password', 1, 1, '1515 N Wicker'); 
+insert into member(id, name, email, password, address) values (0, 'Supreme', 'supreme@aol.com', 'password', 'heaven'); 
+insert into member(id, name, email, password, address) values (1, 'joshua', 'joshua@gmail.com', 'password', '1515 N Wicker'); 
 
 # --- !Downs
 

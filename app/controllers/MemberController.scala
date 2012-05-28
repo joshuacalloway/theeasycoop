@@ -19,9 +19,7 @@ object MemberController extends AbstractCRUDController with Secured {
       "email" -> optional(text),
       "password" -> nonEmptyText,
       "cell" -> optional(text),
-      "address" -> text,
-      "member_status_id" -> number,
-      "member_type_id" -> number)(Member.apply)(Member.unapply))
+      "address" -> text)(Member.apply)(Member.unapply))
 
   override protected def model_all() = {
     Logger.info("model_all called")
