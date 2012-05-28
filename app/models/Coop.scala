@@ -26,7 +26,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
 }
 
 object Coop {
-  
+ 
   val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
@@ -74,6 +74,8 @@ object Coop {
                      }
   }
 
+      // val id:Long = SQL("select currval('coop_id_seq')").as(anorm.ResultSetParser[Long])
+
   def create(coop: Coop) {
     DB.withConnection { implicit c =>
       SQL("insert into Coop (name, description, manager_id,coop_type_id) select {name}, {description}, {manager_id},{coop_type_id} ").on(
@@ -81,9 +83,19 @@ object Coop {
         'description -> coop.description,
         'manager_id -> coop.manager_id,
         'coop_type_id -> coop.coop_type_id
-      ).executeUpdate()
+      ).executeInsert() match {
+        case Some(id) =>
+          SQL("insert into coop_member (coop_id,member_type_id,member_status_id, member_id) values ({coop_id},{member_type_id},{member_status_id}, {member_id})").on(
+            'coop_id -> id,
+            'member_type_id -> MemberType.MANAGER_ID,
+            'member_status_id -> 1,
+            'member_id -> coop.manager_id).executeUpdate()
+        case None => Logger.warn("Could not auto add manager when creating a new coop.")
+        }
+                       
                      }
   }
+
   def delete(id: Long) {
     DB.withConnection { implicit c =>
       SQL("delete from coop where id = {id}").on(

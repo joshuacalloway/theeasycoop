@@ -24,11 +24,17 @@ object MemberType {
     }
   }
      
+  def MANAGER_ID = findByName("MANAGER").get.id
   /**
    * Construct the Map[String,String] needed to fill a select options set.
    */
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
     SQL("select * from member_type order by member_type").as(MemberType.mapping *).map(c => c.id.toString -> c.name)
+  }
+
+  def findByName(name: String): Option[MemberType] = DB.withConnection
+  {
+    implicit c => SQL("select * from member_type where member_type = {name}").on('name -> name).as(mapping.singleOpt)
   }
 
   def findById(id: Long): Option[MemberType] = DB.withConnection
