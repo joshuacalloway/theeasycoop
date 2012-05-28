@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Coop(id: Pk[Long], name: String, description: Option[String], manager_id: Int) extends AbstractModel {
+case class Coop(id: Pk[Long], name: String, description: Option[String], coop_type_id: Int, manager_id: Int) extends AbstractModel {
 
   def save = {
     Coop.save(this)
@@ -17,6 +17,8 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], manager
   def all = Coop.all
 
   def manager = Member.findById(manager_id).get
+
+  def coopType = CoopType.findById(coop_type_id).get
 
   def isManager(member: Member) : Boolean = {
     member.id == manager.id
@@ -29,8 +31,9 @@ object Coop {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[Option[String]]("description") ~
+    get[Int]("coop_type_id") ~
     get[Int]("manager_id") map {
-      case id~name~description~manager_id => Coop(id, name, description, manager_id)
+      case id~name~description~coop_type_id~manager_id => Coop(id, name, description, coop_type_id, manager_id)
     }
   }
 
@@ -43,11 +46,11 @@ object Coop {
   }
   def findById(id: Long): Option[Coop] = DB.withConnection
   {
-    implicit c => SQL("select c.*, m.name as manager from coop c, member m where c.manager_id = m.id and c.id = {id}").on('id -> id).as(Coop.mapping.singleOpt)
+    implicit c => SQL("select * from coop where id = {id}").on('id -> id).as(Coop.mapping.singleOpt)
   }
 
   def all(): List[Coop] = DB.withConnection { implicit c =>
-    SQL("select c.*, m.name as manager from coop c, member m where c.manager_id = m.id").as(mapping *)
+    SQL("select * from coop").as(mapping *)
                                            }
   def addMember(id: Long, member: Member) {
     DB.withConnection { implicit c =>
@@ -73,10 +76,11 @@ object Coop {
 
   def create(coop: Coop) {
     DB.withConnection { implicit c =>
-      SQL("insert into Coop (name, description, manager_id) select {name}, {description}, id from member where name = {manager}").on(
+      SQL("insert into Coop (name, description, manager_id,coop_type_id) select {name}, {description}, {manager_id},{coop_type_id} ").on(
         'name -> coop.name,
         'description -> coop.description,
-        'manager -> coop.manager
+        'manager_id -> coop.manager_id,
+        'coop_type_id -> coop.coop_type_id
       ).executeUpdate()
                      }
   }

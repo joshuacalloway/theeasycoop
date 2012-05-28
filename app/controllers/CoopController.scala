@@ -19,6 +19,7 @@ object CoopController extends AbstractCRUDController with Secured {
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
       "description" -> optional(nonEmptyText),
+      "coop_type_id" -> number,
       "manager_id" -> number
     )(Coop.apply)(Coop.unapply))
 
