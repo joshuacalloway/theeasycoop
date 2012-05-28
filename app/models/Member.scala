@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Member(id: Pk[Long], name: String, email: Option[String], password: String, memberStatusId: Int, memberTypeId: Int) extends AbstractModel {
+case class Member(id: Pk[Long], name: String, email: Option[String], password: String, cell: Option[String], address: String, member_status_id: Int, member_type_id: Int) extends AbstractModel {
   
   def save = {
     Member.save(this)
@@ -16,6 +16,7 @@ case class Member(id: Pk[Long], name: String, email: Option[String], password: S
   }
   def all = Member.all
 
+  def memberType = MemberType.findById(this.member_type_id)
   
 }
 
@@ -26,9 +27,11 @@ object Member {
     get[String]("name") ~
     get[Option[String]]("email") ~
     get[String]("password") ~
+    get[Option[String]]("cell") ~
+    get[String]("address") ~
     get[Int]("member_status_id") ~
     get[Int]("member_type_id") map {
-      case id~name~email~password~member_status_id~member_type_id => Member(id, name, email,password,member_status_id,member_type_id)
+      case id~name~email~password~cell~address~member_status_id~member_type_id => Member(id, name, email,password,cell,address,member_status_id,member_type_id)
     }
   }
   
@@ -87,9 +90,14 @@ object Member {
 
   def create(item: Member) {
     DB.withConnection { implicit c =>
-      SQL("insert into member (name, email) values ({name}, {email})").on(
+      SQL("insert into member (name, email, password, cell, address, member_type_id, member_status_id) values ({name},{email},{password},{cell},{address},{member_type_id},{member_status_id})").on(
         'name -> item.name,
-        'email -> item.email
+        'email -> item.email,
+        'password -> item.password,
+        'cell -> item.cell,
+        'address -> item.address,
+        'member_type_id -> item.member_type_id,
+        'member_status_id -> item.member_status_id
       ).executeUpdate()
                      }
   }

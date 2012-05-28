@@ -18,6 +18,8 @@ object MemberController extends AbstractCRUDController with Secured {
       "name" -> nonEmptyText,
       "email" -> optional(text),
       "password" -> nonEmptyText,
+      "cell" -> optional(text),
+      "address" -> text,
       "member_status_id" -> number,
       "member_type_id" -> number)(Member.apply)(Member.unapply))
 

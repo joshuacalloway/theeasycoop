@@ -7,10 +7,8 @@
   <ul>
     @members.map { member =>
     <li>
-      @member.name - @member.email - @member.password
-      @form(routes.MemberController.deleteItem(member.id.get)) {
-      <input type="submit" value="Delete">
-      }
+      @member.name - @member.email - @member.password - @member.memberType
+
     </li>
     }
   </ul>

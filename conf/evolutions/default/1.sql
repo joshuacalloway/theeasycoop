@@ -32,8 +32,8 @@ insert into member_type (member_type) values ('MANAGER');
 insert into member_type (member_type) values ('REGULAR_MEMBER');
 insert into member_status (member_status) values ('ACTIVE');
 insert into member_status (member_status) values ('SUSPENDED');
-insert into member(id, name, email, password, member_status_id, member_type_id) values (0, 'Supreme', 'supreme@aol.com', 'password', 1, 1); 
-insert into member(id, name, email, password, member_status_id, member_type_id) values (1, 'joshua', 'joshua@gmail.com', 'password', 1, 1); 
+insert into member(id, name, email, password, member_status_id, member_type_id, address) values (0, 'Supreme', 'supreme@aol.com', 'password', 1, 1, 'heaven'); 
+insert into member(id, name, email, password, member_status_id, member_type_id, address) values (1, 'joshua', 'joshua@gmail.com', 'password', 1, 1, '1515 N Wicker'); 
 
 # --- !Downs
 
