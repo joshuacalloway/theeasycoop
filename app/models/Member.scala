@@ -74,6 +74,11 @@ object Member {
     implicit c => SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coopId}").on('coopId -> coopId).as(mapping *)
   }
 
+  def findByBulkitemOrderId(id: Long): List[Member] = DB.withConnection
+  {
+    implicit c => SQL("select m.* from member m, bulkitemorder_member bm where bm.member_id = m.id and bm.bulkitemorder_id = {bulkitemorder_id}").on('bulkitemorder_id -> id).as(mapping *)
+  }
+
   def all(): List[Member] = DB.withConnection { implicit c =>
     SQL("select * from member").as(mapping *)
                                            }

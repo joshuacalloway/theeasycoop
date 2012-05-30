@@ -65,6 +65,8 @@ GET     /coops/:coopID/bulkitemorders/:id  actions.ShowBulkitemOrderInCoopAction
 GET     /coops/:coopID/bulkitemorders/:id/edit         actions.EditBulkitemOrderInCoopAction.editItem(coopID:Long, id:Long)
 GET     /coops/:coopID/bulkitemorders/:id/update       actions.EditBulkitemOrderInCoopAction.updateItem(coopID:Long, id:Long)
 
+GET     /coops/:coopID/bulkitemorders/:id/members      actions.ListMembersInBulkitemOrderInCoopAction.list(coopID:Long, id:Long)
+
 
 
 GET    /manage			  controllers.CoopController.index
