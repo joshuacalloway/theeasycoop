@@ -23,6 +23,10 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
   def isManager(member: Member) : Boolean = {
     member.id == manager.id
   }
+
+  def isMember(member: Member) : Boolean = {
+    Coop.isMember(this, member)
+  }
 }
 
 object Coop {
@@ -74,6 +78,12 @@ object Coop {
                      }
   }
 
+  def isMember(coop: Coop, member: Member) : Boolean = {
+    DB.withConnection { implicit c =>
+      val ret:Long = SQL("select count(*) from coop c, coop_member cm where cm.coop_id = c.id and c.id = {coop_id} and cm.member_id = {member_id}").on('coop_id -> coop.id, 'member_id -> member.id).as(scalar[Long].single)
+                       ret == 1
+                     }
+  }
       // val id:Long = SQL("select currval('coop_id_seq')").as(anorm.ResultSetParser[Long])
 
   def create(coop: Coop) {

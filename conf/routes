@@ -47,6 +47,9 @@ GET     /coops/:id/members          actions.ListMembersByCoopAction.members(id: 
 GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: Long)
 GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id: Long)
 POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id: Long)
+
+GET     /coops/:coopID/members/:id  actions.ShowMemberInCoopAction.showItem(coopID:Long, id:Long)
+
 GET     /coops/:id/bulkitemorders   actions.ListBulkitemOrdersByCoopAction.listByCoop(id: Long)
 GET     /coops/:id/bulkitemorders/   actions.ListBulkitemOrdersByCoopAction.listByCoop(id: Long)
 
