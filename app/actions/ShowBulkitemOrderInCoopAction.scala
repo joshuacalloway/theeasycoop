@@ -17,7 +17,8 @@ object ShowBulkitemOrderInCoopAction extends Controller with Secured {
       val coopOpt = Coop.findById(coopId)
       val itemOpt = BulkitemOrder.findById(id)
       (coopOpt, itemOpt) match {
-        case (Some(coop), Some(item)) if coop.id == item.coop.get.id => Ok("bulkitem exists")
+        case (Some(coop), Some(item)) if coop.id == item.coop.id => Ok(views.html.bulkitemorder.showItem(item))
+
         case _ => Ok("bulkitem does not belong in coop")
       }
     }    

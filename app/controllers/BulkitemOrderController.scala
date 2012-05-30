@@ -46,11 +46,7 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
     Ok(html.bulkitemorder.list(BulkitemOrder.findByCoopId(id)))
   }
 
- // def newItemByCoop(id: Long) = IsAuthenticated { _ => _ =>
- //      Ok(html.bulkitemorder.newItemByCoop(Coop.findById(id).get, form)) 
- //                              }
-
- def newItem = IsAuthenticated { _ => _ =>
+  def newItem = IsAuthenticated { _ => _ =>
       Ok(html.bulkitemorder.newItem(form)) 
                               }
 
@@ -60,18 +56,6 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
                          }.getOrElse(NotFound)
   }
 
-
-//   def saveItemByCoop(id: Long) = Action { implicit request =>
-//     Logger.info("saveItemByCoop.... id : " + id)
-//     form.bindFromRequest.fold(
-//       formWithErrors => BadRequest(html.bulkitemorder.newItemByCoop(Coop.findById(id).get, formWithErrors)),
-//       item => {
-// //        item.coop_id = id.toInt
-//         item.save
-//         Ok("listView : " + item.coop_id)
-//       }
-//     )}
-
   override def saveItem: play.api.mvc.Action[play.api.mvc.AnyContent] = Action { implicit request =>
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(html.bulkitemorder.newItem(formWithErrors)),
@@ -80,16 +64,5 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
         Ok(listView)
       }
     )}
-
-  // def updateItem(id: Long) = Action { implicit request =>
-  //   form.bindFromRequest.fold(
-  //     formWithErrors => BadRequest(html.bulkitemorder.editItem(id, formWithErrors)),
-  //     item => {
-  //       BulkitemOrder.update(id, item)
-  //       Ok("saved...")
-  //     }
-  //   )
-  // }
-
 
 }
