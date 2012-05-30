@@ -1,0 +1,19 @@
+@(coopId: Long, id: Long, theform: Form[String])
+
+@import helper._
+@import actions.routes._
+
+@main("Todo list") {
+  <h2>Add a new member</h2>
+
+  @form(AddMemberToBulkitemOrderInCoopAction.submitForm(coopId, id)) {
+  @select(
+  theform("name"), 
+  Member.optionsByCoopId(coopId),
+  '_label -> "Member", 
+  '_default -> "-- Choose a member --", 
+  '_showConstraints -> false)
+
+  <input type="submit" value="Create">
+  }
+}

@@ -54,6 +54,10 @@ object Member {
     SQL("select * from member order by name").as(Member.mapping *).map(c => c.id.toString -> c.name)
   }
 
+  def optionsByCoopId(id:Long): Seq[(String,String)] = DB.withConnection { implicit connection =>
+    SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coop_id} order by name").on('coop_id -> id ).as(Member.mapping *).map(c => c.id.toString -> c.name)
+  }
+
   def findByName(name: String): Option[Member] = DB.withConnection
   {
     implicit c => SQL("select * from member where name = {name}").on('name -> name).as(mapping.singleOpt)

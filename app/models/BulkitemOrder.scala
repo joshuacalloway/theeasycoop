@@ -103,5 +103,12 @@ object BulkitemOrder {
                      }
   }
 
+  def addMember(id: Long, member: Member) {
+    DB.withConnection { implicit c =>
+      SQL("insert into bulkitemorder_member (member_id, bulkitemorder_id) values ({member_id}, {bulkitemorder_id})").on(
+        'bulkitemorder_id -> id,
+        'member_id -> member.id).executeUpdate()
+                     }
+  }
 }
 
