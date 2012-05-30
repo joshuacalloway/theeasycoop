@@ -27,6 +27,8 @@ case class BulkitemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: I
     Bulkitem.findById(bulkitem_id).get
   }
   def createdBy() = Member.findById(created_by_id).get
+
+  def coop = { Coop.findById(coop_id) }
 }
 
 object BulkitemOrder {

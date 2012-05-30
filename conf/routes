@@ -56,6 +56,8 @@ GET     /coops/:id/bulkitemorders/   actions.ListBulkitemOrdersByCoopAction.list
 POST    /coops/:id/bulkitemorders     		    actions.AddBulkitemOrderToCoopAction.saveItemByCoop(id: Long)
 GET     /coops/:id/bulkitemorders/new 		    actions.AddBulkitemOrderToCoopAction.newItemByCoop(id: Long)
 
+GET     /coops/:coopID/bulkitemorders/:id  actions.ShowBulkitemOrderInCoopAction.showItem(coopID:Long, id:Long)
+
 
 
 GET    /manage			  controllers.CoopController.index

@@ -27,6 +27,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
   def isMember(member: Member) : Boolean = {
     Coop.isMember(this, member)
   }
+
 }
 
 object Coop {
