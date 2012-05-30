@@ -43,7 +43,7 @@ object AddBulkitemOrderToCoopAction extends Controller with Secured {
      formWithErrors => BadRequest(html.public.actions.newItemByCoop(Coop.findById(id).get, formWithErrors)),
      item => {
        item.save
-       Redirect(controllers.routes.BulkitemOrderController.listByCoop(id))
+       Redirect(actions.routes.ListBulkitemOrdersByCoopAction.listByCoop(id))
      }
    )}
 }
