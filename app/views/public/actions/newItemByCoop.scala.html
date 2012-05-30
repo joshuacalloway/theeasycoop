@@ -1,13 +1,13 @@
 @(coop: Coop, theform: Form[BulkitemOrder])
 
 @import helper._
-@import helpers._
+@import actions.routes._
 
 @main("Todo list") {
 
   <h2>Add a new item</h2>
 
-  @form(routes.BulkitemOrderController.saveItemByCoop(coop.id.get)) {
+  @form(AddBulkitemOrderToCoopAction.saveItemByCoop(coop.id.get)) {
   @select(
   theform("bulkitem_id"), 
   Bulkitem.options,
