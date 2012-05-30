@@ -1,0 +1,30 @@
+@(coop: Coop, theform: Form[BulkitemOrder])
+
+@import helper._
+@import helpers._
+
+@main("Todo list") {
+
+  <h2>Add a new item</h2>
+
+  @form(routes.BulkitemOrderController.saveItemByCoop(coop.id.get)) {
+  @select(
+  theform("bulkitem_id"), 
+  Bulkitem.options,
+  '_label -> "BulkItem", 
+  '_default -> "-- Choose a bulk item --", 
+  '_showConstraints -> false)
+
+  @inputText(theform("minimumbuyers"), '_showErrors -> true)
+  @inputText(theform("itemcost"), '_showErrors -> true)
+  @inputText(theform("itemdescription"), '_showErrors -> true)
+  @inputText(theform("deadline_by"), '_showErrors -> true)
+  @inputText(theform("deliveryaddress"), '_showErrors -> true)
+  @inputText(theform("created_at"), '_showErrors -> true)
+  @inputText(theform("created_by_id"), '_showErrors -> true)
+  <input type="hidden" id="coop_id" name="coop_id" value="@coop.id"/>
+
+  <input type="submit" value="Create">
+  }
+
+}

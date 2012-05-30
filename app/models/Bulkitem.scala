@@ -27,6 +27,13 @@ object Bulkitem {
     }
   }
 
+  /**
+   * Construct the Map[String,String] needed to fill a select options set.
+   */
+  def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
+    SQL("select * from bulkitem order by name").as(mapping *).map(c => c.id.toString -> c.name)
+  }
+
   def findById(id: Long): Option[Bulkitem] = DB.withConnection
   {
     implicit c => SQL("select * from bulkitem where id = {id}").on('id -> id).as(Bulkitem.mapping.singleOpt)

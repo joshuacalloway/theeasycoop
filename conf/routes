@@ -48,6 +48,9 @@ GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id:
 POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id: Long)
 GET     /coops/:id/bulkitemorders   controllers.BulkitemOrderController.listByCoop(id: Long)
 
+POST    /coops/:id/bulkitemorders     		    controllers.BulkitemOrderController.saveItemByCoop(id: Long)
+GET     /coops/:id/bulkitemorders/new 		    controllers.BulkitemOrderController.newItemByCoop(id: Long)
+
 
 
 GET    /manage			  controllers.CoopController.index
