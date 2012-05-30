@@ -24,7 +24,11 @@ GET     /bulkitems/:id/update       controllers.BulkitemController.updateItem(id
 GET     /bulkitemorders 		    controllers.BulkitemOrderController.list
 POST    /bulkitemorders     		    controllers.BulkitemOrderController.saveItem
 GET     /bulkitemorders/new 		    controllers.BulkitemOrderController.newItem
+GET     /bulkitemorders/:id/edit         controllers.BulkitemOrderController.editItem(id:Long)
+GET     /bulkitemorders/:id/update       controllers.BulkitemOrderController.updateItem(id:Long)
+
 GET     /bulkitemorders/:id                 controllers.BulkitemOrderController.showItem(id:Long)
+
 
 GET     /members                    controllers.MemberController.list
 POST    /members                    controllers.MemberController.saveItem
@@ -57,6 +61,9 @@ POST    /coops/:id/bulkitemorders     		    actions.AddBulkitemOrderToCoopAction
 GET     /coops/:id/bulkitemorders/new 		    actions.AddBulkitemOrderToCoopAction.newItemByCoop(id: Long)
 
 GET     /coops/:coopID/bulkitemorders/:id  actions.ShowBulkitemOrderInCoopAction.showItem(coopID:Long, id:Long)
+
+GET     /coops/:coopID/bulkitemorders/:id/edit         actions.EditBulkitemOrderInCoopAction.editItem(coopID:Long, id:Long)
+GET     /coops/:coopID/bulkitemorders/:id/update       actions.EditBulkitemOrderInCoopAction.updateItem(coopID:Long, id:Long)
 
 
 
