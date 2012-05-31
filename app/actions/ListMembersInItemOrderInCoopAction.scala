@@ -21,7 +21,7 @@ object ListMembersInItemOrderInCoopAction extends Controller with Secured {
   
   def list(coopId:Long, id: Long) = Action {
     //Ok("")
-    Ok(html.public.actions.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
+    Ok(html.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
   }
 
 }

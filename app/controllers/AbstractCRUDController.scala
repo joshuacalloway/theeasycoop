@@ -42,11 +42,11 @@ trait AbstractCRUDController extends Controller {
   val form: Form[ModelType]
 
   protected def listView = {
-    views.html.base.list(model_all)
+    views.html.admin.base.list(model_all)
   }
   protected val indexView = "Your new application is ready."
-  protected val showItemView = views.html.base.showItem
-  protected val editItemView = views.html.base.editItem
+  protected val showItemView = views.html.admin.base.showItem
+  protected val editItemView = views.html.admin.base.editItem
   // protected val newItemView = views.html.base.newItem
 
 //  protected def newItemView(form: FormType): play.api.mvc.SimpleResult[play.api.templates.Html]

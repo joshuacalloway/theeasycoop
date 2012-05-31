@@ -17,16 +17,16 @@ object AddMemberToItemOrderInCoopAction extends Controller with Secured {
   )
 
   def actionForm(coopId: Long, id: Long) = Action {
-    Ok(html.public.actions.addMemberToItemOrderInCoop(coopId, id, form))
+    Ok(html.addMemberToItemOrderInCoop(coopId, id, form))
   }
 
   def submitForm(coopId: Long, id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.public.actions.addMemberToCoop(id, formWithErrors)),
+      formWithErrors => BadRequest(html.addMemberToCoop(id, formWithErrors)),
       {case (value) => {
         val memberOption = Member.findById(value.toInt)
         ItemOrder.addMember(id, memberOption.get)
-        Ok(html.public.actions.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
+        Ok(html.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
       }}
      )
                                    }

@@ -11,15 +11,6 @@ import play.api.mvc._
 import views._
 
 object ShowMemberInCoopAction extends Controller with Secured {
-  // val form: Form[Member] = Form(
-  //   mapping(
-  //     "id" -> ignored(NotAssigned:Pk[Long]),
-  //     "name" -> nonEmptyText,
-  //     "email" -> optional(text),
-  //     "password" -> nonEmptyText,
-  //     "cell" -> optional(text),
-  //     "address" -> text)(Member.apply)(Member.unapply))
-
   def showItem(coopId: Long, memberId: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =
     Action {
       val coopOpt = Coop.findById(coopId)

@@ -57,6 +57,7 @@ GET     /coops/:coopID/members/:id  actions.ShowMemberInCoopAction.showItem(coop
 GET     /coops/:id/itemorders   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
 GET     /coops/:id/itemorders/   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
 
+
 POST    /coops/:id/itemorders     		    actions.AddItemOrderToCoopAction.saveItemByCoop(id: Long)
 GET     /coops/:id/itemorders/new 		    actions.AddItemOrderToCoopAction.newItemByCoop(id: Long)
 
