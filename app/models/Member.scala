@@ -80,7 +80,7 @@ object Member {
 
   def findByItemOrderId(id: Long): List[Member] = DB.withConnection
   {
-    implicit c => SQL("select m.* from member m, bulkitemorder_member bm where bm.member_id = m.id and bm.bulkitemorder_id = {bulkitemorder_id}").on('bulkitemorder_id -> id).as(mapping *)
+    implicit c => SQL("select m.* from member m, itemorder_member bm where bm.member_id = m.id and bm.itemorder_id = {itemorder_id}").on('itemorder_id -> id).as(mapping *)
   }
 
   def all(): List[Member] = DB.withConnection { implicit c =>

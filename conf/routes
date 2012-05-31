@@ -6,14 +6,8 @@
 GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
-# Authentication
-GET     /login                              actions.LoginAction.login
-POST    /login                              actions.LoginAction.authenticate
-GET     /logout                             actions.LoginAction.logout
-
-
 GET     /items 		    controllers.ItemController.list
-POST    /items     		    controllers.ItemController.saveItem
+POST    /items		    controllers.ItemController.saveItem
 GET    	/items/new     	    controllers.ItemController.newItem
 GET     /items/:id 		    controllers.ItemController.showItem(id: Long)
 
@@ -45,6 +39,12 @@ POST    /coops     		    controllers.CoopController.saveItem
 GET     /coops/:id/edit             controllers.CoopController.editItem(id:Long)
 GET     /coops/:id/update           controllers.CoopController.updateItem(id:Long)
 
+
+
+# Authentication
+GET     /login                              actions.LoginAction.login
+POST    /login                              actions.LoginAction.authenticate
+GET     /logout                             actions.LoginAction.logout
 
 GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
 GET     /coops/:id/members          actions.ListMembersByCoopAction.members(id: Long)
