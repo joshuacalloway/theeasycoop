@@ -1,11 +1,11 @@
-@(theform: Form[Bulkitem])
+@(theform: Form[Item])
 
 @import helper._
 
 @main("Todo list") {
   <h2>Add a new bulk item</h2>
 
-  @form(routes.BulkitemController.saveItem()) {
+  @form(routes.ItemController.saveItem()) {
   @inputText(theform("name"))
   @inputText(theform("description"))
   @inputText(theform("cost"))

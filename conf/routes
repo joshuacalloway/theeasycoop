@@ -12,13 +12,13 @@ POST    /login                              actions.LoginAction.authenticate
 GET     /logout                             actions.LoginAction.logout
 
 
-GET     /bulkitems 		    controllers.BulkitemController.list
-POST    /bulkitems     		    controllers.BulkitemController.saveItem
-GET    	/bulkitems/new     	    controllers.BulkitemController.newItem
-GET     /bulkitems/:id 		    controllers.BulkitemController.showItem(id: Long)
+GET     /items 		    controllers.ItemController.list
+POST    /items     		    controllers.ItemController.saveItem
+GET    	/items/new     	    controllers.ItemController.newItem
+GET     /items/:id 		    controllers.ItemController.showItem(id: Long)
 
-GET     /bulkitems/:id/edit         controllers.BulkitemController.editItem(id:Long)
-GET     /bulkitems/:id/update       controllers.BulkitemController.updateItem(id:Long)
+GET     /items/:id/edit         controllers.ItemController.editItem(id:Long)
+GET     /items/:id/update       controllers.ItemController.updateItem(id:Long)
 
 
 GET     /bulkitemorders 		    controllers.BulkitemOrderController.list

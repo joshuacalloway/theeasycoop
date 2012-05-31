@@ -23,8 +23,8 @@ case class BulkitemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: I
   }
   def all = BulkitemOrder.all
 
-  def bulkitem = {
-    Bulkitem.findById(bulkitem_id).get
+  def item = {
+    Item.findById(bulkitem_id).get
   }
   def createdBy() = Member.findById(created_by_id).get
 

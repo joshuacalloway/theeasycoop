@@ -14,63 +14,63 @@ import anorm._
 import anorm.SqlParser._
 import views._
 
-import models.Bulkitem
+import models.Item
 import helpers.CustomFormats._
 
-object BulkitemController extends Controller {
+object ItemController extends Controller {
 
-  val form: Form[Bulkitem] = Form(
+  val form: Form[Item] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> text,
       "description" -> text,
       "cost" -> money,
       "url" -> text)
-    (Bulkitem.apply)(Bulkitem.unapply))
+    (Item.apply)(Item.unapply))
 
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
   def list = Action {
-    Ok(html.bulkitem.list(Bulkitem.all))
+    Ok(html.item.list(Item.all))
   }
 
   def showItem(id: Long) = Action {
-    val option = Bulkitem.findById(id)
+    val option = Item.findById(id)
     option match {
-      case None => Ok("no bulkitem exists")
+      case None => Ok("no item exists")
       case Some(item) => {
-        Ok(html.bulkitem.showItem(item))
+        Ok(html.item.showItem(item))
       }
     }    
   }
 
   def newItem = Action {
-    Ok(html.bulkitem.newItem(form))
+    Ok(html.item.newItem(form))
   }
 
   def saveItem = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.bulkitem.newItem(formWithErrors)),
-      bulkitem => {
-        Bulkitem.save(bulkitem)
-        Ok(html.bulkitem.showItem(bulkitem))
+      formWithErrors => BadRequest(html.item.newItem(formWithErrors)),
+      item => {
+        Item.save(item)
+        Ok(html.item.showItem(item))
       }
       )}
 
 
   def editItem(id: Long) = Action {
-    Bulkitem.findById(id).map { item =>
-      Ok(html.bulkitem.editItem(id, form.fill(item)))
+    Item.findById(id).map { item =>
+      Ok(html.item.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)
   }
 
   def updateItem(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.bulkitem.editItem(id, formWithErrors)),
+      formWithErrors => BadRequest(html.item.editItem(id, formWithErrors)),
       item => {
-        Bulkitem.update(id, item)
+        Item.update(id, item)
         Ok("saved...")
       }
     )

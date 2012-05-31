@@ -10,7 +10,7 @@
   @form(AddBulkitemOrderToCoopAction.saveItemByCoop(coop.id.get)) {
   @select(
   theform("bulkitem_id"), 
-  Bulkitem.options,
+  Item.options,
   '_label -> "BulkItem", 
   '_default -> "-- Choose a bulk item --", 
   '_showConstraints -> false)

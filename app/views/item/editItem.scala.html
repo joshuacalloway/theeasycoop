@@ -1,10 +1,10 @@
-@(id: Long, theform: Form[Bulkitem])
+@(id: Long, theform: Form[Item])
 
 @import helper._
 
 @main("stuff") {
     
-@form(routes.BulkitemController.updateItem(id)) {
+@form(routes.ItemController.updateItem(id)) {
 @inputText(theform("name"))
 @inputText(theform("description"))
 @inputText(theform("cost"))
