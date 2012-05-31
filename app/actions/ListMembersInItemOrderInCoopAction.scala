@@ -13,15 +13,15 @@ import play.api.data.Forms._
 import anorm._
 import views._
 
-import models.BulkitemOrder
+import models.ItemOrder
 import helpers.CustomFormats._
 import models.Coop
 
-object ListMembersInBulkitemOrderInCoopAction extends Controller with Secured {
+object ListMembersInItemOrderInCoopAction extends Controller with Secured {
   
   def list(coopId:Long, id: Long) = Action {
     //Ok("")
-    Ok(html.public.actions.listMembersInBulkitemOrderInCoop(BulkitemOrder.findById(id).get.members))
+    Ok(html.public.actions.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
   }
 
 }

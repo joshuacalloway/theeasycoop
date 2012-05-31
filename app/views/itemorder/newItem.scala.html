@@ -1,11 +1,11 @@
-@(id: Long, theform: Form[BulkitemOrder])
+@(theform: Form[ItemOrder])
 
 @import helper._
 
-@main("stuff") {
-  <h2>Edit a new item</h2>
+@main("Todo list") {
+  <h2>Add a new item</h2>
 
-  @form(routes.BulkitemOrderController.updateItem(id)) {
+  @form(routes.ItemOrderController.saveItem) {
   @inputText(theform("bulkitem_id"))
   @inputText(theform("minimumbuyers"))
   @inputText(theform("itemcost"))
@@ -18,6 +18,5 @@
     
   <input type="submit" value="Create">
   }
-    
+
 }
-	

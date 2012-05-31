@@ -6,7 +6,7 @@
 @main("Todo list") {
   <h2>Add a new member</h2>
 
-  @form(AddMemberToBulkitemOrderInCoopAction.submitForm(coopId, id)) {
+  @form(AddMemberToItemOrderInCoopAction.submitForm(coopId, id)) {
   @select(
   theform("name"), 
   Member.optionsByCoopId(coopId),

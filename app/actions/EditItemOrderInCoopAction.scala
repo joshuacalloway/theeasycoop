@@ -14,13 +14,13 @@ import anorm._
 //import anorm.SqlParser._
 import views._
 
-import models.BulkitemOrder
+import models.ItemOrder
 import helpers.CustomFormats._
 import models.Coop
 
-object EditBulkitemOrderInCoopAction extends Controller with Secured {
+object EditItemOrderInCoopAction extends Controller with Secured {
 
-  val form: Form[BulkitemOrder] = Form(
+  val form: Form[ItemOrder] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "bulkitem_id" -> number,
@@ -32,14 +32,14 @@ object EditBulkitemOrderInCoopAction extends Controller with Secured {
       "created_at" -> date("yyyy-MM-dd"),
       "created_by_id" -> number,
       "coop_id" -> number
-    )(BulkitemOrder.apply)(BulkitemOrder.unapply))
+    )(ItemOrder.apply)(ItemOrder.unapply))
 
 
   def editItem(coopId: Long, id: Long) = Action {
     val coop = Coop.findById(coopId).get
-    val item = BulkitemOrder.findById(id).get
+    val item = ItemOrder.findById(id).get
     if (item.coop.id == coop.id) {
-      Ok(html.public.actions.editBulkitemOrderInCoop(coop.id.get, id, form.fill(BulkitemOrder.findById(id).get)))
+      Ok(html.public.actions.editItemOrderInCoop(coop.id.get, id, form.fill(ItemOrder.findById(id).get)))
     } else NotFound
   }
 
@@ -49,7 +49,7 @@ object EditBulkitemOrderInCoopAction extends Controller with Secured {
       item => {
         item.update(id)
         Logger.info("updatedItem...")
-        Ok(html.bulkitemorder.list(BulkitemOrder.findByCoopId(coopId)))
+        Ok(html.itemorder.list(ItemOrder.findByCoopId(coopId)))
       }
     )
   }

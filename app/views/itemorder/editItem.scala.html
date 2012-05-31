@@ -1,11 +1,11 @@
-@(coopId: Long, id: Long, theform: Form[BulkitemOrder])
+@(id: Long, theform: Form[ItemOrder])
 
 @import helper._
 
 @main("stuff") {
   <h2>Edit a new item</h2>
 
-  @form(actions.routes.EditBulkitemOrderInCoopAction.updateItem(coopId, id)) {
+  @form(routes.ItemOrderController.updateItem(id)) {
   @inputText(theform("bulkitem_id"))
   @inputText(theform("minimumbuyers"))
   @inputText(theform("itemcost"))

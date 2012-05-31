@@ -14,18 +14,18 @@ import anorm._
 //import anorm.SqlParser._
 import views._
 
-import models.BulkitemOrder
+import models.ItemOrder
 import helpers.CustomFormats._
 import actions.Secured
 import models.Coop
 
-object BulkitemOrderController extends AbstractCRUDController with Secured {
-  override type ModelType = BulkitemOrder
+object ItemOrderController extends AbstractCRUDController with Secured {
+  override type ModelType = ItemOrder
 
-  val form: Form[BulkitemOrder] = Form(
+  val form: Form[ItemOrder] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
-      "bulkitem_id" -> number,
+      "item_id" -> number,
       "minimumbuyers" -> number,
       "itemcost" -> money,
       "itemdescription" -> text,
@@ -34,31 +34,31 @@ object BulkitemOrderController extends AbstractCRUDController with Secured {
       "created_at" -> date("yyyy-MM-dd"),
       "created_by_id" -> number,
       "coop_id" -> number
-    )(BulkitemOrder.apply)(BulkitemOrder.unapply))
+    )(ItemOrder.apply)(ItemOrder.unapply))
 
 
-  override protected def model_all() = BulkitemOrder.all
-  override protected def model_findById(id: Long) = BulkitemOrder.findById(id)
-  override protected def model_delete(id: Long) = BulkitemOrder.delete(id)
-  override protected def listView = views.html.bulkitemorder.list(model_all)
+  override protected def model_all() = ItemOrder.all
+  override protected def model_findById(id: Long) = ItemOrder.findById(id)
+  override protected def model_delete(id: Long) = ItemOrder.delete(id)
+  override protected def listView = views.html.itemorder.list(model_all)
   
   def listByCoop(id: Long) = Action {
-    Ok(html.bulkitemorder.list(BulkitemOrder.findByCoopId(id)))
+    Ok(html.itemorder.list(ItemOrder.findByCoopId(id)))
   }
 
   def newItem = IsAuthenticated { _ => _ =>
-      Ok(html.bulkitemorder.newItem(form)) 
+      Ok(html.itemorder.newItem(form)) 
                               }
 
   def editItem(id: Long) = IsAuthenticated { _ => _ =>
-    BulkitemOrder.findById(id).map { item =>
-      Ok(html.bulkitemorder.editItem(id, form.fill(item)))
+    ItemOrder.findById(id).map { item =>
+      Ok(html.itemorder.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)
   }
 
   override def saveItem: play.api.mvc.Action[play.api.mvc.AnyContent] = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.bulkitemorder.newItem(formWithErrors)),
+      formWithErrors => BadRequest(html.itemorder.newItem(formWithErrors)),
       item => {
         item.save
         Ok(listView)

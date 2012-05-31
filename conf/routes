@@ -21,13 +21,13 @@ GET     /items/:id/edit         controllers.ItemController.editItem(id:Long)
 GET     /items/:id/update       controllers.ItemController.updateItem(id:Long)
 
 
-GET     /bulkitemorders 		    controllers.BulkitemOrderController.list
-POST    /bulkitemorders     		    controllers.BulkitemOrderController.saveItem
-GET     /bulkitemorders/new 		    controllers.BulkitemOrderController.newItem
-GET     /bulkitemorders/:id/edit         controllers.BulkitemOrderController.editItem(id:Long)
-GET     /bulkitemorders/:id/update       controllers.BulkitemOrderController.updateItem(id:Long)
+GET     /itemorders 		    controllers.ItemOrderController.list
+POST    /itemorders     		    controllers.ItemOrderController.saveItem
+GET     /itemorders/new 		    controllers.ItemOrderController.newItem
+GET     /itemorders/:id/edit         controllers.ItemOrderController.editItem(id:Long)
+GET     /itemorders/:id/update       controllers.ItemOrderController.updateItem(id:Long)
 
-GET     /bulkitemorders/:id                 controllers.BulkitemOrderController.showItem(id:Long)
+GET     /itemorders/:id                 controllers.ItemOrderController.showItem(id:Long)
 
 
 GET     /members                    controllers.MemberController.list
@@ -54,20 +54,20 @@ POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id:
 
 GET     /coops/:coopID/members/:id  actions.ShowMemberInCoopAction.showItem(coopID:Long, id:Long)
 
-GET     /coops/:id/bulkitemorders   actions.ListBulkitemOrdersByCoopAction.listByCoop(id: Long)
-GET     /coops/:id/bulkitemorders/   actions.ListBulkitemOrdersByCoopAction.listByCoop(id: Long)
+GET     /coops/:id/itemorders   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
+GET     /coops/:id/itemorders/   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
 
-POST    /coops/:id/bulkitemorders     		    actions.AddBulkitemOrderToCoopAction.saveItemByCoop(id: Long)
-GET     /coops/:id/bulkitemorders/new 		    actions.AddBulkitemOrderToCoopAction.newItemByCoop(id: Long)
+POST    /coops/:id/itemorders     		    actions.AddItemOrderToCoopAction.saveItemByCoop(id: Long)
+GET     /coops/:id/itemorders/new 		    actions.AddItemOrderToCoopAction.newItemByCoop(id: Long)
 
-GET     /coops/:coopID/bulkitemorders/:id  actions.ShowBulkitemOrderInCoopAction.showItem(coopID:Long, id:Long)
+GET     /coops/:coopID/itemorders/:id  actions.ShowItemOrderInCoopAction.showItem(coopID:Long, id:Long)
 
-GET     /coops/:coopID/bulkitemorders/:id/edit         actions.EditBulkitemOrderInCoopAction.editItem(coopID:Long, id:Long)
-GET     /coops/:coopID/bulkitemorders/:id/update       actions.EditBulkitemOrderInCoopAction.updateItem(coopID:Long, id:Long)
+GET     /coops/:coopID/itemorders/:id/edit         actions.EditItemOrderInCoopAction.editItem(coopID:Long, id:Long)
+GET     /coops/:coopID/itemorders/:id/update       actions.EditItemOrderInCoopAction.updateItem(coopID:Long, id:Long)
 
-GET     /coops/:coopID/bulkitemorders/:id/members      actions.ListMembersInBulkitemOrderInCoopAction.list(coopID:Long, id:Long)
-GET     /coops/:coopID/bulkitemorders/:id/members/new      actions.AddMemberToBulkitemOrderInCoopAction.actionForm(coopID:Long, id: Long)
-POST    /coops/:coopID/bulkitemorders/:id/members          actions.AddMemberToBulkitemOrderInCoopAction.submitForm(coopID:Long, id: Long)
+GET     /coops/:coopID/itemorders/:id/members      actions.ListMembersInItemOrderInCoopAction.list(coopID:Long, id:Long)
+GET     /coops/:coopID/itemorders/:id/members/new      actions.AddMemberToItemOrderInCoopAction.actionForm(coopID:Long, id: Long)
+POST    /coops/:coopID/itemorders/:id/members          actions.AddMemberToItemOrderInCoopAction.submitForm(coopID:Long, id: Long)
 
 
 GET    /manage			  controllers.CoopController.index

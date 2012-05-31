@@ -13,12 +13,12 @@ import play.api.data.Forms._
 import anorm._
 import views._
 
-import models.BulkitemOrder
+import models.ItemOrder
 import helpers.CustomFormats._
 import models.Coop
 
-object AddBulkitemOrderToCoopAction extends Controller with Secured {
-  val form: Form[BulkitemOrder] = Form(
+object AddItemOrderToCoopAction extends Controller with Secured {
+  val form: Form[ItemOrder] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "bulkitem_id" -> number,
@@ -30,7 +30,7 @@ object AddBulkitemOrderToCoopAction extends Controller with Secured {
       "created_at" -> date("yyyy-MM-dd"),
       "created_by_id" -> number,
       "coop_id" -> number
-    )(BulkitemOrder.apply)(BulkitemOrder.unapply))
+    )(ItemOrder.apply)(ItemOrder.unapply))
 
   def newItemByCoop(id: Long) = IsAuthenticated { _ => _ =>
     Ok(html.public.actions.newItemByCoop(Coop.findById(id).get, form)) 
@@ -43,7 +43,7 @@ object AddBulkitemOrderToCoopAction extends Controller with Secured {
      formWithErrors => BadRequest(html.public.actions.newItemByCoop(Coop.findById(id).get, formWithErrors)),
      item => {
        item.save
-       Redirect(actions.routes.ListBulkitemOrdersByCoopAction.listByCoop(id))
+       Redirect(actions.routes.ListItemOrdersByCoopAction.listByCoop(id))
      }
    )}
 }
