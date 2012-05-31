@@ -10,7 +10,7 @@ import play.api.Play.current
 import play.Logger
 
 
-case class ItemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: Int, itemcost: BigDecimal, itemdescription: String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, var coop_id: Int) extends AbstractModel {
+case class ItemOrder(id: Pk[Long] = null, item_id: Int, minimumbuyers: Int, membercost: BigDecimal, description: String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, var coop_id: Int) extends AbstractModel {
   val name: String = "UNDEFINED"
 
   def save = {
@@ -24,7 +24,7 @@ case class ItemOrder(id: Pk[Long] = null, bulkitem_id: Int, minimumbuyers: Int, 
   def all = ItemOrder.all
 
   def item = {
-    Item.findById(bulkitem_id).get
+    Item.findById(item_id).get
   }
   def createdBy() = Member.findById(created_by_id).get
 
@@ -37,16 +37,16 @@ object ItemOrder {
 
   val mapping = {
     get[Pk[Long]]("id") ~
-    get[Int]("bulkitem_id") ~
+    get[Int]("item_id") ~
     get[Int]("minimumbuyers") ~
-    get[BigDecimal]("itemcost") ~
-    get[String]("itemdescription") ~
+    get[BigDecimal]("membercost") ~
+    get[String]("description") ~
     get[Date]("deadline_by") ~
     get[String]("deliveryaddress")~
     get[Date]("created_at") ~
     get[Int]("created_by_id") ~
     get[Int]("coop_id") map {
-      case id~bulkitem_id~minimumbuyers~itemcost~itemdescription~deadline_by~deliveryaddress~created_at~created_by_id~coop_id => ItemOrder(id,bulkitem_id,minimumbuyers,itemcost,itemdescription,deadline_by,deliveryaddress,created_at,created_by_id,coop_id)
+      case id~item_id~minimumbuyers~membercost~description~deadline_by~deliveryaddress~created_at~created_by_id~coop_id => ItemOrder(id,item_id,minimumbuyers,membercost,description,deadline_by,deliveryaddress,created_at,created_by_id,coop_id)
 
     }
   }
@@ -54,26 +54,26 @@ object ItemOrder {
 
   def findByCoopId(id: Long): List[ItemOrder] = DB.withConnection
   {
-    implicit c => SQL("select * from bulkitemorder where coop_id = {id}").on('id -> id).as(ItemOrder.mapping *)
+    implicit c => SQL("select * from itemorder where coop_id = {id}").on('id -> id).as(ItemOrder.mapping *)
   }
 
   def findById(id: Long): Option[ItemOrder] = DB.withConnection
   {
-    implicit c => SQL("select * from bulkitemorder where id = {id}").on('id -> id).as(ItemOrder.mapping.singleOpt)
+    implicit c => SQL("select * from itemorder where id = {id}").on('id -> id).as(ItemOrder.mapping.singleOpt)
   }
 
   def all(): List[ItemOrder] = DB.withConnection { implicit c =>
-    SQL("select * from bulkitemorder").as(mapping *)
+    SQL("select * from itemorder").as(mapping *)
                                                }
 
   def save(item: ItemOrder) {
-    Logger.info("save entry version 1.0... bulkitemorder.id: " + item.id)
+    Logger.info("save entry version 1.0... itemorder.id: " + item.id)
     create(item)
   }
 
   def update(id: Long, item: ItemOrder) {
     DB.withConnection { implicit c =>
-      SQL("update bulkitemorder set minimumbuyers={minimumbuyers} where id={id}").on(
+      SQL("update itemorder set minimumbuyers={minimumbuyers} where id={id}").on(
         'minimumbuyers -> item.minimumbuyers,
         'id -> id
       ).executeUpdate()
@@ -82,22 +82,22 @@ object ItemOrder {
 
   def create(item: ItemOrder) {
     DB.withConnection { implicit c =>
-      SQL("insert into bulkitemorder (bulkitem_id,minimumbuyers,deadline_by,deliveryaddress,created_at,created_by_id,coop_id,itemcost,itemdescription) select {bulkitem_id},{minimumbuyers},{deadline_by},{deliveryaddress},{created_at},{created_by_id},{coop_id},{itemcost},{itemdescription}").on(
-        'bulkitem_id -> item.bulkitem_id,
+      SQL("insert into itemorder (item_id,minimumbuyers,deadline_by,deliveryaddress,created_at,created_by_id,coop_id,membercost,description) select {item_id},{minimumbuyers},{deadline_by},{deliveryaddress},{created_at},{created_by_id},{coop_id},{membercost},{description}").on(
+        'item_id -> item.item_id,
         'minimumbuyers -> item.minimumbuyers,
         'deadline_by -> item.deadline_by,
         'deliveryaddress -> item.deliveryaddress,
         'created_at -> item.created_at,
         'created_by_id -> item.created_by_id,
         'coop_id -> item.coop_id,
-        'itemcost -> item.itemcost,
-        'itemdescription -> item.itemdescription
+        'membercost -> item.membercost,
+        'description -> item.description
       ).executeUpdate()
                      }
   }
   def delete(id: Long) {
     DB.withConnection { implicit c =>
-      SQL("delete from bulkitemorder where id = {id}").on(
+      SQL("delete from itemorder where id = {id}").on(
         'id -> id
       ).executeUpdate()
                      }
@@ -105,8 +105,8 @@ object ItemOrder {
 
   def addMember(id: Long, member: Member) {
     DB.withConnection { implicit c =>
-      SQL("insert into bulkitemorder_member (member_id, bulkitemorder_id) values ({member_id}, {bulkitemorder_id})").on(
-        'bulkitemorder_id -> id,
+      SQL("insert into itemorder_member (member_id, itemorder_id) values ({member_id}, {itemorder_id})").on(
+        'itemorder_id -> id,
         'member_id -> member.id).executeUpdate()
                      }
   }
