@@ -33,7 +33,7 @@ object ItemController extends Controller {
   }
 
   def list = Action {
-    Ok(html.item.list(Item.all))
+    Ok(html.admin.item.list(Item.all))
   }
 
   def showItem(id: Long) = Action {
@@ -41,34 +41,36 @@ object ItemController extends Controller {
     option match {
       case None => Ok("no item exists")
       case Some(item) => {
-        Ok(html.item.showItem(item))
+        Ok(html.admin.item.showItem(item))
       }
     }    
   }
 
   def newItem = Action {
-    Ok(html.item.newItem(form))
+    Ok(html.admin.item.newItem(form))
   }
 
   def saveItem = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.item.newItem(formWithErrors)),
+      formWithErrors => BadRequest(html.admin.item.newItem(formWithErrors)),
       item => {
         Item.save(item)
-        Ok(html.item.showItem(item))
+        Ok(html.admin.item.showItem(item))
       }
       )}
 
 
+  def test(id: Long) = Action { Ok("hello") }
+
   def editItem(id: Long) = Action {
     Item.findById(id).map { item =>
-      Ok(html.item.editItem(id, form.fill(item)))
+      Ok(html.admin.item.editItem(id, form.fill(item)))
                          }.getOrElse(NotFound)
   }
 
   def updateItem(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.item.editItem(id, formWithErrors)),
+      formWithErrors => BadRequest(html.admin.item.editItem(id, formWithErrors)),
       item => {
         Item.update(id, item)
         Ok("saved...")

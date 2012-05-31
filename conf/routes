@@ -6,38 +6,38 @@
 GET     /                           controllers.Application.index
 GET     /start                      controllers.Application.start
 
-GET     /items 		    controllers.ItemController.list
-POST    /items		    controllers.ItemController.saveItem
-GET    	/items/new     	    controllers.ItemController.newItem
-GET     /items/:id 		    controllers.ItemController.showItem(id: Long)
+GET     /admin/items 		    controllers.ItemController.list
+POST    /admin/items		    controllers.ItemController.saveItem
+GET    	/admin/items/new     	    controllers.ItemController.newItem
+GET     /admin/items/:id 		    controllers.ItemController.showItem(id: Long)
 
-GET     /items/:id/edit         controllers.ItemController.editItem(id:Long)
-GET     /items/:id/update       controllers.ItemController.updateItem(id:Long)
-
-
-GET     /itemorders 		    controllers.ItemOrderController.list
-POST    /itemorders     		    controllers.ItemOrderController.saveItem
-GET     /itemorders/new 		    controllers.ItemOrderController.newItem
-GET     /itemorders/:id/edit         controllers.ItemOrderController.editItem(id:Long)
-GET     /itemorders/:id/update       controllers.ItemOrderController.updateItem(id:Long)
-
-GET     /itemorders/:id                 controllers.ItemOrderController.showItem(id:Long)
+GET     /admin/items/:id/edit         controllers.ItemController.test(id:Long)
+GET     /admin/items/:id/update       controllers.ItemController.updateItem(id:Long)
 
 
-GET     /members                    controllers.MemberController.list
-POST    /members                    controllers.MemberController.saveItem
-GET     /members/new 		    controllers.MemberController.newItem
-POST    /members/:id/delete         controllers.MemberController.deleteItem(id:Long)
+GET     /admin/itemorders 		    controllers.ItemOrderController.list
+POST    /admin/itemorders     		    controllers.ItemOrderController.saveItem
+GET     /admin/itemorders/new 		    controllers.ItemOrderController.newItem
+GET     /admin/itemorders/:id/edit         controllers.ItemOrderController.editItem(id:Long)
+GET     /admin/itemorders/:id/update       controllers.ItemOrderController.updateItem(id:Long)
+
+GET     /admin/itemorders/:id                 controllers.ItemOrderController.showItem(id:Long)
+
+
+GET     /admin/members                    controllers.MemberController.list
+POST    /admin/members                    controllers.MemberController.saveItem
+GET     /admin/members/new 		    controllers.MemberController.newItem
+POST    /admin/members/:id/delete         controllers.MemberController.deleteItem(id:Long)
 GET     /members/:id/edit           controllers.MemberController.editItem(id:Long)
-GET     /members/:id/update         controllers.MemberController.updateItem(id:Long)
-GET     /members/:id                controllers.MemberController.showItem(id:Long)
+GET     /admin/members/:id/update         controllers.MemberController.updateItem(id:Long)
+GET     /admin/members/:id                controllers.MemberController.showItem(id:Long)
 
-GET     /coops 			    controllers.CoopController.list
-GET     /coops/ 		    controllers.CoopController.list
-GET     /coops/new 		    controllers.CoopController.newItem
-POST    /coops     		    controllers.CoopController.saveItem
-GET     /coops/:id/edit             controllers.CoopController.editItem(id:Long)
-GET     /coops/:id/update           controllers.CoopController.updateItem(id:Long)
+GET     /admin/coops 			    controllers.CoopController.list
+GET     /admin/coops/ 		    controllers.CoopController.list
+GET     /admin/coops/new 		    controllers.CoopController.newItem
+POST    /admin/coops     		    controllers.CoopController.saveItem
+GET     /admin/coops/:id/edit             controllers.CoopController.editItem(id:Long)
+GET     /admin/coops/:id/update           controllers.CoopController.updateItem(id:Long)
 
 
 

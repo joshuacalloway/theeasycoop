@@ -40,25 +40,25 @@ object ItemOrderController extends AbstractCRUDController with Secured {
   override protected def model_all() = ItemOrder.all
   override protected def model_findById(id: Long) = ItemOrder.findById(id)
   override protected def model_delete(id: Long) = ItemOrder.delete(id)
-  override protected def listView = views.html.itemorder.list(model_all)
+  override protected def listView = views.html.admin.itemorder.list(model_all)
   
   def listByCoop(id: Long) = Action {
-    Ok(html.itemorder.list(ItemOrder.findByCoopId(id)))
+    Ok(html.admin.itemorder.list(ItemOrder.findByCoopId(id)))
   }
 
-  def newItem = IsAuthenticated { _ => _ =>
-      Ok(html.itemorder.newItem(form)) 
-                              }
+  def newItem = Action {
+    Ok(html.admin.itemorder.newItem(form)) 
+  }
 
-  def editItem(id: Long) = IsAuthenticated { _ => _ =>
+  def editItem(id: Long) = Action {
     ItemOrder.findById(id).map { item =>
-      Ok(html.itemorder.editItem(id, form.fill(item)))
+      Ok("html.admin.itemorder.editItem(id, form.fill(item))")
                          }.getOrElse(NotFound)
   }
 
   override def saveItem: play.api.mvc.Action[play.api.mvc.AnyContent] = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.itemorder.newItem(formWithErrors)),
+      formWithErrors => BadRequest(html.admin.itemorder.newItem(formWithErrors)),
       item => {
         item.save
         Ok(listView)

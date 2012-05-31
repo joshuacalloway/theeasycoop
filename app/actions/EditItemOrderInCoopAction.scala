@@ -49,7 +49,7 @@ object EditItemOrderInCoopAction extends Controller with Secured {
       item => {
         item.update(id)
         Logger.info("updatedItem...")
-        Ok(html.itemorder.list(ItemOrder.findByCoopId(coopId)))
+        Ok(html.admin.itemorder.list(ItemOrder.findByCoopId(coopId)))
       }
     )
   }

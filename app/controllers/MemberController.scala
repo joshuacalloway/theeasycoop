@@ -25,17 +25,20 @@ object MemberController extends AbstractCRUDController with Secured {
     Logger.info("model_all called")
     Member.all
   }
+
   override protected def model_findById(id: Long) = Member.findById(id)
   override protected def model_delete(id: Long) = Member.delete(id)
-  override protected def listView = views.html.member.list(model_all)
+  override protected def listView = views.html.admin.member.list(model_all)
 
-  def newItem = IsAuthenticated { _ => _ =>
-      Ok(html.member.newItem(form)) 
-                               }
+  def newItem = Action {
+    Ok(html.admin.member.newItem(form)) 
+  }
 
-  def editItem(id: Long) = IsAuthenticated { _ => _ =>
-    Member.findById(id).map { item =>
-      Ok(html.member.editItem(id, form.fill(item)))
-                           }.getOrElse(NotFound)
+  def editItem(id: Long) = Action {
+    Member.findById(id) match { 
+      case Some(item) =>
+        Ok(html.admin.member.editItem(id, form.fill(item)))
+      case _ => Ok("error")
+    }
   }
 }

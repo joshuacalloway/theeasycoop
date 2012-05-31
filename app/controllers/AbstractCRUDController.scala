@@ -77,7 +77,7 @@ trait AbstractCRUDController extends Controller {
   // = {
  //    method(param)
  //  } 
-  def newItem: play.api.mvc.Action[(play.api.mvc.Action[play.api.mvc.AnyContent], play.api.mvc.AnyContent)]
+  def newItem : play.api.mvc.Action[play.api.mvc.AnyContent]
 
 // play.api.mvc.Action[play.api.mvc.AnyContent]
   // = {
@@ -95,7 +95,8 @@ trait AbstractCRUDController extends Controller {
 
   // def form_fill(item:model) : play.api.data.Form[model]
 
-  def editItem(id: Long): play.api.mvc.Action[(play.api.mvc.Action[play.api.mvc.AnyContent], play.api.mvc.AnyContent)]
+  def editItem(id: Long): play.api.mvc.Action[play.api.mvc.AnyContent]
+//: play.api.mvc.Action[(play.api.mvc.Action[play.api.mvc.AnyContent], play.api.mvc.AnyContent)]
   // = Action {
   //   model_findById(id).map { item =>
   //     Ok(editItemView(id, form_fill(item)))
