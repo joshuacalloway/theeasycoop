@@ -23,11 +23,17 @@ object AddMemberToCoopAction extends Controller with Secured {
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(html.public.actions.addMemberToCoop(id, formWithErrors)),
       {case (value) => {
-        val memberOption = Member.findById(value.toInt)
-        Coop.addMember(id, memberOption.get)
-        val members = Member.findByCoopId(id)
-        val coop = Coop.findById(id)
-        Ok(html.coop.showItem(coop.get, members))
+        val memberOpt = Member.findById(value.toInt)
+        val coopOpt = Coop.findById(id)
+        (coopOpt, memberOpt) match {
+          case (Some(coop), Some(member)) => {
+            val members = Member.findByCoopId(id)
+            if (!coop.isMember(member))
+              Coop.addMember(id, memberOpt.get)
+            Ok(html.coop.showItem(coop, members))
+          }
+          case _ => Ok("Could not add member to coop")
+        }
       }}
      )
                                    }
