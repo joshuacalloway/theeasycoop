@@ -28,10 +28,11 @@ CREATE TABLE coop_member (
        member_status_id integer references member_status(id)
 );
 
-insert into coop(id, name, description, coop_type_id, manager_id) values (0, 'Global Coop', 'Global Coop Open to Anyone', 0, 0);
-
 insert into coop_type(id, coop_type) values (0, 'PUBLIC');
 insert into coop_type(id, coop_type) values (1, 'PRIVATE');
+
+insert into coop(id, name, description, coop_type_id, manager_id) values (0, 'Global Coop', 'Global Coop Open to Anyone', 0, 0);
+
 
 # --- !Downs
 DROP TABLE coop;

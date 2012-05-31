@@ -27,9 +27,9 @@ object AddMemberToCoopAction extends Controller with Secured {
         val coopOpt = Coop.findById(id)
         (coopOpt, memberOpt) match {
           case (Some(coop), Some(member)) => {
-            val members = Member.findByCoopId(id)
             if (!coop.isMember(member))
               Coop.addMember(id, memberOpt.get)
+            val members = Member.findByCoopId(id)
             Ok(html.coop.showItem(coop, members))
           }
           case _ => Ok("Could not add member to coop")
