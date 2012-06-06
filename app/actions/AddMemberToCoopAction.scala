@@ -15,7 +15,7 @@ object AddMemberToCoopAction extends Controller with Secured {
     "name" -> nonEmptyText
   )
 
-  def actionForm(id: Long) = IsManagerOf(id) { _ => _ =>
+  def actionForm(id: Long) = Action { implicit request =>
     Ok(html.addMemberToCoop(id, form))
   }
 
@@ -30,7 +30,7 @@ object AddMemberToCoopAction extends Controller with Secured {
             if (!coop.isMember(member))
               Coop.addMember(id, memberOpt.get)
             val members = Member.findByCoopId(id)
-            Ok(html.admin.coop.showItem(coop, members))
+            Ok(html.showcoop(coop, members))
           }
           case _ => Ok("Could not add member to coop")
         }

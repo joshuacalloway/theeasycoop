@@ -36,6 +36,7 @@ GET     /admin/coops 			    controllers.CoopController.list
 GET     /admin/coops/ 		    controllers.CoopController.list
 GET     /admin/coops/new 		    controllers.CoopController.newItem
 POST    /admin/coops     		    controllers.CoopController.saveItem
+GET     /admin/coops/:id             	    controllers.CoopController.showItem(id:Long)
 GET     /admin/coops/:id/edit             controllers.CoopController.editItem(id:Long)
 GET     /admin/coops/:id/update           controllers.CoopController.updateItem(id:Long)
 
@@ -53,7 +54,7 @@ POST    /members          	    actions.RegisterMemberAction.submitForm
 
 GET     /coops/new 	            actions.StartCoopAction.actionForm
 POST    /coops 	            	    actions.StartCoopAction.submitForm
-GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
+GET     /coops/:id 	            actions.ShowCoopAction.showItem(id: Long)
 GET     /coops/:id/members          actions.ListMembersByCoopAction.members(id: Long)
 GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: Long)
 GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id: Long)

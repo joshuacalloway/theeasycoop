@@ -1,0 +1,31 @@
+@(coop: Coop, members: List[Member])(implicit session: play.api.mvc.Session) 
+
+@import helpers.Utils
+
+@main("Showing Coop") {
+    
+@{coop.name}
+<br>
+@{coop.description}
+<br>
+@{coop.manager}
+
+<br>
+Members:
+<ul>
+  @members.map { member =>
+    <li>@member.id - @member.name - @member.name
+              }
+</ul>
+}
+
+@if(coop.isManager(Utils.getLoggedInUser(session))) {
+
+<a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
+}
+
+
+
+<br/>
+logged in as : @session.get("username")
+    
