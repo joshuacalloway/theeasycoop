@@ -24,7 +24,7 @@ object RegisterMemberAction extends Controller {
 
 
   def actionForm = Action {
-      Ok(html.admin.member.newItem(form)) 
+      Ok(html.registermember(form)) 
   }
 
 
@@ -34,7 +34,7 @@ object RegisterMemberAction extends Controller {
       formWithErrors => BadRequest(html.admin.member.newItem(formWithErrors)),
       item => {
 	item.save
-	Ok("item saved")
+        Redirect(controllers.routes.Application.index).withSession("username" -> item.email.get)
       }
      )
 			 }

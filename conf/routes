@@ -48,6 +48,8 @@ GET     /logout                             actions.LoginAction.logout
 
 
 GET     /members/new 		    actions.RegisterMemberAction.actionForm
+POST    /members          	    actions.RegisterMemberAction.submitForm
+
 
 GET     /coops/new 	            actions.StartCoopAction.actionForm
 GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)

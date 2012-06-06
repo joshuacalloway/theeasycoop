@@ -1,9 +1,11 @@
 @()(implicit session: play.api.mvc.Session) 
 
+@import helpers.Utils
+
 @main("The Easy Coop") {
   <h1>username : @session.get("username") </h1>
   @{
-    if (session.get("username")) {
+    if (Utils.isLogin(session)) {
       <h1><a href="/coops/new">Start a Coop</a></h1>
     } else {
       <h1><a href="/members/new">Register as User</a></h1>

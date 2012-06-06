@@ -1,0 +1,17 @@
+@(coopForm: Form[Member])
+@import helper._
+
+
+@main("start a coop") {
+<h1> New Item </h1>
+
+  @form(actions.routes.RegisterMemberAction.submitForm) {
+  @inputText(coopForm("name"))
+  @inputText(coopForm("email"))
+  @inputText(coopForm("password"))
+  @inputText(coopForm("cell"))
+  @inputText(coopForm("address"))
+  <input type="submit" value="Create">
+  }
+
+}
