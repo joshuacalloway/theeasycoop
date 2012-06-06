@@ -39,7 +39,7 @@ object CoopController extends AbstractCRUDController with Secured {
       itemOption match {
       case None => Ok("no item exists")
       case Some(item) => {
-        val members = Member.findByCoopId(item.id.get)
+        val members = Member.findByCoopId(item.id)
         Ok(html.admin.coop.showItem(item, members))
       }
       }

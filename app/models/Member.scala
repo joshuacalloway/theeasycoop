@@ -74,7 +74,7 @@ object Member {
     implicit c => SQL("select * from member where id = {id}").on('id -> id).as(mapping.singleOpt)
   }
 
-  def findByCoopId(coopId: Long): List[Member] = DB.withConnection
+  def findByCoopId(coopId: Pk[Long]): List[Member] = DB.withConnection
   {
     implicit c => SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coopId}").on('coopId -> coopId).as(mapping *)
   }

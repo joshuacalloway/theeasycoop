@@ -17,7 +17,7 @@ object ListMembersByCoopAction extends Controller with Secured {
     coopOption match {
       case None => Ok("no coop exists")
       case Some(coop) => {
-        val members = Member.findByCoopId(coop.id.get)
+        val members = Member.findByCoopId(coop.id)
         Ok(html.admin.coop.showItem(coop, members))
       }
     }    
