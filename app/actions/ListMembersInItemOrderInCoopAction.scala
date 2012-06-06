@@ -20,8 +20,7 @@ import models.Coop
 object ListMembersInItemOrderInCoopAction extends Controller with Secured {
   
   def list(coopId:Long, id: Long) = Action { implicit request =>
-    //Ok("")
-    Ok(html.listMembersInItemOrderInCoop(ItemOrder.findById(id).get.members))
+    Ok(html.listmembersinitemorderincoop(ItemOrder.findById(id).get.members))
   }
 
 }

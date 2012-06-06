@@ -33,14 +33,14 @@ object AddItemOrderToCoopAction extends Controller with Secured {
     )(ItemOrder.apply)(ItemOrder.unapply))
 
   def newItemByCoop(id: Long) = Action { implicit request =>
-    Ok(html.newItemByCoop(Coop.findById(id).get, form)) 
+    Ok(html.newitembycoop(Coop.findById(id).get, form)) 
                                                }
 
   def saveItemByCoop(id: Long) = Action 
   { implicit request =>
     Logger.info("saveItemByCoop.... id : " + id)
    form.bindFromRequest.fold(
-     formWithErrors => BadRequest(html.newItemByCoop(Coop.findById(id).get, formWithErrors)),
+     formWithErrors => BadRequest(html.newitembycoop(Coop.findById(id).get, formWithErrors)),
      item => {
        item.save
        Redirect(actions.routes.ListItemOrdersByCoopAction.listByCoop(id))

@@ -39,13 +39,13 @@ object EditItemOrderInCoopAction extends Controller with Secured {
     val coop = Coop.findById(coopId).get
     val item = ItemOrder.findById(id).get
     if (item.coop.id == coop.id) {
-      Ok(html.editItemOrderInCoop(coop.id.get, id, form.fill(ItemOrder.findById(id).get)))
+      Ok(html.edititemorderincoop(coop.id.get, id, form.fill(ItemOrder.findById(id).get)))
     } else NotFound
   }
 
   def updateItem(coopId: Long, id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => Ok("BadRequest(view.editItem(id, formWithErrors))"),
+      formWithErrors => BadRequest(html.edititemorderincoop(coopId, id, formWithErrors)),
       item => {
         item.update(id)
         Logger.info("updatedItem...")

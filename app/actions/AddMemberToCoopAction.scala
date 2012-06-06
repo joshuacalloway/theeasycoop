@@ -16,12 +16,12 @@ object AddMemberToCoopAction extends Controller with Secured {
   )
 
   def actionForm(id: Long) = Action { implicit request =>
-    Ok(html.addMemberToCoop(id, form))
+    Ok(html.addmembertocoop(id, form))
   }
 
   def submitForm(id: Long) = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.addMemberToCoop(id, formWithErrors)),
+      formWithErrors => BadRequest(html.addmembertocoop(id, formWithErrors)),
       {case (value) => {
         val memberOpt = Member.findById(value.toInt)
         val coopOpt = Coop.findById(id)
