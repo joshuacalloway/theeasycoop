@@ -1,5 +1,7 @@
 @(title: String)(content: Html)(implicit session: Session)
 
+@import helpers.Utils
+
 <!DOCTYPE html>
 
 <html>
@@ -11,5 +13,12 @@
     </head>
     <body>
         @content
+
+	<br/>
+
+	@if(Utils.isLogin(session)) {
+	logged in as : @Utils.getLoggedInUser(session).name
+
+	}
     </body>
 </html>
