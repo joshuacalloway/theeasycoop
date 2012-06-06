@@ -24,7 +24,7 @@ object StartCoopAction extends Controller {
     )(Coop.apply)(Coop.unapply))
 
 
-  def actionForm = Action {
+  def actionForm = Action { implicit request =>
       Ok(html.startcoop(form)) 
   }
 

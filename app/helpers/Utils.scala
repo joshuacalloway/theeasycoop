@@ -1,6 +1,7 @@
 package helpers
 
 import play.api.mvc.Session
+import models.Member
 
 object Utils
 {
@@ -11,5 +12,10 @@ object Utils
       case _ => false
     }
   }
+
+  def getLoggedInUser(s: Session): Member =
+    {
+      Member.findByEmail(s.get("username").get).get
+    }
 
 }
