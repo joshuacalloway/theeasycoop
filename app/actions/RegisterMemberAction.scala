@@ -23,7 +23,7 @@ object RegisterMemberAction extends Controller {
       "address" -> text)(Member.apply)(Member.unapply))
 
 
-  def actionForm = Action {
+  def actionForm = Action { implicit request =>
       Ok(html.registermember(form)) 
   }
 

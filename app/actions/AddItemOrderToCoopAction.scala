@@ -32,7 +32,7 @@ object AddItemOrderToCoopAction extends Controller with Secured {
       "coop_id" -> number
     )(ItemOrder.apply)(ItemOrder.unapply))
 
-  def newItemByCoop(id: Long) = IsAuthenticated { _ => _ =>
+  def newItemByCoop(id: Long) = Action { implicit request =>
     Ok(html.newItemByCoop(Coop.findById(id).get, form)) 
                                                }
 

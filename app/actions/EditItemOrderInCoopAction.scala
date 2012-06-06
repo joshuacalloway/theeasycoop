@@ -35,7 +35,7 @@ object EditItemOrderInCoopAction extends Controller with Secured {
     )(ItemOrder.apply)(ItemOrder.unapply))
 
 
-  def editItem(coopId: Long, id: Long) = Action {
+  def editItem(coopId: Long, id: Long) = Action { implicit request =>
     val coop = Coop.findById(coopId).get
     val item = ItemOrder.findById(id).get
     if (item.coop.id == coop.id) {

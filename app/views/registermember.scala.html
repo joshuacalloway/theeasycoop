@@ -1,9 +1,10 @@
-@(coopForm: Form[Member])
+@(coopForm: Form[Member])(implicit session: play.api.mvc.Session)
 @import helper._
 
 
 @main("start a coop") {
 <h1> New Item </h1>
+
 
   @form(actions.routes.RegisterMemberAction.submitForm) {
   @inputText(coopForm("name"))

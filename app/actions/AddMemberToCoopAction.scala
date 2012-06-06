@@ -35,5 +35,6 @@ object AddMemberToCoopAction extends Controller with Secured {
         }
       }}
      )
+
                                    }
 }

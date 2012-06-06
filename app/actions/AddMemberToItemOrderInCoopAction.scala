@@ -16,7 +16,7 @@ object AddMemberToItemOrderInCoopAction extends Controller with Secured {
     "name" -> nonEmptyText
   )
 
-  def actionForm(coopId: Long, id: Long) = Action {
+  def actionForm(coopId: Long, id: Long) = Action { implicit request =>
     Ok(html.addMemberToItemOrderInCoop(coopId, id, form))
   }
 
