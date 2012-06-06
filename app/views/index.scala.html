@@ -1,7 +1,16 @@
-@(message: String)
+@()(implicit session: play.api.mvc.Session) 
 
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
+@main("The Easy Coop") {
+  <h1>username : @session.get("username") </h1>
+  @{
+    if (session.get("username")) {
+      <h1><a href="/coops/new">Start a Coop</a></h1>
+    } else {
+      <h1><a href="/members/new">Register as User</a></h1>
+    }
+  }
+  <br>
+  <h1><a href="/login">Already Registered?  Login to your Coop</a></h1>
+
     
 }

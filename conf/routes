@@ -46,6 +46,10 @@ GET     /login                              actions.LoginAction.login
 POST    /login                              actions.LoginAction.authenticate
 GET     /logout                             actions.LoginAction.logout
 
+
+GET     /members/new 		    actions.RegisterMemberAction.actionForm
+
+GET     /coops/new 	            actions.StartCoopAction.actionForm
 GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
 GET     /coops/:id/members          actions.ListMembersByCoopAction.members(id: Long)
 GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: Long)

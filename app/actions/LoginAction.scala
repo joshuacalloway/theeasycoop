@@ -36,7 +36,7 @@ object LoginAction extends Controller {
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
       member => 
-        Redirect(controllers.routes.Application.index).withSession("email" -> member._1)
+        Redirect(controllers.routes.Application.index).withSession("username" -> member._1)
     )
   }
 

@@ -28,8 +28,8 @@ object ItemController extends Controller {
       "url" -> text)
     (Item.apply)(Item.unapply))
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def index = Action { implicit request =>
+    Ok(views.html.index())
   }
 
   def list = Action {

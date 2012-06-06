@@ -9,17 +9,24 @@ import play.api.data.Forms._
 
 import models.Member
 import models.Coop
+import actions.Secured
 
-object Application extends Controller {
+object Application extends Controller with Secured {
   
   def start = Action {
     Ok("Start page")
   }
 
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
-  }
+
+  def index = Action { implicit request =>
+    val username = request.session.get("username")
+    Logger.info("username is : " + request.session.get("username"))
+		     
+    Ok(views.html.index())
+		    }
+
+ 
 
   def test = Action {
     Ok("this is a test....")
