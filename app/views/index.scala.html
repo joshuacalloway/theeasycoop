@@ -5,15 +5,15 @@
 @import models.Coop
 
 @main("The Easy Coop") {
-  <h1>username : @session.get("username") </h1>
   
  @if(Utils.isLogin(session)) { 
-    <h1><a href="/coops/new">Start a Coop</a></h1>
-    
-   <ul>
+   
+   <ul>Navigate to one of your Coops
    @coops.map { coop =>
      <li><a href="/coops/@coop.id">@coop.name</a>
 	     }
+   <li><a href="/coops/new">Start a Coop</a>
+    
    </ul>
     
       
@@ -25,5 +25,7 @@
   }
   
 
+  <br/>
+  logged in as : @session.get("username")
     
 }

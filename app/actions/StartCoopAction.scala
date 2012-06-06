@@ -25,9 +25,18 @@ object StartCoopAction extends Controller {
 
 
   def actionForm = Action {
-      Ok(html.admin.coop.newItem(form)) 
+      Ok(html.startcoop(form)) 
   }
 
+
+  def submitForm = Action { implicit request =>
+    form.bindFromRequest.fold(
+      formWithErrors => Ok("BadRequest(newItemView(formWithErrors))"),
+      item => {
+        item.save
+	Redirect(controllers.routes.Application.index)
+      }
+    )}
 
 }
 

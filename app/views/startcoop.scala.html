@@ -1,0 +1,21 @@
+@(theform: Form[Coop])
+@import helper._
+
+
+@main("start a coop") {
+<h1> Start a coop </h1>
+
+  @form(actions.routes.StartCoopAction.submitForm) {
+  @inputText(theform("name"))
+  @inputText(theform("manager_id"))
+  @textarea(theform("description"))
+  @select(
+  theform("coop_type_id"), 
+  CoopType.options,
+  '_label -> "Coop Type", 
+  '_default -> "-- Choose a Coop Type --", 
+  '_showConstraints -> false)
+  <input type="submit" value="Create">
+  }
+
+}

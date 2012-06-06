@@ -52,6 +52,7 @@ POST    /members          	    actions.RegisterMemberAction.submitForm
 
 
 GET     /coops/new 	            actions.StartCoopAction.actionForm
+POST    /coops 	            	    actions.StartCoopAction.submitForm
 GET     /coops/:id 	            controllers.CoopController.showItem(id: Long)
 GET     /coops/:id/members          actions.ListMembersByCoopAction.members(id: Long)
 GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: Long)
