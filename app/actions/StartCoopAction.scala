@@ -31,7 +31,7 @@ object StartCoopAction extends Controller {
 
   def submitForm = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => Ok("BadRequest(newItemView(formWithErrors))"),
+      formWithErrors => BadRequest(html.startcoop(formWithErrors)),
       item => {
         item.save
 	Redirect(controllers.routes.Application.index)
