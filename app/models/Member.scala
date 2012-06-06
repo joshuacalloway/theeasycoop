@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Member(id: Pk[Long], name: String, email: Option[String], password: String, cell: Option[String], address: String) extends AbstractModel {
+case class Member(id: Pk[Long], name: String, email: String, password: String, cell: Option[String], address: String) extends AbstractModel {
   
   def save = {
     Member.save(this)
@@ -22,7 +22,7 @@ object Member {
   val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
-    get[Option[String]]("email") ~
+    get[String]("email") ~
     get[String]("password") ~
     get[Option[String]]("cell") ~
     get[String]("address") map {

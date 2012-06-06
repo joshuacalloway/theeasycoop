@@ -17,7 +17,7 @@ object RegisterMemberAction extends Controller {
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
-      "email" -> optional(text),
+      "email" -> nonEmptyText,
       "password" -> nonEmptyText,
       "cell" -> optional(text),
       "address" -> text)(Member.apply)(Member.unapply))
@@ -31,10 +31,10 @@ object RegisterMemberAction extends Controller {
 
   def submitForm = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.admin.member.newItem(formWithErrors)),
+      formWithErrors => BadRequest(html.registermember(formWithErrors)),
       item => {
 	item.save
-        Redirect(controllers.routes.Application.index).withSession("username" -> item.email.get)
+        Redirect(controllers.routes.Application.index).withSession("username" -> item.email)
       }
      )
 			 }

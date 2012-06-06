@@ -16,7 +16,7 @@ object MemberController extends AbstractCRUDController with Secured {
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
-      "email" -> optional(text),
+      "email" -> nonEmptyText,
       "password" -> nonEmptyText,
       "cell" -> optional(text),
       "address" -> text)(Member.apply)(Member.unapply))
