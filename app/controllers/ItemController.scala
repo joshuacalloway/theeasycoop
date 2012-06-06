@@ -29,7 +29,7 @@ object ItemController extends Controller {
     (Item.apply)(Item.unapply))
 
   def index = Action { implicit request =>
-    Ok(views.html.index())
+    Ok("views.html.index()")
   }
 
   def list = Action {

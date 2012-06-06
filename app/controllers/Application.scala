@@ -20,10 +20,15 @@ object Application extends Controller with Secured {
 
 
   def index = Action { implicit request =>
-    val username = request.session.get("username")
-    Logger.info("username is : " + request.session.get("username"))
-		     
-    Ok(views.html.index())
+    val member = request.session.get("username") match {
+      case Some(email) => Member.findByEmail(email)
+      case _ => None
+    }
+       
+    member match {
+      case Some(m) => Ok(views.html.index(m, m.coops))
+      case _ => Ok(views.html.index(null,null))
+    }
 		    }
 
  

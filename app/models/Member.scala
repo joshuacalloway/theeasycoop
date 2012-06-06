@@ -15,6 +15,7 @@ case class Member(id: Pk[Long], name: String, email: String, password: String, c
     Member.update(id, this)
   }
   def all = Member.all
+  def coops = Member.coops(id)
 }
 
 object Member {
@@ -109,6 +110,10 @@ object Member {
         'id -> id
       ).executeUpdate()
                      }
+  }
+
+  def coops(id: Pk[Long]) : List[Coop] = {
+    Coop.findByMemberId(id)
   }
 
   def update(id: Long, item: Member) {

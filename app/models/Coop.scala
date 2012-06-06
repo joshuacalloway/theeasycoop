@@ -64,6 +64,12 @@ object Coop {
         'member_id -> member.id).executeUpdate()
                      }
   }
+
+  def findByMemberId(memberId: Pk[Long]): List[Coop] = DB.withConnection
+  {
+    implicit c => SQL("select c.* from coop c, coop_member cm where cm.coop_id = c.id and cm.member_id = {memberId}").on('memberId -> memberId).as(mapping *)
+  }
+
   def save(coop: Coop) {
     Logger.info("save entry version 1.0... coop.id: " + coop.id)
     create(coop)
