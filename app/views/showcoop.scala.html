@@ -3,7 +3,12 @@
 @import helpers.Utils
 
 @main(title="Showing Coop"){
-  no menu
+  @if(coop.isManager(Utils.getLoggedInUser(session))) {
+    <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
+    <br/>
+    <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Item Order</a>
+
+  }
 } {
   
   @{coop.name}
@@ -21,9 +26,6 @@
   </ul>
 
 
-  @if(coop.isManager(Utils.getLoggedInUser(session))) {
-    <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
-  }
 
   <br/>
   ItemOrders
@@ -34,9 +36,6 @@
               }
   </ul>
 
-  @if(coop.isManager(Utils.getLoggedInUser(session))) {
-    <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Item Order</a>
-  }
   
 
 }
