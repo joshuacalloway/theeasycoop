@@ -21,7 +21,9 @@
   @inputText(theform("itemdescription"), '_showErrors -> true)
   @inputText(theform("deadline_by"), '_showErrors -> true)
   @inputText(theform("deliveryaddress"), '_showErrors -> true)
-  @inputText(theform("created_at"), '_showErrors -> true)
+
+  <input type="hidden" id="created_at" name="created_at" value="@Utils.getCurrentDate()"/>
+
   <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
   <input type="hidden" id="coop_id" name="coop_id" value="@coop.id"/>
   <input type="submit" value="Create">

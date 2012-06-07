@@ -2,6 +2,7 @@ package helpers
 
 import play.api.mvc.Session
 import models.Member
+import java.text.SimpleDateFormat
 
 object Utils
 {
@@ -18,4 +19,9 @@ object Utils
       Member.findByEmail(s.get("username").get).get
     }
 
+//  def getCurrentDate() : java.util.Date = new java.util.Date()
+  def getCurrentDate() = {
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    dateFormat.format(new java.util.Date())
+  }
 }
