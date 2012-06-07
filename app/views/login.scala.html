@@ -1,6 +1,8 @@
 @(form: Form[(String,String)])(implicit flash: Flash, session: Session)
 
 @main("Login to EasyCoop") {
+no menu
+}{
   
   @helper.form(actions.routes.LoginAction.authenticate) {
 

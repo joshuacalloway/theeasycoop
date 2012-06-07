@@ -3,7 +3,9 @@
 @import helper._
 @import actions.routes._
 
-@main("Add Member to Coop") {
+@main(title="Add Member to Coop"){
+  no menu
+}{
   <h2>Add a new member</h2>
 
   @form(AddMemberToCoopAction.submitForm(id)) {

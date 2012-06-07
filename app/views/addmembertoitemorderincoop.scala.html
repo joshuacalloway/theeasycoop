@@ -4,6 +4,8 @@
 @import actions.routes._
 
 @main("Todo list") {
+  no menu
+}{
   <h2>Add a new member</h2>
 
   @form(AddMemberToItemOrderInCoopAction.submitForm(coopId, id)) {
