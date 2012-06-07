@@ -29,7 +29,7 @@ object AddMemberToCoopAction extends Controller with Secured {
           case (Some(coop), Some(member)) => {
             if (!coop.isMember(member))
               Coop.addMember(id, memberOpt.get)
-            Ok(html.showcoop(coop, coop.members))
+            Ok(html.showcoop(coop))
           }
           case _ => Ok("Could not add member to coop")
         }

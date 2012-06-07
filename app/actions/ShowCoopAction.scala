@@ -26,8 +26,7 @@ object ShowCoopAction extends Controller {
       itemOption match {
       case None => Ok("no item exists")
       case Some(item) => {
-        val members = Member.findByCoopId(item.id)
-        Ok(html.showcoop(item, members))
+        Ok(html.showcoop(item))
       }
       }
     }    
