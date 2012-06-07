@@ -2,8 +2,9 @@
 
 @import helper._
 @import actions.routes._
+@import helpers.Utils
 
-@main("Todo list") {
+@main("Add Item Order to Coop") {
 
   <h2>Add a new item</h2>
 
@@ -21,9 +22,8 @@
   @inputText(theform("deadline_by"), '_showErrors -> true)
   @inputText(theform("deliveryaddress"), '_showErrors -> true)
   @inputText(theform("created_at"), '_showErrors -> true)
-  @inputText(theform("created_by_id"), '_showErrors -> true)
+  <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
   <input type="hidden" id="coop_id" name="coop_id" value="@coop.id"/>
-
   <input type="submit" value="Create">
   }
 
