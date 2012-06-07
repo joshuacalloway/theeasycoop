@@ -13,16 +13,26 @@
   <br>
   Members:
   <ul>
-  @members.map { member =>
+  @coop.members.map { member =>
     <li>@member.id - @member.name - @member.name
               }
   </ul>
 
 
   @if(coop.isManager(Utils.getLoggedInUser(session))) {
-
     <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
   }
+
+  <br/>
+  ItemOrders
+
+  <ul>
+  @coop.itemOrders.map { itemOrder =>
+    <li>@itemOrder.id - @itemOrder.description - @itemOrder.item.name
+              }
+  </ul>
+  
+
 }
 
     

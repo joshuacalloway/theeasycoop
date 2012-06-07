@@ -51,10 +51,15 @@ object ItemOrder {
     }
   }
 
-
   def findByCoopId(id: Long): List[ItemOrder] = DB.withConnection
   {
     implicit c => SQL("select * from itemorder where coop_id = {id}").on('id -> id).as(ItemOrder.mapping *)
+  }
+
+
+  def findByCoopId(id: Pk[Long]): List[ItemOrder] = 
+  {
+    findByCoopId(id.get)
   }
 
   def findById(id: Long): Option[ItemOrder] = DB.withConnection

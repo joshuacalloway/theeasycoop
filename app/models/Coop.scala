@@ -28,7 +28,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
     Coop.isMember(this, member)
   }
   def members = Member.findByCoopId(id)
-
+  def itemOrders = ItemOrder.findByCoopId(id)
 }
 
 object Coop {

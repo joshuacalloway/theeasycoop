@@ -3,17 +3,19 @@
 @import helper._
 @import actions.routes._
 
-@main("Todo list") {
+@main("Add Member to Coop") {
   <h2>Add a new member</h2>
 
   @form(AddMemberToCoopAction.submitForm(id)) {
   @select(
   theform("name"), 
   Member.options,
-  '_label -> "Member", 
+  '_label -> "Add a Registered Member", 
   '_default -> "-- Choose a member --", 
   '_showConstraints -> false)
 
-  <input type="submit" value="Create">
+  <input type="submit" value="Add">
   }
+
+
 }

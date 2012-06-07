@@ -42,7 +42,7 @@ object ItemOrderController extends AbstractCRUDController with Secured {
   override protected def model_delete(id: Long) = ItemOrder.delete(id)
   override protected def listView = views.html.admin.itemorder.list(model_all)
   
-  def listByCoop(id: Long) = Action {
+  def listByCoop(id: Pk[Long]) = Action {
     Ok(html.admin.itemorder.list(ItemOrder.findByCoopId(id)))
   }
 
