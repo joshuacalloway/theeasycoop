@@ -2,7 +2,7 @@
 
 @import helpers.Utils
 
-@main("Showing Coop") {
+@main(title="Showing Coop") {
   
   @{coop.name}
   <br>
@@ -28,9 +28,13 @@
 
   <ul>
   @coop.itemOrders.map { itemOrder =>
-    <li>@itemOrder.id - @itemOrder.description - @itemOrder.item.name
+    <li><a href="@actions.routes.ShowItemOrderInCoopAction.showItem(coop.id.get, itemOrder.id.get)">@itemOrder.id - @itemOrder.description - @itemOrder.item.name</a>
               }
   </ul>
+
+  @if(coop.isManager(Utils.getLoggedInUser(session))) {
+    <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Item Order</a>
+  }
   
 
 }
