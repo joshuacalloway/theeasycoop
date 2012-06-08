@@ -1,0 +1,17 @@
+@(id: Long, theform: Form[Member])(implicit session: Session)
+
+@import helper._
+
+@main("stuff") {
+} {   
+  @form(actions.routes.EditMemberAction.updateItem(id)) {
+    @inputText(theform("id"))
+    @inputText(theform("name"))
+    @inputText(theform("email"))
+    @inputText(theform("password"))
+    @inputText(theform("cell"))
+    @inputText(theform("address"))
+    <input type="submit" value="Update">
+  }
+}
+	

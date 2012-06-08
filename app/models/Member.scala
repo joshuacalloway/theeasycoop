@@ -119,9 +119,12 @@ object Member {
   def update(id: Long, item: Member) {
     Logger.info("updating member : " + id + " with email : " + item.email)
     DB.withConnection { implicit c =>
-      SQL("update member set name={name}, email={email} where id={id}").on(
+      SQL("update member set name={name}, email={email}, password={password}, cell={cell}, address={address} where id={id}").on(
         'name -> item.name,
         'email -> item.email,
+	'password -> item.password,
+	'cell -> item.cell,
+	'address -> item.address,
         'id -> id
       ).executeUpdate()
                      }

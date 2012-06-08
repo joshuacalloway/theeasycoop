@@ -28,7 +28,7 @@ GET     /admin/members                    controllers.MemberController.list
 POST    /admin/members                    controllers.MemberController.saveItem
 GET     /admin/members/new 		    controllers.MemberController.newItem
 POST    /admin/members/:id/delete         controllers.MemberController.deleteItem(id:Long)
-GET     /members/:id/edit           controllers.MemberController.editItem(id:Long)
+GET    /admin/members/:id/edit         controllers.MemberController.editItem(id:Long)
 GET     /admin/members/:id/update         controllers.MemberController.updateItem(id:Long)
 GET     /admin/members/:id                controllers.MemberController.showItem(id:Long)
 
@@ -52,6 +52,8 @@ GET     /logout                             actions.LoginAction.logout
 GET     /members/new 		    actions.RegisterMemberAction.actionForm
 POST    /members          	    actions.RegisterMemberAction.submitForm
 GET     /members/:id 		    actions.ShowMemberAction.showItem(id:Long)
+GET     /members/:id/edit           actions.EditMemberAction.editItem(id:Long)
+POST    /members/:id          	    actions.EditMemberAction.updateItem(id:Long)
 
 POST    /items		    actions.AddItemAction.saveItem
 GET    	/items/new     	    actions.AddItemAction.newItem
