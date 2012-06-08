@@ -6,9 +6,17 @@
   @if(coop.isManager(Utils.getLoggedInUser(session))) {
     <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
     <br/>
-    <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Item Order</a>
+    <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a>
 
-  }
+    <br/>
+    Your Coops <br/>
+    @Utils.getLoggedInUser(session).coops.map { coop =>
+    <a href="/coops/@coop.id">@coop.name</a>
+					    <br/>
+	}				  }
+ 
+
+  
 } {
   
   @{coop.name}
