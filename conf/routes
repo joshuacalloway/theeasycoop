@@ -43,7 +43,7 @@ GET     /admin/coops/:id/update           controllers.CoopController.updateItem(
 
 
 # Authentication
-GET	/                                   actions.LoginAction.login
+GET	/                                   controllers.Application.index
 GET     /login                              actions.LoginAction.login
 POST    /login                              actions.LoginAction.authenticate
 GET     /logout                             actions.LoginAction.logout
