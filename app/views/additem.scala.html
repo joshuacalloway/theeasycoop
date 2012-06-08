@@ -1,0 +1,16 @@
+@(theform: Form[Item])(implicit session: Session)
+
+@import helper._
+
+@main("Add Item") {
+} {
+  <h2>Add a new bulk item</h2>
+
+  @form(actions.routes.AddItemAction.saveItem()) {
+  @inputText(theform("name"))
+  @inputText(theform("description"))
+  @inputText(theform("cost"))
+  @inputText(theform("url"))
+  <input type="submit" value="Create">
+  }
+}
