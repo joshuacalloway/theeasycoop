@@ -1,11 +1,13 @@
 package helpers
 
 import play.api.mvc.Session
-import models.Member
+import models.{Member,Coop}
 import java.text.SimpleDateFormat
 
 object Utils
 {
+  def isManager(s: Session, coop: Coop): Boolean = coop.isManager(getLoggedInUser(s))
+    
   def isLogin(s: Session): Boolean = 
   { 
     s.get("username") match {

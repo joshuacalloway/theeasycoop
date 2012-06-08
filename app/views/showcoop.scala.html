@@ -2,8 +2,10 @@
 
 @import helpers.Utils
 
+
+
 @main(title="Showing Coop"){
-  @if(coop.isManager(Utils.getLoggedInUser(session))) {
+  @if(Utils.isManager(session, coop)) {
     <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
     <br/>
     <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a>
@@ -23,14 +25,19 @@
   <br>
   @{coop.description}
   <br>
-  @{coop.manager}
+  Manager : @{coop.manager.name} - @{coop.manager.email}
+
 
   <br>
   Members:
   <ul>
   @coop.members.map { member =>
+    @if(Utils.isManager(session,coop)) {
+      <li><a href="/members/@member.id">@member.id - @member.name - @member.name</a>
+    } else {
     <li>@member.id - @member.name - @member.name
-              }
+    }
+		   }
   </ul>
 
 
