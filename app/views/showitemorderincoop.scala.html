@@ -3,7 +3,12 @@
 @import helpers.Utils
 
 @main("Showing Item Order") {
-  
+
+@if(Utils.isManager(session, item.coop)) {
+  <a href="@item.id/edit">Edit Order</a>
+  <br/>
+}
+
 } {  
 @{item.id},
 <br/>
