@@ -51,6 +51,7 @@ GET     /logout                             actions.LoginAction.logout
 
 GET     /members/new 		    actions.RegisterMemberAction.actionForm
 POST    /members          	    actions.RegisterMemberAction.submitForm
+GET     /members/:id 		    actions.ShowMemberAction.showItem(id:Long)
 
 POST    /items		    actions.AddItemAction.saveItem
 GET    	/items/new     	    actions.AddItemAction.newItem

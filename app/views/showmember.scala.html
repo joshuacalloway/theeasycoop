@@ -1,0 +1,17 @@
+@(item: Member)(implicit session: Session) 
+
+@import helpers.Utils
+
+@main(title="Showing Member"){
+<a href="/members/@item.id/edit">Edit Profile</a>
+<br/>
+} {
+  @{item.id}
+  <br/>
+  @{item.name}
+  <br>
+  @{item.address}
+  <br>
+}
+
+    

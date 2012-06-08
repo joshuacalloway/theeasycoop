@@ -22,7 +22,10 @@
 <br/>
 @if(Utils.isLogin(session)) {
 
+  
   <a href="/items/new">Add Item</a>
+<br/>
+  <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
 <br/>
   <a href="/logout">Logout</a>
 }
