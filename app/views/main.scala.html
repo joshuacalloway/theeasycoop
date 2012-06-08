@@ -18,6 +18,12 @@
 <div id="menu" style="background-color:#FFD700;height:400px;width:100px;float:left;">
 <b>Menu</b><br />
 @menu
+
+<br/>
+@if(Utils.isLogin(session)) {
+  <a href="/logout">Logout</a>
+}
+
 </div>
 <div id="content" style="background-color:#EEEEEE;height:400px;width:400px;float:left;">
 @content

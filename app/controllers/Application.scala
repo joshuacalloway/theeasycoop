@@ -20,14 +20,13 @@ object Application extends Controller with Secured {
 
 
   def index = Action { implicit request =>
-    val member = request.session.get("username") match {
-      case Some(email) => Member.findByEmail(email)
-      case _ => None
-    }
-       
-    member match {
-      case Some(m) => Ok(views.html.showcoop(m.coops(0)))
-      case _ => Ok(views.html.index(null,null))
+    request.session.get("username") match {
+      case Some(email) => {
+	val member = Member.findByEmail(email)
+	if (member.get.coops.size > 0) Ok(views.html.showcoop(member.get.coops(0)))
+	else Ok(views.html.index(member.get))
+      }
+      case _ => Ok("User not logged in")
     }
 		    }
 

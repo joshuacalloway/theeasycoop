@@ -1,4 +1,4 @@
-@(member: Member, coops: List[Coop])(implicit session: Session) 
+@(member: Member)(implicit session: Session) 
 
 @import helpers.Utils
 @import models.Member
@@ -7,13 +7,8 @@
 @main("The Easy Coop") {
   <a href="/coops/new">Start a Coop</a>
 <br/>
-  <a href="/logout">Logout</a>
 } {
   
-  <ul>Navigate to one of your Coops
-  @coops.map { coop =>
-    <li><a href="/coops/@coop.id">@coop.name</a>
-	    }
-  </ul>
+  Welcome to the Easy Coop. 
     
 }
