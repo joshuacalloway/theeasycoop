@@ -19,8 +19,8 @@ import models.Coop
 
 object ListItemOrdersByCoopAction extends Controller with Secured {
   
-  def listByCoop(id: Long) = Action {
-    Ok(html.admin.itemorder.list(ItemOrder.findByCoopId(id)))
+  def listByCoop(id: Long) = Action { implicit request =>
+    Ok(html.listitemordersbycoop(ItemOrder.findByCoopId(id)))
   }
 
 }
