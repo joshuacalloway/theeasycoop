@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /index                      controllers.Application.index
 GET     /start                      controllers.Application.start
 
 GET     /admin/items 		    controllers.ItemController.list
@@ -43,6 +43,7 @@ GET     /admin/coops/:id/update           controllers.CoopController.updateItem(
 
 
 # Authentication
+GET	/                                   actions.LoginAction.login
 GET     /login                              actions.LoginAction.login
 POST    /login                              actions.LoginAction.authenticate
 GET     /logout                             actions.LoginAction.logout
