@@ -1,0 +1,29 @@
+@(item: ItemOrder)(implicit session: Session)
+
+@import helpers.Utils
+
+@main("Showing Item Order") {
+  
+} {  
+@{item.id},
+<br/>
+@{item.item.name},
+<br/>
+Minimum Buyers: 
+@{item.minimumbuyers},
+<br/>
+@{item.membercost},
+<br/>
+@{item.description},
+<br/>
+@{item.deadline_by},
+<br/>
+@{item.deliveryaddress},
+<br/>
+@{item.created_at},
+<br/>
+@{item.createdBy.name},
+<br/>
+@{item.coop.name},
+<br/>
+}

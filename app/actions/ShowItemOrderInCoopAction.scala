@@ -12,12 +12,11 @@ import views._
 
 object ShowItemOrderInCoopAction extends Controller with Secured {
 
-  def showItem(coopId: Long, id: Long) : play.api.mvc.Action[play.api.mvc.AnyContent] =
-    Action {
+  def showItem(coopId: Long, id: Long) = Action { implicit request =>
       val coopOpt = Coop.findById(coopId)
       val itemOpt = ItemOrder.findById(id)
       (coopOpt, itemOpt) match {
-        case (Some(coop), Some(item)) if coop.id == item.coop.id => Ok(views.html.admin.itemorder.showItem(item))
+        case (Some(coop), Some(item)) if coop.id == item.coop.id => Ok(html.showitemorderincoop(item))
 
         case _ => Ok("bulkitem does not belong in coop")
       }
