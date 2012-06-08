@@ -26,8 +26,7 @@ object Application extends Controller with Secured {
     }
        
     member match {
-      case Some(m) if m.coops.size > 1 => Ok(views.html.index(m, m.coops))
-      case Some(m) if m.coops.size == 1 => Ok(views.html.showcoop(m.coops(0)))
+      case Some(m) => Ok(views.html.showcoop(m.coops(0)))
       case _ => Ok(views.html.index(null,null))
     }
 		    }
