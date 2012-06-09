@@ -25,7 +25,8 @@ object ItemController extends Controller {
       "name" -> text,
       "description" -> text,
       "cost" -> money,
-      "url" -> text)
+      "url" -> text,
+    "created_by_id" -> number)
     (Item.apply)(Item.unapply))
 
   def index = Action { implicit request =>

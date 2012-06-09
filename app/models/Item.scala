@@ -8,7 +8,7 @@ import play.api.data.FormError
 import play.api.Play.current
 import play.Logger
 
-case class Item(id: Pk[Long] = null, name: String, description: String, cost: BigDecimal, url: String) {
+case class Item(id: Pk[Long] = null, name: String, description: String, cost: BigDecimal, url: String, created_by_id:Int) {
   def save() {
     Item.save(this)
   }
@@ -22,8 +22,9 @@ object Item {
     get[String]("name") ~
     get[String]("description") ~
     get[BigDecimal]("cost") ~
-    get[String]("url") map {
-      case id~name~cost~description~url => Item(id, name, cost,description, url)
+    get[String]("url") ~
+    get[Int]("created_by_id") map {
+      case id~name~cost~description~url~created_by_id => Item(id, name, cost,description, url,created_by_id)
     }
   }
 

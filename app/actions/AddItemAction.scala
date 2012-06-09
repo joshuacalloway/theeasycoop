@@ -24,7 +24,8 @@ object AddItemAction extends Controller with Secured {
       "name" -> text,
       "description" -> text,
       "cost" -> money,
-      "url" -> text)
+      "url" -> text,
+    "created_by_id" -> number)
     (Item.apply)(Item.unapply))
 
   def saveItem = Action { implicit request =>
