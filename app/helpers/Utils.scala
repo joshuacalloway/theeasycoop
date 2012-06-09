@@ -11,14 +11,17 @@ object Utils
   def isLogin(s: Session): Boolean = 
   { 
     s.get("username") match {
-      case Some(x) => true
+      case Some(x) if getLoggedInUser(s) != null => true
       case _ => false
     }
   }
 
   def getLoggedInUser(s: Session): Member =
     {
-      Member.findByEmail(s.get("username").get).get
+      s.get("username") match {
+	case Some(x) => Member.findByEmail(x).getOrElse(null)
+	case  _ => null
+      }
     }
 
 //  def getCurrentDate() : java.util.Date = new java.util.Date()
