@@ -16,20 +16,24 @@
 <div id="header" style="background-color:#FFA500;">
 <h1 style="margin-bottom:0;">@title</h1></div>
 <div id="menu" style="background-color:#FFD700;height:520px;width:100px;float:left;">
+
+<div id="pagemenu">
 <b>Menu</b><br />
 @menu
 
+</div>
 <br/>
+<div id="usermenu">
 @if(Utils.isLogin(session)) {
-
-  
-  <a href="/items/new">Add Item</a>
-<br/>
   <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
 <br/>
+  @Utils.getLoggedInUser(session).coops.map { coop =>
+    <a href="/coops/@coop.id">@coop.name</a>
+					     <br/>
+					   }
   <a href="/logout">Logout</a>
 }
-
+</div>
 </div>
 <div id="content" style="background-color:#EEEEEE;height:520px;width:400px;float:left;">
 @content

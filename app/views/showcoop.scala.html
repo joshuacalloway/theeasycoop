@@ -5,20 +5,18 @@
 
 
 @main(title="Showing Coop"){
+  <a href="/items/new">Add Item</a>
+<br/>
+
   @if(Utils.isManager(session, coop)) {
+    <div id="managermenu">
     <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
     <br/>
     <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a>
 
     <br/>
-    Your Coops <br/>
-    @Utils.getLoggedInUser(session).coops.map { coop =>
-    <a href="/coops/@coop.id">@coop.name</a>
-					    <br/>
-	}				  }
- 
-
-  
+    </div>
+  }
 } {
   
   @{coop.name}
