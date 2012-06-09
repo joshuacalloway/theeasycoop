@@ -1,6 +1,7 @@
 @(theform: Form[Item])(implicit session: Session)
 
 @import helper._
+@import helpers.Utils
 
 @main("Add Item") {
 } {
@@ -11,6 +12,9 @@
   @inputText(theform("description"))
   @inputText(theform("cost"))
   @inputText(theform("url"))
+
+  <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
+
   <input type="submit" value="Create">
   }
 }

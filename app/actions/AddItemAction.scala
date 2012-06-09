@@ -30,7 +30,7 @@ object AddItemAction extends Controller with Secured {
 
   def saveItem = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.admin.item.newItem(formWithErrors)),
+      formWithErrors => BadRequest(html.additem(formWithErrors)),
       item => {
         Item.save(item)
         Redirect(controllers.routes.Application.index)

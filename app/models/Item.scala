@@ -63,11 +63,12 @@ object Item {
 
   def create(item: Item) {
     DB.withConnection { implicit c =>
-      SQL("insert into item (name, description, cost, url) select {name}, {description}, {cost}, {url}").on(
+      SQL("insert into item (name, description, cost, url, created_by_id) select {name}, {description}, {cost}, {url}, {created_by_id}").on(
         'name -> item.name,
         'description -> item.description,
         'cost -> item.cost,
-         'url -> item.url
+         'url -> item.url,
+	'created_by_id -> item.created_by_id
       ).executeUpdate()
                      }
   }
