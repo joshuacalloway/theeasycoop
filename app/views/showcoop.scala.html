@@ -1,10 +1,9 @@
 @(coop: Coop)(implicit session: Session) 
 
 @import helpers.Utils
+@import views.html.tags._
 
-
-
-@main(title="Showing Coop"){
+@main(title=coop.name){
   <a href="/items/new">Add Item</a>
 <br/>
 
@@ -23,21 +22,24 @@
   <br>
   @{coop.description}
   <br>
-  Manager : @{coop.manager.name} - @{coop.manager.email}
+  Manager : @member(coop.manager)
 
 
   <br>
   Members:
   <ul>
-  @coop.members.map { member =>
+  @coop.members.map { m =>
     @if(Utils.isManager(session,coop)) {
-      <li><a href="/members/@member.id">@member.id - @member.name - @member.name</a>
+      <li><a href="/members/@m.id">@member(m)</a>
     } else {
-    <li>@member.id - @member.name - @member.name
+
+
+    <li>@member(m)
     }
+
+
 		   }
   </ul>
-
 
 
   <br/>
