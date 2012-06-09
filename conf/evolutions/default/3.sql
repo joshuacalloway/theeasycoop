@@ -12,8 +12,8 @@ CREATE TABLE item (
        created_by_id integer references member(id)
 );
 
-insert into item(id, name, description, cost, url) values (1, 'Fresh Salmon Sushi Grade', '10 lbs the very best', 300, 'salmon.com', 0);
-insert into item(id, name, description, cost, url) values (1, 'NAPA valley Wine', '10 cases of red wine', 500, 'napawine.com', 0);
+insert into item(id, name, description, cost, url,created_by_id) values (1, 'Fresh Salmon Sushi Grade', '10 lbs the very best', 300, 'salmon.com', 0);
+insert into item(id, name, description, cost, url,created_by_id) values (2, 'NAPA valley Wine', '10 cases of red wine', 500, 'napawine.com', 0);
 
 CREATE SEQUENCE itemorder_id_seq;
 CREATE TABLE itemorder (
