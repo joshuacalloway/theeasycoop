@@ -28,12 +28,12 @@ CREATE TABLE coop_member (
        member_status_id integer references member_status(id)
 );
 
-insert into coop_type(id, coop_type) values (0, 'PUBLIC');
-insert into coop_type(id, coop_type) values (1, 'PRIVATE');
+insert into coop_type(coop_type) values ('PUBLIC');
+insert into coop_type(coop_type) values ('PRIVATE');
 
-insert into coop(id, name, description, coop_type_id, manager_id) values (0, 'Global Coop', 'Global Coop Open to Anyone', 0, 0);
+insert into coop(name, description, coop_type_id, manager_id) values ('Global Coop', 'Global Coop Open to Anyone', 1, 1);
 
-insert into coop_member(id, coop_id, joined_at, member_id, member_type_id, member_status_id) values (0, 0, '2012-01-01', 0, 1, 1);
+insert into coop_member(coop_id, joined_at, member_id, member_type_id, member_status_id) values (1, '2012-01-01', 1, 1, 1);
 
 
 # --- !Downs
