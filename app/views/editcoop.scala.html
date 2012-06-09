@@ -1,0 +1,24 @@
+@(id: Long, theform: Form[Coop])(implicit session: Session)
+
+@import helper._
+@import helpers.Utils
+
+@main("Edit Coop") {
+} {   
+  @form(actions.routes.EditCoopAction.updateItem(id)) {
+  @inputText(theform("name"))
+
+  <input type="hidden" id="manager_id" name="manager_id" value="@Utils.getLoggedInUser(session).id"/>
+
+  @textarea(theform("description"))
+  @select(
+  theform("coop_type_id"), 
+  CoopType.options,
+  '_label -> "Coop Type", 
+  '_default -> "-- Choose a Coop Type --", 
+  '_showConstraints -> false)
+
+    <input type="submit" value="Update">
+  }
+}
+	

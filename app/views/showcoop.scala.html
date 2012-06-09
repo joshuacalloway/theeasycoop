@@ -7,6 +7,9 @@
 
   @if(Utils.isManager(session, coop)) {
     <div id="managermenu">
+    <a href="@actions.routes.EditCoopAction.editItem(coop.id.get)">Edit Coop</a>
+    <br/>
+
     <a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a>
     <br/>
     <a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a>
@@ -20,6 +23,9 @@
   <br>
   @{coop.description}
   <br>
+  @{coop.coopType.name}
+  <br>
+
   Manager : @member(coop.manager)
 
 
