@@ -9,7 +9,9 @@
   <ul>
     @items.map { i =>
     <li>
+      <a href="/items/@i.id">
       @i.name | @i.description | @i.cost | @i.url
+		</a>
     </li>
     }
   </ul>
