@@ -1,17 +1,19 @@
 @(items: List[Coop])(implicit session: Session)
 
 @import helper._
+@import views.html.tags._
 
 @main("List Coops") {
 
 } {
-  <h1>@items.size Item(s) </h1>
+  <h1>@items.size Coop(s) </h1>
   <ul>
     @items.map { i =>
     <li>
       <a href="/coops/@i.id">
-      @i.name | @i.description |
-		</a>
+      @i.name</a><br/>
+		@i.description<br/>@i.coopType.name<br/>@member(i.manager)
+		
     </li>
     }
   </ul>
