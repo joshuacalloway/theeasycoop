@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
 # Home page
 GET     /index                      controllers.Application.index
 GET     /start                      controllers.Application.start
@@ -96,5 +99,3 @@ POST    /coops/:coopID/itemorders/:id/members          actions.AddMemberToItemOr
 
 GET    /manage			  controllers.CoopController.index
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
