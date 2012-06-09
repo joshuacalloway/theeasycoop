@@ -12,6 +12,12 @@ case class Item(id: Pk[Long] = null, name: String, description: String, cost: Bi
   def save() {
     Item.save(this)
   }
+
+  def update(id: Long) = {
+    Item.update(id, this)
+  }
+
+  def createdBy = Member.findById(created_by_id)
 }
 
 object Item {

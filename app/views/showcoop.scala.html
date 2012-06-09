@@ -4,8 +4,6 @@
 @import views.html.tags._
 
 @main(title=coop.name){
-  <a href="/items/new">Add Item</a>
-<br/>
 
   @if(Utils.isManager(session, coop)) {
     <div id="managermenu">

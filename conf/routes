@@ -59,6 +59,8 @@ POST    /items		    actions.AddItemAction.saveItem
 GET    	/items/new     	    actions.AddItemAction.newItem
 GET     /items 		    actions.ListItemsAction.list
 GET     /items/:id  	    actions.ShowItemAction.showItem(id: Long)
+GET     /items/:id/edit  	    actions.EditItemAction.editItem(id: Long)
+POST    /items/:id          	    actions.EditItemAction.updateItem(id:Long)
 
 
 GET     /coops/new 	            actions.StartCoopAction.actionForm

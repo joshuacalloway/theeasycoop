@@ -1,0 +1,20 @@
+@(id: Long, theform: Form[Item])(implicit session: Session)
+
+@import helper._
+@import helpers.Utils
+
+@main("Edit Item") {
+} {   
+  @form(actions.routes.EditItemAction.updateItem(id)) {
+    @inputText(theform("id"))
+    @inputText(theform("name"))
+    @inputText(theform("description"))
+    @inputText(theform("cost"))
+    @inputText(theform("url"))
+
+  <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
+
+    <input type="submit" value="Update">
+  }
+}
+	
