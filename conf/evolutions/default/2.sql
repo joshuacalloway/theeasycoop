@@ -33,6 +33,8 @@ insert into coop_type(id, coop_type) values (1, 'PRIVATE');
 
 insert into coop(id, name, description, coop_type_id, manager_id) values (0, 'Global Coop', 'Global Coop Open to Anyone', 0, 0);
 
+insert into coop_member(id, coop_id, joined_at, member_id, member_type_id, member_status_id) values (0, 0, '2012-01-01', 0, 1, 1);
+
 
 # --- !Downs
 DROP TABLE coop;
