@@ -24,7 +24,7 @@ object Application extends Controller with Secured {
       case Some(email) => {
 	val member = Member.findByEmail(email)
 	if (member.get.coops.size > 0) Ok(views.html.showcoop(member.get.coops(0)))
-	else Ok("views.html.index(member.get)")
+	else Ok(views.html.index(member.get))
       }
       case _ => Redirect(actions.routes.LoginAction.login)
     }

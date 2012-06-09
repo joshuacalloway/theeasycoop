@@ -16,12 +16,6 @@ no menu
 			   @error.message
 			   </p>
 			 }
-
-    @flash.get("success").map { message =>
-      <p class="success">
-			       @message
-			       </p>
-			     }
     
     <p>
     <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">

@@ -2,18 +2,18 @@
 @import helper._
 
 
-@main("start a coop") {
+@main("Register as new User") {
 no menu
 }{
-<h1> New Item </h1>
+<h1> Registration </h1>
 
 
   @form(actions.routes.RegisterMemberAction.submitForm) {
   @inputText(coopForm("name"))
   @inputText(coopForm("email"))
-  @inputText(coopForm("password"))
+  @inputPassword(coopForm("password"))
   @inputText(coopForm("cell"))
-  @inputText(coopForm("address"))
+  @textarea(field = coopForm("address"), args = 'rows -> 3, 'cols -> 30)
   <input type="submit" value="Create">
   }
 
