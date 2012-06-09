@@ -1,0 +1,16 @@
+@(items: List[Item])(implicit session: Session)
+
+@import helper._
+
+@main("List Items") {
+
+} {
+  <h1>@items.size Item(s) </h1>
+  <ul>
+    @items.map { i =>
+    <li>
+      @i.name | @i.description | @i.cost | @i.url
+    </li>
+    }
+  </ul>
+}

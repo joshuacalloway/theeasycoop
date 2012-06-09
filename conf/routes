@@ -57,6 +57,7 @@ POST    /members/:id          	    actions.EditMemberAction.updateItem(id:Long)
 
 POST    /items		    actions.AddItemAction.saveItem
 GET    	/items/new     	    actions.AddItemAction.newItem
+GET     /items 		    actions.ListItemsAction.list
 
 
 GET     /coops/new 	            actions.StartCoopAction.actionForm
