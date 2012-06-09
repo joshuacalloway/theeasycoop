@@ -8,7 +8,7 @@ import play.api.data.FormError
 import play.api.Play.current
 import play.Logger
 
-case class Item(id: Pk[Long] = null, name: String, description: String, cost: BigDecimal, url: String, created_by_id:Int) {
+case class Item(id: Pk[Long] = null, name: String, description: String, item_type_id: Int, cost: BigDecimal, url: String, created_by_id:Int) {
   def save() {
     Item.save(this)
   }
@@ -16,6 +16,8 @@ case class Item(id: Pk[Long] = null, name: String, description: String, cost: Bi
   def update(id: Long) = {
     Item.update(id, this)
   }
+
+  def itemType = ItemType.findById(item_type_id).getOrElse(null)
 
   def createdBy = Member.findById(created_by_id)
 }
@@ -27,10 +29,11 @@ object Item {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[String]("description") ~
+    get[Int]("item_type_id") ~
     get[BigDecimal]("cost") ~
     get[String]("url") ~
     get[Int]("created_by_id") map {
-      case id~name~cost~description~url~created_by_id => Item(id, name, cost,description, url,created_by_id)
+      case id~name~cost~description~item_type_id~url~created_by_id => Item(id, name, cost,description, item_type_id, url,created_by_id)
     }
   }
 
@@ -69,9 +72,10 @@ object Item {
 
   def create(item: Item) {
     DB.withConnection { implicit c =>
-      SQL("insert into item (name, description, cost, url, created_by_id) select {name}, {description}, {cost}, {url}, {created_by_id}").on(
+      SQL("insert into item (name, description, item_type_id, cost, url, created_by_id) select {name}, {description}, {item_type_id}, {cost}, {url}, {created_by_id}").on(
         'name -> item.name,
         'description -> item.description,
+	'item_type_id -> item.item_type_id,
         'cost -> item.cost,
          'url -> item.url,
 	'created_by_id -> item.created_by_id

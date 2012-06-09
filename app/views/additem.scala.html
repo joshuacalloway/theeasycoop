@@ -1,5 +1,6 @@
 @(theform: Form[Item])(implicit session: Session)
 
+@import models.ItemType
 @import helper._
 @import helpers.Utils
 
@@ -10,6 +11,15 @@
   @form(actions.routes.AddItemAction.saveItem()) {
   @inputText(theform("name"))
   @inputText(theform("description"))
+
+  @select(
+  theform("item_type_id"), 
+  ItemType.options,
+  '_label -> "Item Type", 
+  '_default -> "-- Choose a Item Type --", 
+  '_showConstraints -> false)
+
+
   @inputText(theform("cost"))
   @inputText(theform("url"))
 

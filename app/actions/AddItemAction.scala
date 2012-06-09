@@ -23,6 +23,7 @@ object AddItemAction extends Controller with Secured {
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> text,
       "description" -> text,
+      "item_type_id" -> number,
       "cost" -> money,
       "url" -> text,
     "created_by_id" -> number)
