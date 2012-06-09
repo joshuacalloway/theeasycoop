@@ -1,6 +1,7 @@
 @(items: List[ItemOrder])(implicit session: Session)
 
 @import helper._
+@import views.html.tags._
 
 @main("Listing Orders") {
 } {
@@ -8,7 +9,15 @@
   <ul>
     @items.map { i =>
     <li>
-      @i.id | @i.item.name ( @i.item_id )  | @i.minimumbuyers |@i.membercost| @i.description| @i.deadline_by | @i.deliveryaddress | @i.created_at | @i.createdBy().name ( @i.created_by_id )
+		<a href="/items/@i.id">@i.item.name ( @i.item_id ) </a><br/>
+		Description: @i.description <br/>
+		Miniumum Buyers: @i.minimumbuyers <br/> 
+		Member Cost: @i.membercost <br/> 
+		Deadline: @i.deadline_by <br/>
+		Delivery Address: @i.deliveryaddress <br/>
+		Created At: @i.created_at <br/>
+		Created By: @member(i.createdBy())
+
     </li>
     }
   </ul>
