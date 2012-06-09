@@ -1,0 +1,18 @@
+@(items: List[Coop])(implicit session: Session)
+
+@import helper._
+
+@main("List Coops") {
+
+} {
+  <h1>@items.size Item(s) </h1>
+  <ul>
+    @items.map { i =>
+    <li>
+      <a href="/coops/@i.id">
+      @i.name | @i.description |
+		</a>
+    </li>
+    }
+  </ul>
+}

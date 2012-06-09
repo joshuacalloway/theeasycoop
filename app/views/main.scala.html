@@ -21,7 +21,7 @@
 <b>Menu</b><br />
 <a href="/items">Browse Items</a>
 <br/>
-<a href="/items/new">Add Item</a>
+<a href="/coops">Browse Coops</a>
 <br/>
 
 @menu
@@ -30,8 +30,10 @@
 <br/>
 <div id="usermenu">
 @if(Utils.isLogin(session)) {
+  <a href="/items/new">Add Item</a>
+  <br/>
   <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
-<br/>
+  <br/>
   @Utils.getLoggedInUser(session).coops.map { coop =>
     <a href="/coops/@coop.id">@coop.name</a>
 					     <br/>

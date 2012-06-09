@@ -21,7 +21,10 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
   def coopType = CoopType.findById(coop_type_id).get
 
   def isManager(member: Member) : Boolean = {
-    member.id == manager.id
+    (member, manager) match {
+      case (x: Member, y:Member) => x.id == y.id
+      case _ => false
+    }
   }
 
   def isMember(member: Member) : Boolean = {

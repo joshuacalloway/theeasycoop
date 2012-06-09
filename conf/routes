@@ -63,6 +63,7 @@ GET     /items/:id/edit  	    actions.EditItemAction.editItem(id: Long)
 POST    /items/:id          	    actions.EditItemAction.updateItem(id:Long)
 
 
+GET     /coops 		    	    actions.ListCoopsAction.list
 GET     /coops/new 	            actions.StartCoopAction.actionForm
 POST    /coops 	            	    actions.StartCoopAction.submitForm
 GET     /coops/:id 	            actions.ShowCoopAction.showItem(id: Long)
