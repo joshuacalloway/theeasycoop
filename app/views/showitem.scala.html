@@ -13,7 +13,12 @@
   <br>
   @{item.description}
   <br>
-
+  @{item.cost}
+  <br>
+  <a href="@{item.url}">@{item.url}</a>
+  <br>
+  Created By:
+  @member(item.createdBy.get)
 }
 
     

@@ -12,8 +12,8 @@ CREATE TABLE item (
        created_by_id integer references member(id)
 );
 
-insert into item(id, name, description, cost, url,created_by_id) values (1, 'Fresh Salmon Sushi Grade', '10 lbs the very best', 300, 'salmon.com', 0);
-insert into item(id, name, description, cost, url,created_by_id) values (2, 'NAPA valley Wine', '10 cases of red wine', 500, 'napawine.com', 0);
+insert into item(id, name, description, cost, url,created_by_id) values (1, '100% Grass-Fed Black Angus Beef', '45-55 lbs at 7.95 each.  No Hormones, Antibiotics, Corn, or Grains', 440, 'http://www.barrington-natural-farms.com/our-products/', 0);
+insert into item(id, name, description, cost, url,created_by_id) values (2, '50 lbs Freezer Pack-All Ground', '50 lbs at 5.95 per lb.  No Hormones, Antibiotics, Corn, or Grains', 300, 'http://www.barrington-natural-farms.com/our-products/', 0);
 
 CREATE SEQUENCE itemorder_id_seq;
 CREATE TABLE itemorder (
@@ -35,7 +35,7 @@ create table itemorder_member (
        itemorder_id integer references itemorder(id)
        );
 
-insert into itemorder(id, item_id, minimumbuyers, membercost, description, deadline_by, deliveryaddress, created_at, created_by_id, coop_id) values (1, 1, 10, 30.10, '1 lb of salmon each', '2012-09-01', '1515 N Wicker', now(), 0, 0);
+insert into itemorder(id, item_id, minimumbuyers, membercost, description, deadline_by, deliveryaddress, created_at, created_by_id, coop_id) values (1, 1, 11, 40, '5 lb each', '2012-09-01', '1515 N Wicker', now(), 0, 0);
 
 
 # --- !Downs
