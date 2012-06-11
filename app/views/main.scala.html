@@ -32,6 +32,9 @@
 @if(Utils.isLogin(session)) {
   <a href="/items/new">Add Item</a>
   <br/>
+  <a href="/coops/new">Start a Coop</a>
+  <br/>
+
   <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
   <br/>
   @Utils.getLoggedInUser(session).coops.map { coop =>
