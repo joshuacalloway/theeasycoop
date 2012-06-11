@@ -15,7 +15,8 @@ object EditCoopAction extends Controller with Secured {
       "name" -> nonEmptyText,
       "description" -> optional(nonEmptyText),
       "coop_type_id" -> number,
-      "manager_id" -> number
+      "manager_id" -> number,
+      "zip_code" -> nonEmptyText
     )(Coop.apply)(Coop.unapply))
 
 

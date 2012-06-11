@@ -20,7 +20,8 @@ object CoopController extends AbstractCRUDController with Secured {
       "name" -> nonEmptyText,
       "description" -> optional(nonEmptyText),
       "coop_type_id" -> number,
-      "manager_id" -> number
+      "manager_id" -> number,
+      "zip_code" -> nonEmptyText
     )(Coop.apply)(Coop.unapply))
 
   override protected def model_all() = Coop.all
