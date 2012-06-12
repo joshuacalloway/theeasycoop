@@ -11,7 +11,7 @@ import play.api.mvc._
 import views._
 import helpers.Utils
 
-object AddLoggedInUserToItemOrderInCoopAction extends Controller with Secured {
+object AddLoggedInUserToItemOrderAction extends Controller with Secured {
 
 
   def action(coopId: Long, id: Long) = Action 

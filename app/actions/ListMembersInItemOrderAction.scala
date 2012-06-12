@@ -17,7 +17,7 @@ import models.ItemOrder
 import helpers.CustomFormats._
 import models.Coop
 
-object ListMembersInItemOrderInCoopAction extends Controller with Secured {
+object ListMembersInItemOrderAction extends Controller with Secured {
   
   def list(coopId:Long, id: Long) = Action { implicit request =>
     Ok(html.listmembersinitemorderincoop(ItemOrder.findById(id).get.members))
