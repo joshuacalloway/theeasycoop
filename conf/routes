@@ -95,8 +95,8 @@ GET     /coops/:coopID/itemorders/:id/update       actions.EditItemOrderInCoopAc
 GET     /coops/:coopID/itemorders/:id/members      actions.ListMembersInItemOrderAction.list(coopID:Long, id:Long)
 GET 	/coops/:coopId/itemorders/:id/members/adduser								actions.AddLoggedInUserToItemOrderAction.action(coopId:Long, id:Long)
 
-GET     /coops/:coopID/itemorders/:id/members/new      actions.AddMemberToItemOrderInCoopAction.actionForm(coopID:Long, id: Long)
-POST    /coops/:coopID/itemorders/:id/members          actions.AddMemberToItemOrderInCoopAction.submitForm(coopID:Long, id: Long)
+GET     /coops/:coopID/itemorders/:id/members/new      actions.AddMemberToItemOrderAction.actionForm(coopID:Long, id: Long)
+POST    /coops/:coopID/itemorders/:id/members          actions.AddMemberToItemOrderAction.submitForm(coopID:Long, id: Long)
 
 
 GET    /manage			  controllers.CoopController.index
