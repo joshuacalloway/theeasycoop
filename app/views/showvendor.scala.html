@@ -5,7 +5,7 @@
 
 @main(title=item.name){
  @if(item.createdBy.get == Utils.getLoggedInUser(session)) {
-    <a href="/vendors/@item.id/edit">Edit Item</a>
+    <li><a href="/vendors/@item.id/edit">Edit Item</a>
   }
 } {
   
