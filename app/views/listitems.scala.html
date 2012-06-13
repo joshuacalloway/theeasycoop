@@ -5,14 +5,10 @@
 @main("List Items") {
 
 } {
-  <h1>@items.size Item(s) </h1>
   <ul>
     @items.map { i =>
     <li>
-      <a href="/items/@i.id">
-      @i.name | @i.description | @i.cost | @i.url
-		</a>
-    </li>
+      <a href="/items/@i.id">@i.name</a>
     }
   </ul>
 }

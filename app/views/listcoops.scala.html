@@ -6,15 +6,11 @@
 @main("List Coops") {
 
 } {
-  <h1>@items.size Coop(s) </h1>
   <ul>
     @items.map { i =>
     <li>
       <a href="/coops/@i.id">
-      @i.name</a><br/>
-		@i.description<br/>@i.coopType.name<br/>@member(i.manager)
-		
-    </li>
+      @i.name</a>
     }
   </ul>
 }

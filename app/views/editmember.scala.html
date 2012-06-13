@@ -5,10 +5,9 @@
 @main("stuff") {
 } {   
   @form(actions.routes.EditMemberAction.updateItem(id)) {
-    @inputText(theform("id"))
     @inputText(theform("name"))
     @inputText(theform("email"))
-    @inputText(theform("password"))
+    @inputPassword(theform("password"))
     @inputText(theform("cell"))
     @inputText(theform("address"))
     <input type="submit" value="Update">
