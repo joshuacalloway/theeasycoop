@@ -6,9 +6,11 @@
 @main("Add Vendor") {
 } {
   @form(actions.routes.AddVendorAction.saveVendor()) {
-  @inputText(theform("name"))
+  @inputText(theform("name"),
+	   '_label -> "Vendor Name")
   @inputText(theform("address"))
-  @inputText(theform("zip_code"))
+  @inputText(theform("zip_code"),
+	   '_label -> "Zip Code")
   @inputText(theform("url"))
 
   <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
