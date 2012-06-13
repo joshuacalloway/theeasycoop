@@ -15,20 +15,11 @@ import anorm.SqlParser._
 import views._
 
 import models.Item
+import models.ItemForm
 import helpers.CustomFormats._
 
 object ItemController extends Controller {
-
-  val form: Form[Item] = Form(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> text,
-      "description" -> text,
-      "item_type_id" -> number,
-      "cost" -> money,
-      "url" -> text,
-    "created_by_id" -> number)
-    (Item.apply)(Item.unapply))
+  val form: Form[Item] = ItemForm.form
 
   def index = Action { implicit request =>
     Ok("views.html.index()")

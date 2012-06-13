@@ -8,19 +8,10 @@ import play.api.data._
 import play.api.mvc._
 import views._
 import helpers.CustomFormats._
+import models.ItemForm
 
 object EditItemAction extends Controller with Secured {
-  val form: Form[Item] = Form(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> text,
-      "description" -> text,
-      "item_type_id" -> number,
-      "cost" -> money,
-      "url" -> text,
-    "created_by_id" -> number)
-    (Item.apply)(Item.unapply))
-
+  val form: Form[Item] = ItemForm.form
 
   def editItem(id: Long) = Action { implicit request => 
     Item.findById(id) match { 

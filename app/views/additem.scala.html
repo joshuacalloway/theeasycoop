@@ -6,8 +6,6 @@
 
 @main("Add Item") {
 } {
-  <h2>Add a new bulk item</h2>
-
   @form(actions.routes.AddItemAction.saveItem()) {
   @inputText(theform("name"))
   @inputText(theform("description"))
@@ -25,6 +23,6 @@
 
   <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
 
-  <input type="submit" value="Create">
+  <input type="submit" value="Add Item">
   }
 }
