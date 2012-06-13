@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat
 
 object Utils
 {
+  def isMember(s: Session, coop: Coop): Boolean = coop.isMember(getLoggedInUser(s))
+
   def isManager(s: Session, coop: Coop): Boolean = coop.isManager(getLoggedInUser(s))
     
   def isLogin(s: Session): Boolean = 

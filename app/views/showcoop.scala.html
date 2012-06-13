@@ -32,33 +32,33 @@
 
   Manager : @member(coop.manager)
 
+  @if(coop.isPublic || Utils.isMember(session, coop)) {
+    <br>
+    Members:
+    <ul>
+    @coop.members.map { m =>
+      @if(Utils.isManager(session,coop)) {
+	<li><a href="/members/@m.id">@member(m)</a>
+      } else {
+	
 
-  <br>
-  Members:
-  <ul>
-  @coop.members.map { m =>
-    @if(Utils.isManager(session,coop)) {
-      <li><a href="/members/@m.id">@member(m)</a>
-    } else {
-
-
-    <li>@member(m)
-    }
-
-
-		   }
-  </ul>
+	<li>@member(m)
+      }
 
 
-  <br/>
-  ItemOrders
+		     }
+    </ul>
 
-  <ul>
-  @coop.itemOrders.map { itemOrder =>
-    <li><a href="@actions.routes.ShowItemOrderAction.showItem(coop.id.get, itemOrder.id.get)">@itemOrder.id - @itemOrder.description - @itemOrder.item.name</a>
-              }
-  </ul>
 
+    <br/>
+    ItemOrders
+
+    <ul>
+    @coop.itemOrders.map { itemOrder =>
+      <li><a href="@actions.routes.ShowItemOrderAction.showItem(coop.id.get, itemOrder.id.get)">@itemOrder.id - @itemOrder.description - @itemOrder.item.name</a>
+			}
+    </ul>
+  }
   
 
 }

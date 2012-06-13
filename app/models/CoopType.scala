@@ -23,7 +23,9 @@ object CoopType {
       case id~coop_type => CoopType(id, coop_type)
     }
   }
-     
+
+  def PUBLIC = CoopType.findByType("PUBLIC").get
+
   /**
    * Construct the Map[String,String] needed to fill a select options set.
    */
@@ -34,6 +36,11 @@ object CoopType {
   def findById(id: Long): Option[CoopType] = DB.withConnection
   {
     implicit c => SQL("select * from coop_type where id = {id}").on('id -> id).as(mapping.singleOpt)
+  }
+
+  def findByType(t: String): Option[CoopType] = DB.withConnection
+  {
+    implicit c => SQL("select * from coop_type where coop_type = {coop_type}").on('coop_type -> t).as(mapping.singleOpt)
   }
 
   def all(): List[CoopType] = DB.withConnection { implicit c =>

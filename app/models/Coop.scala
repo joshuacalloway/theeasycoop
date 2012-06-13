@@ -20,6 +20,7 @@ case class Coop(id: Pk[Long], name: String, description: String, coop_type_id: I
   }
   def all = Coop.all
 
+  def isPublic = coopType == CoopType.PUBLIC
   def manager = Member.findById(manager_id).get
 
   def coopType = CoopType.findById(coop_type_id).get
