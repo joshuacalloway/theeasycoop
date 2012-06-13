@@ -8,7 +8,11 @@
   @form(actions.routes.EditVendorAction.updateVendor(id)) {
     @inputText(theform("id"))
     @inputText(theform("name"))
+    @inputText(theform("address"))
+    @inputText(theform("zip_code"))
     @inputText(theform("url"))
+    
+    <input type="hidden" id="created_by_id" name="created_by_id" value="@Utils.getLoggedInUser(session).id"/>
 
     <input type="submit" value="Update">
   }

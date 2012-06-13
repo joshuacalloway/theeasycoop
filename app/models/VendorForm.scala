@@ -19,6 +19,7 @@ object VendorForm {
       "name" -> nonEmptyText,
       "address" -> nonEmptyText,
       "zip_code" -> nonEmptyText,
-      "url" -> text)
+      "url" -> text,
+    "created_by_id" -> number)
     (Vendor.apply)(Vendor.unapply))
 }

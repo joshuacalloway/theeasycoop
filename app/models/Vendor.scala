@@ -6,16 +6,21 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Vendor(id: Pk[Long], name: String, address:String, zip_code:String,url:String) extends AbstractModel {
+case class Vendor(id: Pk[Long], name: String, address:String, zip_code:String,url:String, created_by_id:Int) extends AbstractModel {
   def all = Vendor.all
 
   def save = {
     Vendor.save(this)
   }
 
-  def update(id: Long) = Nil
+  def update(id: Long) = {
+    Vendor.update(id, this)
+  }
   
   def items = Item.findByVendorId(id)
+
+  def createdBy = Member.findById(created_by_id)
+
 }
 
 object Vendor {
@@ -25,8 +30,9 @@ object Vendor {
     get[String]("name") ~
     get[String]("address") ~
     get[String]("zip_code") ~
-    get[String]("url") map {
-      case id~name~address~zip_code~url => Vendor(id, name, address, zip_code, url)
+    get[String]("url") ~
+    get[Int]("created_by_id") map {
+      case id~name~address~zip_code~url~created_by_id => Vendor(id, name, address, zip_code, url,created_by_id)
     }
   }
      
@@ -52,11 +58,12 @@ object Vendor {
 
   def create(item: Vendor) {
     DB.withConnection { implicit c =>
-      SQL("insert into vendor (name,address,zip_code,url) select {name},{address},{zip_code},{url} ").on(
+      SQL("insert into vendor (name,address,zip_code,url,created_by_id) select {name},{address},{zip_code},{url},{created_by_id} ").on(
         'name -> item.name,
 	'address -> item.address,
 	'zip_code -> item.zip_code,
-	'url -> item.url
+	'url -> item.url,
+	'created_by_id -> item.created_by_id
       ).executeUpdate()
                      }
   }
@@ -64,6 +71,19 @@ object Vendor {
   def delete(id: Long) {
     DB.withConnection { implicit c =>
       SQL("delete from vendor where id = {id}").on(
+        'id -> id
+      ).executeUpdate()
+                     }
+  }
+
+
+  def update(id: Long, item: Vendor) {
+    DB.withConnection { implicit c =>
+      SQL("update vendor set name={name}, address={address}, zip_code={zip_code}, url={url} where id={id}").on(
+        'name -> item.name,
+        'address -> item.address,
+        'url -> item.url,
+        'zip_code -> item.zip_code,
         'id -> id
       ).executeUpdate()
                      }
