@@ -52,6 +52,11 @@ object Item {
     implicit c => SQL("select * from item where id = {id}").on('id -> id).as(Item.mapping.singleOpt)
   }
 
+  def findByVendorId(id: Pk[Long]): List[Item] = DB.withConnection
+  {
+    implicit c => SQL("select * from item where vendor_id = {id}").on('id -> id).as(Item.mapping *)
+  }
+
   def all(): List[Item] = DB.withConnection { implicit c =>
     SQL("select * from item").as(mapping *)
                                                }

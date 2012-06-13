@@ -9,9 +9,19 @@
   
   @{item.name}
   <br>
+  @{item.address}
+  <br>
+  @{item.zip_code}
   <br>
   <a href="@{item.url}">@{item.url}</a>
   <br>
+    Items:
+  <ul>
+  @item.items.map { m =>
+      <li><a href="/items/@m.id">@m.name</a>
+    }
+  </ul>
+
 }
 
     

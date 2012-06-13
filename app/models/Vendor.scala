@@ -15,6 +15,7 @@ case class Vendor(id: Pk[Long], name: String, address:String, zip_code:String,ur
 
   def update(id: Long) = Nil
   
+  def items = Item.findByVendorId(id)
 }
 
 object Vendor {
