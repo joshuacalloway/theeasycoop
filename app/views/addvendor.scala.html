@@ -7,7 +7,8 @@
 } {
   @form(actions.routes.AddVendorAction.saveVendor()) {
   @inputText(theform("name"))
-
+  @inputText(theform("address"))
+  @inputText(theform("zip_code"))
   @inputText(theform("url"))
   <input type="submit" value="Add Vendor">
   }

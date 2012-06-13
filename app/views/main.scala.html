@@ -26,10 +26,20 @@
 
 <div id="globalmenu" style="background-color:#ACD7CC;">
 <b>Global Menu</b><br />
+<a href="/vendors">Browse Vendors</a>
+<br/>
 <a href="/items">Browse Items</a>
 <br/>
 <a href="/coops">Browse Coops</a>
 <br/>
+@if(Utils.isLogin(session)) {
+  <a href="/vendors/new">Add Vendor</a>
+  <br/>
+  <a href="/items/new">Add Item</a>
+  <br/>
+  <a href="/coops/new">Start a Coop</a>
+  <br/>
+}
 </div>
 <div id="pagemenu" style="background-color:#FFD7CC;">
 <b>Page Menu</b><br />
@@ -41,11 +51,6 @@
 <div id="usermenu" style="background-color:#CFD7FF;">
 <b>User Menu</b><br />
 @if(Utils.isLogin(session)) {
-  <a href="/items/new">Add Item</a>
-  <br/>
-  <a href="/coops/new">Start a Coop</a>
-  <br/>
-
   <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
   <br/>
   @Utils.getLoggedInUser(session).coops.map { coop =>

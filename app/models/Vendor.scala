@@ -51,7 +51,7 @@ object Vendor {
 
   def create(item: Vendor) {
     DB.withConnection { implicit c =>
-      SQL("insert into vendor (name, address, zip_code, url)").on(
+      SQL("insert into vendor (name,address,zip_code,url) select {name},{address},{zip_code},{url} ").on(
         'name -> item.name,
 	'address -> item.address,
 	'zip_code -> item.zip_code,

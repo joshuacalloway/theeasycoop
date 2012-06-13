@@ -17,6 +17,13 @@
   '_default -> "-- Choose a Item Type --", 
   '_showConstraints -> false)
 
+  @select(
+  theform("vendor_id"), 
+  Vendor.options,
+  '_label -> "Vendor", 
+  '_default -> "-- Choose a Vendor --", 
+  '_showConstraints -> false)
+
 
   @inputText(theform("cost"))
   @inputText(theform("url"))
