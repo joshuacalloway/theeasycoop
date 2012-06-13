@@ -24,7 +24,7 @@
 </div>
 <div id="menu" style="background-color:#FFD700;height:520px;width:200px;float:left;">
 
-<div id="globalmenu" style="background-color:#ACD7CC;">
+<div id="globalmenu">
 <ul>Global Menu
 <li><a href="/vendors">Vendors</a>
 <li><a href="/items">Items</a>
@@ -36,7 +36,7 @@
 }
 </ul>
 </div>
-<div id="pagemenu" style="background-color:#FFD7CC;">
+<div id="pagemenu">
 <ul>Page Menu
 
 @menu
@@ -44,7 +44,7 @@
 </ul>
 </div>
 <br/>
-<div id="usermenu" style="background-color:#CFD7FF;">
+<div id="usermenu">
 <ul>User Menu
 @if(Utils.isLogin(session)) {
   <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
