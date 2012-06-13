@@ -19,6 +19,7 @@ object ItemForm {
       "name" -> nonEmptyText,
       "description" -> nonEmptyText,
       "item_type_id" -> number,
+      "vendor_id" -> number,
       "cost" -> money,
       "url" -> text,
     "created_by_id" -> number)

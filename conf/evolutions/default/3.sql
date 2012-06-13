@@ -1,6 +1,16 @@
 # item and item_order
 # --- !Ups
 
+create SEQUENCE vendor_id_seq;
+
+CREATE TABLE vendor (
+       id integer PRIMARY KEY DEFAULT nextval('vendor_id_seq'),
+       name varchar(128),
+       address varchar(256),
+       zip_code varchar(16),
+       url varchar (64)
+);
+
 CREATE SEQUENCE item_type_id_seq;
 
 CREATE TABLE item_type (
@@ -17,13 +27,16 @@ CREATE TABLE item (
        item_type_id integer references item_type(id),
        cost numeric(8,2),
        url varchar(128),
+       vendor_id integer references vendor(id),
        created_by_id integer references member(id)
 );
 
 insert into item_type(item_type) values ('BEEF');
 
-insert into item(name, description, item_type_id, cost, url,created_by_id) values ('100% Grass-Fed Black Angus Beef', '45-55 lbs at 7.95 each.  No Hormones, Antibiotics, Corn, or Grains', 1, 440, 'http://www.barrington-natural-farms.com/our-products/', 1);
-insert into item(name, description, item_type_id, cost, url,created_by_id) values ('50 lbs Freezer Pack-All Ground', '50 lbs at 5.95 per lb.  No Hormones, Antibiotics, Corn, or Grains', 1, 300, 'http://www.barrington-natural-farms.com/our-products/', 1);
+insert into vendor(name, address, zip_code, url) values ('barrington natural farms', '7 Crawling Stone Rd, Barrington Hills, IL 60010', '60010', 'http://www.barrington-natural-farms.com/our-products/');
+  
+insert into item(name, vendor_id, description, item_type_id, cost, url,created_by_id) values ('100% Grass-Fed Black Angus Beef', 1, '45-55 lbs at 7.95 each.  No Hormones, Antibiotics, Corn, or Grains', 1, 440, 'http://www.barrington-natural-farms.com/our-products/', 1);
+insert into item(name, vendor_id, description, item_type_id, cost, url,created_by_id) values ('50 lbs Freezer Pack-All Ground', 1, '50 lbs at 5.95 per lb.  No Hormones, Antibiotics, Corn, or Grains', 1, 300, 'http://www.barrington-natural-farms.com/our-products/', 1);
 
 CREATE SEQUENCE itemorder_id_seq;
 CREATE TABLE itemorder (
@@ -55,7 +68,9 @@ drop table itemorder_member;
 DROP TABLE itemorder;
 DROP TABLE item;
 DROP TABLE item_type;
+DROP TABLE vendor;
 DROP SEQUENCE itemorder_id_seq;
 DROP SEQUENCE itemorder_member_id_seq;
 DROP SEQUENCE item_id_seq;
 DROP SEQUENCE item_type_id_seq;
+DROP SEQUENCE vendor_id_seq;

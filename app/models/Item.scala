@@ -8,7 +8,7 @@ import play.api.data.FormError
 import play.api.Play.current
 import play.Logger
 
-case class Item(id: Pk[Long] = null, name: String, description: String, item_type_id: Int, cost: BigDecimal, url: String, created_by_id:Int) {
+case class Item(id: Pk[Long] = null, name: String, description: String, item_type_id: Int, vendor_id: Int, cost: BigDecimal, url: String, created_by_id:Int) {
   def save() {
     Item.save(this)
   }
@@ -18,6 +18,8 @@ case class Item(id: Pk[Long] = null, name: String, description: String, item_typ
   }
 
   def itemType = ItemType.findById(item_type_id).getOrElse(null)
+
+  def vendor = Vendor.findById(vendor_id).get
 
   def createdBy = Member.findById(created_by_id)
 }
@@ -30,10 +32,11 @@ object Item {
     get[String]("name") ~
     get[String]("description") ~
     get[Int]("item_type_id") ~
+    get[Int]("vendor_id") ~
     get[BigDecimal]("cost") ~
     get[String]("url") ~
     get[Int]("created_by_id") map {
-      case id~name~cost~description~item_type_id~url~created_by_id => Item(id, name, cost,description, item_type_id, url,created_by_id)
+      case id~name~description~item_type_id~vendor_id~cost~url~created_by_id => Item(id, name, description, item_type_id, vendor_id, cost, url,created_by_id)
     }
   }
 
@@ -72,10 +75,11 @@ object Item {
 
   def create(item: Item) {
     DB.withConnection { implicit c =>
-      SQL("insert into item (name, description, item_type_id, cost, url, created_by_id) select {name}, {description}, {item_type_id}, {cost}, {url}, {created_by_id}").on(
+      SQL("insert into item (name, description, item_type_id, vendor_id, cost, url, created_by_id) select {name}, {description}, {item_type_id}, {vendor_id}, {cost}, {url}, {created_by_id}").on(
         'name -> item.name,
         'description -> item.description,
 	'item_type_id -> item.item_type_id,
+	'vendor_id -> item.vendor_id,
         'cost -> item.cost,
          'url -> item.url,
 	'created_by_id -> item.created_by_id
