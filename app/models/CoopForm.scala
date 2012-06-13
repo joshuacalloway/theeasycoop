@@ -16,7 +16,7 @@ object CoopForm {
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
-      "description" -> optional(nonEmptyText),
+      "description" -> nonEmptyText,
       "coop_type_id" -> number,
       "manager_id" -> number,
       "state_id" -> number,
