@@ -8,6 +8,7 @@ import play.api.data._
 import play.api.mvc._
 import views._
 import actions.Secured
+import play.api.data.validation.Constraints._
 
 object CoopForm {
 
@@ -18,7 +19,8 @@ object CoopForm {
       "description" -> optional(nonEmptyText),
       "coop_type_id" -> number,
       "manager_id" -> number,
-      "zip_code" -> nonEmptyText
+      "state" -> number,
+      "zip_code" -> text
     )(Coop.apply)(Coop.unapply))
 
 }

@@ -10,7 +10,7 @@ import play.api.mvc._
 import views._
 import play.api.data._
 
-case class Coop(id: Pk[Long], name: String, description: Option[String], coop_type_id: Int, manager_id: Int, zip_code: String) extends AbstractModel {
+case class Coop(id: Pk[Long], name: String, description: Option[String], coop_type_id: Int, manager_id: Int, state_id: Int, zip_code: String) extends AbstractModel {
 
   def save = {
     Coop.save(this)
@@ -46,8 +46,9 @@ object Coop {
     get[Option[String]]("description") ~
     get[Int]("coop_type_id") ~
     get[Int]("manager_id") ~
+    get[Int]("state_id") ~
     get[String]("zip_code") map {
-      case id~name~description~coop_type_id~manager_id~zip_code => Coop(id, name, description, coop_type_id, manager_id, zip_code)
+      case id~name~description~coop_type_id~manager_id~state~zip_code => Coop(id, name, description, coop_type_id, manager_id, state, zip_code)
     }
   }
 
@@ -105,11 +106,12 @@ object Coop {
 
   def create(coop: Coop) {
     DB.withConnection { implicit c =>
-      SQL("insert into Coop (name, description, manager_id,coop_type_id,zip_code) select {name}, {description}, {manager_id},{coop_type_id},{zip_code} ").on(
+      SQL("insert into Coop (name, description, manager_id,coop_type_id,zip_code) select {name}, {description}, {manager_id},{coop_type_id},{state_id},{zip_code} ").on(
         'name -> coop.name,
         'description -> coop.description,
         'manager_id -> coop.manager_id,
         'coop_type_id -> coop.coop_type_id,
+	'state_id -> coop.state_id,
 	'zip_code -> coop.zip_code
       ).executeInsert() match {
         case Some(id) =>
