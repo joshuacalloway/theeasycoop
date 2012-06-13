@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Vendor(id: Pk[Long], name: String, address:String, zip_code:String,url:String, created_by_id:Int) extends AbstractModel {
+case class Vendor(id: Pk[Long], name: String, address:String, state_id:Int, zip_code:String,url:String, created_by_id:Int) extends AbstractModel {
   def all = Vendor.all
 
   def save = {
@@ -29,10 +29,11 @@ object Vendor {
     get[Pk[Long]]("id") ~
     get[String]("name") ~
     get[String]("address") ~
+    get[Int]("state_id") ~
     get[String]("zip_code") ~
     get[String]("url") ~
     get[Int]("created_by_id") map {
-      case id~name~address~zip_code~url~created_by_id => Vendor(id, name, address, zip_code, url,created_by_id)
+      case id~name~address~state_id~zip_code~url~created_by_id => Vendor(id, name, address, state_id, zip_code, url,created_by_id)
     }
   }
      
@@ -58,9 +59,10 @@ object Vendor {
 
   def create(item: Vendor) {
     DB.withConnection { implicit c =>
-      SQL("insert into vendor (name,address,zip_code,url,created_by_id) select {name},{address},{zip_code},{url},{created_by_id} ").on(
+      SQL("insert into vendor (name,address,state_id, zip_code,url,created_by_id) select {name},{address},{state_id}, {zip_code},{url},{created_by_id} ").on(
         'name -> item.name,
 	'address -> item.address,
+	'state_id -> item.state_id,
 	'zip_code -> item.zip_code,
 	'url -> item.url,
 	'created_by_id -> item.created_by_id

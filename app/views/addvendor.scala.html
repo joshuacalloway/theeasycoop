@@ -9,6 +9,16 @@
   @inputText(theform("name"),
 	   '_label -> "Vendor Name")
   @inputText(theform("address"))
+
+  @select(
+  theform("state_id"), 
+  State.options,
+  '_label -> "State", 
+  '_default -> "-- Choose a State --", 
+  '_showConstraints -> false,
+  '_error -> theform.error("state_id"))
+
+
   @inputText(theform("zip_code"),
 	   '_label -> "Zip Code")
   @inputText(theform("url"))

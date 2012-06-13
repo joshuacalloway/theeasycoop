@@ -7,6 +7,7 @@ CREATE TABLE vendor (
        id integer PRIMARY KEY DEFAULT nextval('vendor_id_seq'),
        name varchar(128),
        address varchar(256),
+       state_id integer references state(id),
        zip_code varchar(16),
        url varchar (64),
        created_by_id integer references member(id)
@@ -34,7 +35,7 @@ CREATE TABLE item (
 
 insert into item_type(item_type) values ('BEEF');
 
-insert into vendor(name, address, zip_code, url, created_by_id) values ('barrington natural farms', '7 Crawling Stone Rd, Barrington Hills, IL 60010', '60010', 'http://www.barrington-natural-farms.com/our-products/',1);
+insert into vendor(name, address, zip_code, url, created_by_id,state_id) values ('barrington natural farms', '7 Crawling Stone Rd, Barrington Hills, IL 60010', '60010', 'http://www.barrington-natural-farms.com/our-products/',1,1);
   
 insert into item(name, vendor_id, description, item_type_id, cost, url,created_by_id) values ('100% Grass-Fed Black Angus Beef', 1, '45-55 lbs at 7.95 each.  No Hormones, Antibiotics, Corn, or Grains', 1, 440, 'http://www.barrington-natural-farms.com/our-products/', 1);
 insert into item(name, vendor_id, description, item_type_id, cost, url,created_by_id) values ('50 lbs Freezer Pack-All Ground', 1, '50 lbs at 5.95 per lb.  No Hormones, Antibiotics, Corn, or Grains', 1, 300, 'http://www.barrington-natural-farms.com/our-products/', 1);

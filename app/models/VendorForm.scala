@@ -18,6 +18,7 @@ object VendorForm {
       "id" -> ignored(NotAssigned:Pk[Long]),
       "name" -> nonEmptyText,
       "address" -> nonEmptyText,
+      "state_id" -> number,
       "zip_code" -> nonEmptyText,
       "url" -> text,
     "created_by_id" -> number)
