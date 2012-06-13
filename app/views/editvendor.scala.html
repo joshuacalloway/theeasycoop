@@ -1,0 +1,16 @@
+@(id: Long, theform: Form[Vendor])(implicit session: Session)
+
+@import helper._
+@import helpers.Utils
+
+@main("Edit Vendor") {
+} {   
+  @form(actions.routes.EditVendorAction.updateVendor(id)) {
+    @inputText(theform("id"))
+    @inputText(theform("name"))
+    @inputText(theform("url"))
+
+    <input type="submit" value="Update">
+  }
+}
+	

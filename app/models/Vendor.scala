@@ -9,7 +9,10 @@ import play.Logger
 case class Vendor(id: Pk[Long], name: String, address:String, zip_code:String,url:String) extends AbstractModel {
   def all = Vendor.all
 
-  def save = Nil
+  def save = {
+    Vendor.save(this)
+  }
+
   def update(id: Long) = Nil
   
 }
@@ -41,6 +44,11 @@ object Vendor {
   def all(): List[Vendor] = DB.withConnection { implicit c =>
     SQL("select * from vendor").as(mapping *)
                                            }
+
+  def save(item: Vendor) {
+    create(item)
+  }
+
   def create(item: Vendor) {
     DB.withConnection { implicit c =>
       SQL("insert into vendor (name, address, zip_code, url)").on(

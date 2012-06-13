@@ -58,6 +58,13 @@ GET     /members/:id 		    actions.ShowMemberAction.showItem(id:Long)
 GET     /members/:id/edit           actions.EditMemberAction.editItem(id:Long)
 POST    /members/:id          	    actions.EditMemberAction.updateItem(id:Long)
 
+POST    /vendors		    actions.AddVendorAction.saveVendor
+GET    	/vendors/new     	    actions.AddVendorAction.newVendor
+GET     /vendors 		    actions.ListVendorsAction.list
+GET     /vendors/:id  	    actions.ShowVendorAction.showVendor(id: Long)
+GET     /vendors/:id/edit  	    actions.EditVendorAction.editVendor(id: Long)
+POST    /vendors/:id          	    actions.EditVendorAction.updateVendor(id:Long)
+
 POST    /items		    actions.AddItemAction.saveItem
 GET    	/items/new     	    actions.AddItemAction.newItem
 GET     /items 		    actions.ListItemsAction.list

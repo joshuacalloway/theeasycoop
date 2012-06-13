@@ -1,0 +1,17 @@
+@(items: List[Vendor])(implicit session: Session)
+
+@import helper._
+
+@main("List Vendors") {
+
+} {
+  <ul>
+    @items.map { i =>
+    <li>
+      <a href="/vendors/@i.id">
+      @i.name | @i.address | @i.url
+		</a>
+    </li>
+    }
+  </ul>
+}

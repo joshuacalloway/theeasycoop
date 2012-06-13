@@ -1,0 +1,17 @@
+@(item: Vendor)(implicit session: Session) 
+
+@import helpers.Utils
+@import views.html.tags._
+
+@main(title=item.name){
+
+} {
+  
+  @{item.name}
+  <br>
+  <br>
+  <a href="@{item.url}">@{item.url}</a>
+  <br>
+}
+
+    

@@ -1,0 +1,14 @@
+@(theform: Form[Vendor])(implicit session: Session)
+
+@import helper._
+@import helpers.Utils
+
+@main("Add Vendor") {
+} {
+  @form(actions.routes.AddVendorAction.saveVendor()) {
+  @inputText(theform("name"))
+
+  @inputText(theform("url"))
+  <input type="submit" value="Add Vendor">
+  }
+}
