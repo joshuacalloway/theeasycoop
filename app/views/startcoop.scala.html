@@ -28,8 +28,9 @@ no menu
   '_showConstraints -> false,
   '_error -> theform.error("state_id"))
 
-  @inputText(theform("zip_code"))
-  <input type="submit" value="Create">
+  @inputText(theform("zip_code"),
+	   '_label -> "Zip Code")
+  <input type="submit" value="Create Coop">
   }
 
 

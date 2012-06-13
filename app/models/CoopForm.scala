@@ -20,7 +20,7 @@ object CoopForm {
       "coop_type_id" -> number,
       "manager_id" -> number,
       "state_id" -> number,
-      "zip_code" -> text
+      "zip_code" -> nonEmptyText
     )(Coop.apply)(Coop.unapply))
 
 }
