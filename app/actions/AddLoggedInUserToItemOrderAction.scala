@@ -19,6 +19,6 @@ object AddLoggedInUserToItemOrderAction extends Controller with Secured {
     val member = Utils.getLoggedInUser(request.session)
 					       
    ItemOrder.addMember(id, member)
-   Ok(html.showitemorderincoop(ItemOrder.findById(id).get))
+   Ok(html.showitemorder(ItemOrder.findById(id).get))
  }
 }

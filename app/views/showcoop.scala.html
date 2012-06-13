@@ -53,7 +53,7 @@
 
   <ul>
   @coop.itemOrders.map { itemOrder =>
-    <li><a href="@actions.routes.ShowItemOrderInCoopAction.showItem(coop.id.get, itemOrder.id.get)">@itemOrder.id - @itemOrder.description - @itemOrder.item.name</a>
+    <li><a href="@actions.routes.ShowItemOrderAction.showItem(coop.id.get, itemOrder.id.get)">@itemOrder.id - @itemOrder.description - @itemOrder.item.name</a>
               }
   </ul>
 
