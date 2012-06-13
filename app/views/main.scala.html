@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>@title</title>
+<title>The Easy Coop</title>
 <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
@@ -14,21 +14,32 @@
 <body>
 <div id="container" style="width:500px">
 <div id="header" style="background-color:#FFA500;">
-<h1 style="margin-bottom:0;">@title</h1></div>
+<div id="globaltitle" style="background-color:#CCA5DD;align:center">
+<h1 style="margin-bottom:0;">The Easy Coop</h1>
+</div>
+
+<div id="pagetitle" style="background-color:#CCA500;align:center">
+<h2 style="margin-bottom:0;">@title</h2>
+</div>
+</div>
 <div id="menu" style="background-color:#FFD700;height:520px;width:100px;float:left;">
 
-<div id="pagemenu" style="background-color:#FFD7CC;">
-<b>Menu</b><br />
+<div id="globalmenu" style="background-color:#ACD7CC;">
+<b>Global Menu</b><br />
 <a href="/items">Browse Items</a>
 <br/>
 <a href="/coops">Browse Coops</a>
 <br/>
+</div>
+<div id="pagemenu" style="background-color:#FFD7CC;">
+<b>Page Menu</b><br />
 
 @menu
 
 </div>
 <br/>
 <div id="usermenu" style="background-color:#CFD7FF;">
+<b>User Menu</b><br />
 @if(Utils.isLogin(session)) {
   <a href="/items/new">Add Item</a>
   <br/>
