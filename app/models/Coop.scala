@@ -5,6 +5,10 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 import play.Logger
+import play.api.data.Forms._
+import play.api.mvc._
+import views._
+import play.api.data._
 
 case class Coop(id: Pk[Long], name: String, description: Option[String], coop_type_id: Int, manager_id: Int, zip_code: String) extends AbstractModel {
 
@@ -35,7 +39,7 @@ case class Coop(id: Pk[Long], name: String, description: Option[String], coop_ty
 }
 
 object Coop {
- 
+
   val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~

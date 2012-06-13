@@ -1,6 +1,7 @@
 package controllers
 
 import anorm._
+import models.CoopForm
 import models.Coop
 import models.Member
 import play.api.Play.current
@@ -13,16 +14,7 @@ import actions.Secured
 
 object CoopController extends AbstractCRUDController with Secured {
   override type ModelType = Coop
-
-  val form: Form[Coop] = Form(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
-      "description" -> optional(nonEmptyText),
-      "coop_type_id" -> number,
-      "manager_id" -> number,
-      "zip_code" -> nonEmptyText
-    )(Coop.apply)(Coop.unapply))
+  val form: Form[Coop] = CoopForm.form
 
   override protected def model_all() = Coop.all
   override protected def model_findById(id: Long) = Coop.findById(id)
