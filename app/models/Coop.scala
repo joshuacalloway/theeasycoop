@@ -108,7 +108,7 @@ object Coop {
 
   def create(coop: Coop) {
     DB.withConnection { implicit c =>
-      SQL("insert into Coop (name, description, manager_id,coop_type_id,zip_code) select {name}, {description}, {manager_id},{coop_type_id},{state_id},{zip_code} ").on(
+      SQL("insert into Coop (name, description, manager_id,coop_type_id,state_id,zip_code) select {name}, {description}, {manager_id},{coop_type_id},{state_id},{zip_code} ").on(
         'name -> coop.name,
         'description -> coop.description,
         'manager_id -> coop.manager_id,

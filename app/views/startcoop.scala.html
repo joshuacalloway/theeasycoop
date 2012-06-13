@@ -19,6 +19,15 @@ no menu
   '_label -> "Coop Type", 
   '_default -> "-- Choose a Coop Type --", 
   '_showConstraints -> false)
+
+  @select(
+  theform("state_id"), 
+  State.options,
+  '_label -> "State", 
+  '_default -> "-- Choose a State --", 
+  '_showConstraints -> false,
+  '_error -> theform.error("state_id"))
+
   @inputText(theform("zip_code"))
   <input type="submit" value="Create">
   }
