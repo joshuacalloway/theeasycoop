@@ -12,7 +12,7 @@
 <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
 </head>
 <body>
-<div id="container" style="width:500px">
+<div id="container" style="width:600px">
 <div id="header" style="background-color:#FFA500;">
 <div id="globaltitle" style="background-color:#CCA5DD;align:center">
 <h1 style="margin-bottom:0;">The Easy Coop</h1>
@@ -22,45 +22,42 @@
 <h2 style="margin-bottom:0;">@title</h2>
 </div>
 </div>
-<div id="menu" style="background-color:#FFD700;height:520px;width:100px;float:left;">
+<div id="menu" style="background-color:#FFD700;height:520px;width:200px;float:left;">
 
 <div id="globalmenu" style="background-color:#ACD7CC;">
-<b>Global Menu</b><br />
-<a href="/vendors">Browse Vendors</a>
-<br/>
-<a href="/items">Browse Items</a>
-<br/>
-<a href="/coops">Browse Coops</a>
-<br/>
+<ul>Global Menu
+<li><a href="/vendors">Vendors</a>
+<li><a href="/items">Items</a>
+<li><a href="/coops">Coops</a>
 @if(Utils.isLogin(session)) {
-  <a href="/vendors/new">Add Vendor</a>
-  <br/>
-  <a href="/items/new">Add Item</a>
-  <br/>
-  <a href="/coops/new">Start a Coop</a>
-  <br/>
+  <li><a href="/vendors/new">Add Vendor</a>
+  <li><a href="/items/new">Add Item</a>
+  <li><a href="/coops/new">Start a Coop</a>
 }
+</ul>
 </div>
 <div id="pagemenu" style="background-color:#FFD7CC;">
-<b>Page Menu</b><br />
+<ul>Page Menu
 
 @menu
 
+</ul>
 </div>
 <br/>
 <div id="usermenu" style="background-color:#CFD7FF;">
-<b>User Menu</b><br />
+<ul>User Menu
 @if(Utils.isLogin(session)) {
-  <a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
+  <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
   <br/>
   @Utils.getLoggedInUser(session).coops.map { coop =>
-    <a href="/coops/@coop.id">@coop.name</a>
+    <li><a href="/coops/@coop.id">@coop.name</a>
 					     <br/>
 					   }
-  <a href="/logout">Logout</a>
+  <li><a href="/logout">Logout</a>
 } else {
-  <a href="/">Login</a>
+  <li><a href="/">Login</a>
 }
+</ul>
 </div>
 </div>
 <div id="content" style="background-color:#EEEEEE;height:520px;width:400px;float:left;">
