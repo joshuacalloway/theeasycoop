@@ -6,7 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Member(id: Pk[Long], name: String, email: String, password: String, cell: Option[String], address: String) extends AbstractModel {
+case class Member(id: Pk[Long], name: String, email: String, password: String, cell: Option[String], address: String, state_id: Int, zip_code:String) extends AbstractModel {
   
   def save = {
     Member.save(this)
@@ -16,6 +16,7 @@ case class Member(id: Pk[Long], name: String, email: String, password: String, c
   }
   def all = Member.all
   def coops = Member.coops(id)
+  def state = State.findById(state_id).get
 }
 
 object Member {
@@ -26,8 +27,10 @@ object Member {
     get[String]("email") ~
     get[String]("password") ~
     get[Option[String]]("cell") ~
-    get[String]("address") map {
-      case id~name~email~password~cell~address => Member(id, name, email,password,cell,address)
+    get[String]("address") ~
+    get[Int]("state_id") ~
+    get[String]("zip_code") map {
+      case id~name~email~password~cell~address~state_id~zip_code => Member(id, name, email,password,cell,address,state_id,zip_code)
     }
   }
   
@@ -95,12 +98,14 @@ object Member {
 
   def create(item: Member) {
     DB.withConnection { implicit c =>
-      SQL("insert into member (name, email, password, cell, address) values ({name},{email},{password},{cell},{address})").on(
+      SQL("insert into member (name, email, password, cell, address, state_id, zip_code) values ({name},{email},{password},{cell},{address},{state_id},{zip_code})").on(
         'name -> item.name,
         'email -> item.email,
         'password -> item.password,
         'cell -> item.cell,
-        'address -> item.address
+        'address -> item.address,
+	'state_id -> item.state_id,
+	'zip_code -> item.zip_code
       ).executeUpdate()
                      }
   }
@@ -119,12 +124,14 @@ object Member {
   def update(id: Long, item: Member) {
     Logger.info("updating member : " + id + " with email : " + item.email)
     DB.withConnection { implicit c =>
-      SQL("update member set name={name}, email={email}, password={password}, cell={cell}, address={address} where id={id}").on(
+      SQL("update member set name={name}, email={email}, password={password}, cell={cell}, address={address}, state_id={state_id}, zip_code={zip_code} where id={id}").on(
         'name -> item.name,
         'email -> item.email,
 	'password -> item.password,
 	'cell -> item.cell,
 	'address -> item.address,
+	'state_id -> item.state_id,
+	'zip_code -> item.zip_code,
         'id -> id
       ).executeUpdate()
                      }

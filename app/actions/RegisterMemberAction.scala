@@ -4,6 +4,7 @@ package actions
 import anorm._
 import models.Coop
 import models.Member
+import models.MemberForm
 import play.api.Play.current
 import play.api._
 import play.api.data.Forms._
@@ -13,21 +14,11 @@ import views._
 import models.Coop
 
 object RegisterMemberAction extends Controller {
-  val form: Form[Member] = Form (
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "password" -> nonEmptyText,
-      "cell" -> optional(text),
-      "address" -> text)(Member.apply)(Member.unapply))
-
+  val form: Form[Member] = MemberForm.form
 
   def actionForm = Action { implicit request =>
       Ok(html.registermember(form)) 
   }
-
-
 
   def submitForm = Action { implicit request =>
     form.bindFromRequest.fold(

@@ -2,6 +2,7 @@ package controllers
 
 import anorm._
 import models.Member
+import models.MemberForm
 import play.api._
 import play.api.data.Forms._
 import play.api.data._
@@ -12,14 +13,7 @@ import actions.Secured
 object MemberController extends AbstractCRUDController with Secured {
   override type ModelType = Member
   override type FormType = AbstractForm[Member]
-  val form: Form[Member] = AbstractForm(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "password" -> nonEmptyText,
-      "cell" -> optional(text),
-      "address" -> text)(Member.apply)(Member.unapply))
+  val form: Form[Member] = MemberForm.form
 
   override protected def model_all() = {
     Logger.info("model_all called")

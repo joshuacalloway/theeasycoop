@@ -2,6 +2,7 @@ package actions
 
 import anorm._
 import models.Member
+import models.MemberForm
 import play.api._
 import play.api.data.Forms._
 import play.api.data._
@@ -9,15 +10,7 @@ import play.api.mvc._
 import views._
 
 object EditMemberAction extends Controller with Secured {
-  val form: Form[Member] = Form(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "password" -> nonEmptyText,
-      "cell" -> optional(text),
-      "address" -> text)(Member.apply)(Member.unapply))
-
+  val form: Form[Member] = MemberForm.form
 
   def editItem(id: Long) = Action { implicit request => 
     Member.findById(id) match { 
