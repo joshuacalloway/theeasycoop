@@ -38,4 +38,6 @@ Vendor: @{vendor(item.item.vendor)}
 # of Members In: @{item.members.size}
 <br/>
 <a href="@actions.routes.AddLoggedInUserToItemOrderAction.action(item.coop.id.get, item.id.get)">I'm in</a>
+<br>
+<a href="@actions.routes.RemoveLoggedInUserFromItemOrderAction.action(item.coop.id.get, item.id.get)">I'm out</a>
 }

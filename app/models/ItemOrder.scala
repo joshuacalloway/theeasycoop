@@ -121,5 +121,14 @@ object ItemOrder {
         'member_id -> member.id).executeUpdate()
                      }
   }
+
+  def removeMember(id: Long, member: Member) {
+    DB.withConnection { implicit c =>
+      SQL("delete from itemorder_member where member_id={member_id} and itemorder_id = {itemorder_id}").on(
+        'itemorder_id -> id,
+        'member_id -> member.id).executeUpdate()
+                     }
+  }
+
 }
 

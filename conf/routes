@@ -85,7 +85,7 @@ GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: 
 GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id: Long)
 POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id: Long)
 
-GET     /coops/:coopID/members/:id  actions.ShowMemberInCoopAction.showItem(coopID:Long, id:Long)
+GET     /coops/:coopId/members/:id  actions.ShowMemberInCoopAction.showItem(coopId:Long, id:Long)
 
 GET     /coops/:id/itemorders   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
 GET     /coops/:id/itemorders/   actions.ListItemOrdersByCoopAction.listByCoop(id: Long)
@@ -94,16 +94,18 @@ GET     /coops/:id/itemorders/   actions.ListItemOrdersByCoopAction.listByCoop(i
 POST    /coops/:id/itemorders     		    actions.AddItemOrderToCoopAction.saveItemByCoop(id: Long)
 GET     /coops/:id/itemorders/new 		    actions.AddItemOrderToCoopAction.newItemByCoop(id: Long)
 
-GET     /coops/:coopID/itemorders/:id  actions.ShowItemOrderAction.showItem(coopID:Long, id:Long)
+GET     /coops/:coopId/itemorders/:id  actions.ShowItemOrderAction.showItem(coopId:Long, id:Long)
 
-GET     /coops/:coopID/itemorders/:id/edit         actions.EditItemOrderAction.editItem(coopID:Long, id:Long)
-GET     /coops/:coopID/itemorders/:id/update       actions.EditItemOrderAction.updateItem(coopID:Long, id:Long)
+GET     /coops/:coopId/itemorders/:id/edit         actions.EditItemOrderAction.editItem(coopId:Long, id:Long)
+GET     /coops/:coopId/itemorders/:id/update       actions.EditItemOrderAction.updateItem(coopId:Long, id:Long)
 
-GET     /coops/:coopID/itemorders/:id/members      actions.ListMembersInItemOrderAction.list(coopID:Long, id:Long)
+GET     /coops/:coopId/itemorders/:id/members      actions.ListMembersInItemOrderAction.list(coopId:Long, id:Long)
 GET 	/coops/:coopId/itemorders/:id/members/adduser								actions.AddLoggedInUserToItemOrderAction.action(coopId:Long, id:Long)
+GET 	/coops/:coopId/itemorders/:id/members/removeuser								actions.RemoveLoggedInUserFromItemOrderAction.action(coopId:Long, id:Long)
 
-GET     /coops/:coopID/itemorders/:id/members/new      actions.AddMemberToItemOrderAction.actionForm(coopID:Long, id: Long)
-POST    /coops/:coopID/itemorders/:id/members          actions.AddMemberToItemOrderAction.submitForm(coopID:Long, id: Long)
+GET     /coops/:coopId/itemorders/:id/members/remove/:memberId      actions.RemoveMemberFromItemOrderAction.action(coopId:Long,memberId:Long, id: Long)
+GET     /coops/:coopId/itemorders/:id/members/new      actions.AddMemberToItemOrderAction.actionForm(coopId:Long, id: Long)
+POST    /coops/:coopId/itemorders/:id/members          actions.AddMemberToItemOrderAction.submitForm(coopId:Long, id: Long)
 
 
 GET    /manage			  controllers.CoopController.index
