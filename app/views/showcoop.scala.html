@@ -32,7 +32,8 @@
     <ul>
     @coop.members.map { m =>
       @if(Utils.isManager(session,coop)) {
-	<li><a href="/members/@m.id">View</a>@member(m) - @coop.memberStatus(m).name
+	<li><a href="@actions.routes.SuspendMemberAction.action(coop.id.get, m.id.get)">
+Suspend</a> - <a href="/members/@m.id">View</a>@member(m) - @coop.memberStatus(m).name
       } else {
 	
 

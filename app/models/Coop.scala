@@ -40,6 +40,9 @@ case class Coop(id: Pk[Long], name: String, description: String, coop_type_id: I
   def memberStatus(member: Member) : MemberStatus = {
     Coop.memberStatus(this, member).get
   }
+  def suspendMember(member: Member) = {
+    Coop.suspendMember(this, member)
+  }
   def members = Member.findByCoopId(id)
   def itemOrders = ItemOrder.findByCoopId(id)
 }
@@ -109,6 +112,14 @@ object Coop {
     DB.withConnection { implicit c =>
       //SQL("select s.* from member_status s where s.id=1").as(MemberStatus.mapping.singleOpt)
       SQL("select s.* from member_status s, coop_member cm where cm.coop_id = {coop_id} and cm.member_id = {member_id} and s.id = cm.member_status_id").on('coop_id -> coop.id, 'member_id -> member.id).as(MemberStatus.mapping.singleOpt)
+		       
+                     }
+  }
+
+
+  def suspendMember(coop: Coop, member: Member) = {
+    DB.withConnection { implicit c =>
+      SQL("update coop_member cm set member_status_id = 2 where cm.coop_id = {coop_id} and cm.member_id = {member_id}").on('coop_id -> coop.id, 'member_id -> member.id).executeUpdate()
 		       
                      }
   }
