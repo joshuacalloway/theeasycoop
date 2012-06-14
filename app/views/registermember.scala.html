@@ -14,6 +14,17 @@ no menu
   @inputPassword(coopForm("password"))
   @inputText(coopForm("cell"))
   @textarea(field = coopForm("address"), args = 'rows -> 3, 'cols -> 30)
+    @select(
+  coopForm("state_id"), 
+  State.options,
+  '_label -> "State", 
+  '_default -> "-- Choose a State --", 
+  '_showConstraints -> false,
+  '_error -> coopForm.error("state_id"))
+
+  @inputText(coopForm("zip_code"),
+	   '_label -> "Zip Code")
+
   <input type="submit" value="Create">
   }
 

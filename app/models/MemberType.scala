@@ -23,6 +23,7 @@ object MemberType {
       case id~member_type => MemberType(id, member_type)
     }
   }
+  def REGULAR = findByName("REGULAR_MEMBER").get
      
   def MANAGER_ID = findByName("MANAGER").get.id
   /**

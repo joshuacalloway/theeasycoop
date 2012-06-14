@@ -32,7 +32,7 @@
     <ul>
     @coop.members.map { m =>
       @if(Utils.isManager(session,coop)) {
-	<li><a href="/members/@m.id">@member(m)</a>
+	<li><a href="/members/@m.id">View</a>@member(m) - @coop.memberStatus(m).name
       } else {
 	
 

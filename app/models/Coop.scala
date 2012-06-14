@@ -37,6 +37,9 @@ case class Coop(id: Pk[Long], name: String, description: String, coop_type_id: I
   def isMember(member: Member) : Boolean = {
     Coop.isMember(this, member)
   }
+  def memberStatus(member: Member) : MemberStatus = {
+    Coop.memberStatus(this, member).get
+  }
   def members = Member.findByCoopId(id)
   def itemOrders = ItemOrder.findByCoopId(id)
 }
@@ -72,8 +75,10 @@ object Coop {
                                            }
   def addMember(id: Long, member: Member) {
     DB.withConnection { implicit c =>
-      SQL("insert into coop_member (coop_id, member_id) values ({coop_id}, {member_id})").on(
+      SQL("insert into coop_member (coop_id, member_id, member_type_id, member_status_id) values ({coop_id}, {member_id}, {member_type_id}, {member_status_id})").on(
         'coop_id -> id,
+	'member_type_id -> MemberType.REGULAR.id,
+	'member_status_id -> MemberStatus.ACTIVE.id,
         'member_id -> member.id).executeUpdate()
                      }
   }
@@ -96,6 +101,15 @@ object Coop {
 	'coop_type_id -> coop.coop_type_id,
         'id -> id
       ).executeUpdate()
+                     }
+  }
+
+
+  def memberStatus(coop: Coop, member: Member) : Option[MemberStatus] = {
+    DB.withConnection { implicit c =>
+      //SQL("select s.* from member_status s where s.id=1").as(MemberStatus.mapping.singleOpt)
+      SQL("select s.* from member_status s, coop_member cm where cm.coop_id = {coop_id} and cm.member_id = {member_id} and s.id = cm.member_status_id").on('coop_id -> coop.id, 'member_id -> member.id).as(MemberStatus.mapping.singleOpt)
+		       
                      }
   }
 
