@@ -11,32 +11,32 @@
 </ul>
 } {
   
-Id: @{item.id},
+<span class="label">Id:</span> @{item.id},
 <br/>
-Name: @{item.item.name},
+<span class="label">Name:</span> @{item.item.name},
 <br/>
-Minimum Buyers: 
+<span class="label">Minimum Buyers:</span> 
 @{item.minimumbuyers},
 <br/>
-Item Cost: @{item.membercost},
+<span class="label">Item Cost:</span> @{item.membercost},
 <br/>
-Description: @{item.description},
+<span class="label">Description:</span> @{item.description},
 <br/>
-Order deadline: @{item.deadline_by},
+<span class="label">Order deadline:</span> @{item.deadline_by},
 <br/>
-Delivery Address: @{item.deliveryaddress},
+<span class="label">Delivery Address:</span> @{item.deliveryaddress},
 <br/>
-Created at: @{item.created_at},
+<span class="label">Created at:</span> @{item.created_at},
 <br/>
-Created by @{member(item.createdBy)},
+<span class="label">Created by:</span> @{member(item.createdBy)},
 <br/>
-In Coop: @{item.coop.name},
+<span class="label">In Coop:</span> @{item.coop.name},
 <br/>
-Vendor: @{vendor(item.item.vendor)}
+<span class="label">Vendor:</span> @{vendor(item.item.vendor)}
 <br>
 ----------------------------
 <br/>
-# of Members In: @{item.members.size}
+<span class="label"># of Members In:</span> @{item.members.size}
 <br/>
 @{members(item.members)}
 <br>
