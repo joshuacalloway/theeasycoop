@@ -1,46 +1,50 @@
-@(item: ItemOrder)(implicit session: Session)
+@(order: ItemOrder)(implicit session: Session)
 
 @import helpers.Utils
 @import views.html.tags._
 
 @main("Showing Item Order") {
 <ul>
-@if(Utils.isManager(session, item.coop)) {
-  <li><a href="@actions.routes.EditItemOrderAction.editItem(item.coop.id.get, item.id.get)">Edit Order</a>
+@if(Utils.isManager(session, order.coop)) {
+  <li><a href="@actions.routes.EditItemOrderAction.editItem(order.coop.id.get, order.id.get)">Edit Order</a>
 }
 </ul>
 } {
   
-<span class="label">Id:</span> @{item.id}
+<span class="label">Id:</span> @{order.id}
 <br/>
-<span class="label">Name:</span> @{item.item.name}
+<span class="label">Name:</span> @{order.item.name}
 <br/>
 <span class="label">Minimum Buyers:</span> 
-@{item.minimumbuyers}
+@{order.minimumbuyers}
 <br/>
-<span class="label">Item Cost:</span> @{item.membercost}
+<span class="label">Item Cost:</span> @{order.membercost}
 <br/>
-<span class="label">Description:</span> @{item.description}
+<span class="label">Description:</span> @{order.description}
 <br/>
-<span class="label">Order deadline:</span> @{item.deadline_by}
+<span class="label">Order deadline:</span> @{order.deadline_by}
 <br/>
-<span class="label">Delivery Address:</span> @{item.deliveryaddress}
+<span class="label">Delivery Address:</span> @{order.deliveryaddress}
 <br/>
-<span class="label">Created at:</span> @{item.created_at}
+<span class="label">Created at:</span> @{order.created_at}
 <br/>
-<span class="label">Created by:</span> @{member(item.createdBy)}
+<span class="label">Created by:</span> @{member(order.createdBy)}
 <br/>
-<span class="label">In Coop:</span> @{item.coop.name}
+<span class="label">In Coop:</span> @{order.coop.name}
 <br/>
-<span class="label">Vendor:</span> @{vendor(item.item.vendor)}
+<span class="label">Vendor:</span> @{vendor(order.item.vendor)}
 <br>
 ----------------------------
 <br/>
-<span class="label"># of Members In:</span> @{item.members.size}
+<span class="label"># of Members In:</span> @{order.members.size}
 <br/>
-@{members(item.members)}
+@{members(order.members)}
 <br>
-<a href="@actions.routes.AddLoggedInUserToItemOrderAction.action(item.coop.id.get, item.id.get)">I'm in</a>
+@if(order.isMemberIn(Utils.getLoggedInUser(session))) {
+<a href="@actions.routes.RemoveLoggedInUserFromItemOrderAction.action(order.coop.id.get, order.id.get)">I'm out</a>
+} else {
+  <a href="@actions.routes.AddLoggedInUserToItemOrderAction.action(order.coop.id.get, order.id.get)">I'm in</a>
+}
 <br>
-<a href="@actions.routes.RemoveLoggedInUserFromItemOrderAction.action(item.coop.id.get, item.id.get)">I'm out</a>
+
 }
