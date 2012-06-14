@@ -17,15 +17,9 @@
 <div id="globaltitle" style="background-color:#CCA5DD;align:center">
 <h1 style="margin-bottom:0;">The Easy Coop</h1>
 </div>
-
-<div id="pagetitle" style="background-color:#CCA500;align:center">
-<h2 style="margin-bottom:0;">@title</h2>
-</div>
-</div>
-<div id="menu" style="background-color:#FFD700;height:520px;width:200px;float:left;">
-
-<div id="globalmenu">
-<ul>Global Menu
+<ul id="menu">
+<li id="globalmenu"><a href="#">Global Menu</a>
+<ul>
 <li><a href="/vendors">Vendors</a>
 <li><a href="/items">Items</a>
 <li><a href="/coops">Coops</a>
@@ -35,32 +29,31 @@
   <li><a href="/coops/new">Start a Coop</a>
 }
 </ul>
-</div>
-<div id="pagemenu">
-<ul>Page Menu
-
+</li>
+<li id="pagemenu"><a href="#">Page Menu</a>
+<ul>
 @menu
 
 </ul>
-</div>
-<br/>
-<div id="usermenu">
-<ul>User Menu
+</li>
+<li id="usermenu"><a href="#">User Menu</a>
+<ul>
 @if(Utils.isLogin(session)) {
   <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
-  <br/>
   @Utils.getLoggedInUser(session).coops.map { coop =>
     <li><a href="/coops/@coop.id">@coop.name</a>
-					     <br/>
 					   }
   <li><a href="/logout">Logout</a>
 } else {
   <li><a href="/">Login</a>
 }
 </ul>
+</li>
+</ul>
+<div id="content" style="background-color:#EEEEEE;height:520px;width:600px;float:left;">
+<div id="pagetitle" style="background-color:#CCA500;align:center">
+<h2 style="margin-bottom:0;">@title</h2>
 </div>
-</div>
-<div id="content" style="background-color:#EEEEEE;height:520px;width:400px;float:left;">
 @content
 </div>
 

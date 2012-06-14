@@ -1,11 +1,29 @@
+
 #globalmenu {
-    background-color:#FFDCAA;
+    background-color:#CFD7FF;
+    width:150px;
+    height:130px;
+    position:relative;
+    top:0;
+    left:0;
+    float:left;
 }
-
 #pagemenu {
-    background-color:#FFD7CC;
+    background-color:#CFD7FF;
+    width:150px;
+    position:relative;
+    height:130px;
+    top:0;
+    left:0;
+    float:left;
 }
-
 #usermenu {
     background-color:#CFD7FF;
+    width:150px;
+    position:relative;
+    height:130px;
+    top:0;
+    left:0;
+    float:left;
 }
+
