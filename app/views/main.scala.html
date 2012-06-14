@@ -18,7 +18,7 @@
 <h1 style="margin-bottom:0;">The Easy Coop</h1>
 </div>
 <ul id="menu">
-<li id="globalmenu"><a href="#">Global Menu</a>
+  <li><a href="#">Global Menu</a>
 <ul>
 <li><a href="/vendors">Vendors</a></li>
 <li><a href="/items">Items</a></li>
@@ -29,14 +29,10 @@
   <li><a href="/coops/new">Start a Coop</a></li>
 }
 </ul>
-</li>
-<li id="pagemenu"><a href="#">Page Menu</a>
-<ul>
+  <li><a href="#">Page Menu</a>
 @menu
-
-</ul>
-</li>
-<li id="usermenu"><a href="#">User Menu</a>
+  </li>
+  <li><a href="#">User Menu</a>
 <ul>
 @if(Utils.isLogin(session)) {
   <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a></li>
@@ -48,7 +44,7 @@
   <li><a href="/">Login</a></li>
 }
 </ul>
-</li>
+  </li>
 </ul>
 <div id="content" style="background-color:#EEEEEE;height:520px;width:600px;float:left;">
 <div id="pagetitle" style="background-color:#CCA500;align:center">

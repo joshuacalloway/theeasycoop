@@ -1,30 +1,36 @@
 
-#globalmenu {
-    background-color:#CFD7FF;
-    width:150px;
-    height:130px;
-    position:relative;
-    top:0;
-    left:0;
-    float:left;
+#menu,
+#menu ul {
+  font-family: Arial, Verdana;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-
-#pagemenu {
-    background-color:#CFD7FF;
-    width:150px;
-    position:relative;
-    height:130px;
-    top:0;
-    left:0;
-    float:left;
+#menu ul li {
+  display: block;
+  position: relative;
+  float: left;
 }
-#usermenu {
-    background-color:#CFD7FF;
-    width:150px;
-    position:relative;
-    height:130px;
-    top:0;
-    left:0;
-    float:left;
+#menu li ul { display: none; }
+#menu ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  border-top: 1px solid #ffffff;
+  padding: 5px 15px 5px 15px;
+  background: #2C5463;
+  margin-left: 1px;
+  white-space: nowrap;
 }
-
+#menu ul li a:hover { background: #617F8A; }
+#menu li:hover ul {
+  display: block;
+  position: absolute;
+}
+#menu li:hover li {
+  float: none;
+  font-size: 11px;
+}
+#menu li:hover a { background: #617F8A; }
+#menu li:hover li a:hover { background: #95A9B1; }
