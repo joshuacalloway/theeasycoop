@@ -20,6 +20,7 @@ object ItemOrderForm {
       "minimumbuyers" -> number,
       "itemcost" -> money,
       "itemdescription" -> text,
+      "paymentinstructions" -> text,
       "deadline_by" -> date("yyyy-MM-dd"),
       "deliveryaddress" -> text,
       "created_at" -> date("yyyy-MM-dd"),

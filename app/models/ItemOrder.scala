@@ -10,7 +10,7 @@ import play.api.Play.current
 import play.Logger
 
 
-case class ItemOrder(id: Pk[Long] = null, item_id: Int, minimumbuyers: Int, membercost: BigDecimal, description: String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, var coop_id: Int) extends AbstractModel {
+case class ItemOrder(id: Pk[Long] = null, item_id: Int, minimumbuyers: Int, membercost: BigDecimal, description: String, paymentinstructions:String, deadline_by: Date, deliveryaddress: String, created_at: Date, created_by_id: Int, var coop_id: Int) extends AbstractModel {
   val name: String = "UNDEFINED"
 
   def save = {
@@ -47,12 +47,13 @@ object ItemOrder {
     get[Int]("minimumbuyers") ~
     get[BigDecimal]("membercost") ~
     get[String]("description") ~
+    get[String]("paymentinstructions") ~
     get[Date]("deadline_by") ~
     get[String]("deliveryaddress")~
     get[Date]("created_at") ~
     get[Int]("created_by_id") ~
     get[Int]("coop_id") map {
-      case id~item_id~minimumbuyers~membercost~description~deadline_by~deliveryaddress~created_at~created_by_id~coop_id => ItemOrder(id,item_id,minimumbuyers,membercost,description,deadline_by,deliveryaddress,created_at,created_by_id,coop_id)
+      case id~item_id~minimumbuyers~membercost~description~paymentinstructions~deadline_by~deliveryaddress~created_at~created_by_id~coop_id => ItemOrder(id,item_id,minimumbuyers,membercost,description,paymentinstructions,deadline_by,deliveryaddress,created_at,created_by_id,coop_id)
 
     }
   }
@@ -93,7 +94,7 @@ object ItemOrder {
 
   def create(item: ItemOrder) {
     DB.withConnection { implicit c =>
-      SQL("insert into itemorder (item_id,minimumbuyers,deadline_by,deliveryaddress,created_at,created_by_id,coop_id,membercost,description) select {item_id},{minimumbuyers},{deadline_by},{deliveryaddress},{created_at},{created_by_id},{coop_id},{membercost},{description}").on(
+      SQL("insert into itemorder (item_id,minimumbuyers,deadline_by,deliveryaddress,created_at,created_by_id,coop_id,membercost,description,paymentinstructions) select {item_id},{minimumbuyers},{deadline_by},{deliveryaddress},{created_at},{created_by_id},{coop_id},{membercost},{description},{paymentinstructions}").on(
         'item_id -> item.item_id,
         'minimumbuyers -> item.minimumbuyers,
         'deadline_by -> item.deadline_by,
@@ -102,7 +103,8 @@ object ItemOrder {
         'created_by_id -> item.created_by_id,
         'coop_id -> item.coop_id,
         'membercost -> item.membercost,
-        'description -> item.description
+        'description -> item.description,
+	'paymentinstructions -> item.paymentinstructions
       ).executeUpdate()
                      }
   }

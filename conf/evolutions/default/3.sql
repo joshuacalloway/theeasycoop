@@ -49,6 +49,7 @@ CREATE TABLE itemorder (
        description varchar(128),
        deadline_by timestamp,
        deliveryaddress varchar(128),
+       paymentinstructions varchar(128),
        created_at timestamp default now(),
        created_by_id integer references member(id),
        coop_id integer references coop(id)
@@ -60,7 +61,7 @@ create table itemorder_member (
        itemorder_id integer references itemorder(id)
        );
 
-insert into itemorder(item_id, minimumbuyers, membercost, description, deadline_by, deliveryaddress, created_at, created_by_id, coop_id) values (1, 11, 40, '5 lb each', '2012-09-01', '1515 N Wicker', now(), 1, 1);
+insert into itemorder(item_id, minimumbuyers, membercost, description, deadline_by, deliveryaddress, created_at, created_by_id, coop_id,paymentinstructions) values (1, 11, 40, '5 lb each', '2012-09-01', '1515 N Wicker', now(), 1, 1, 'please send paypal money to supreme@aol.com');
 
 
 # --- !Downs
