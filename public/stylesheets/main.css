@@ -20,12 +20,15 @@
   height:30px;
 }
 #menu li ul { display: none; }
+#menu li a,
 #menu ul li a {
   display: block;
   text-decoration: none;
-  color: #ffffff;
+  color: #371C1C;
   border-top: 1px solid #ffffff;
-  padding: 5px 15px 5px 15px;
+  font-size:21px;
+  padding-right:32px;
+  padding-left:32px;
   background: #2C5463;
   margin-left: 1px;
   white-space: nowrap;
