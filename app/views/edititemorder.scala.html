@@ -2,11 +2,9 @@
 
 @import helper._
 
-@main("stuff") {
-  no menu
-}{
-  <h2>Edit a new item</h2>
+@main("Edit Order") {
 
+}{
   @form(actions.routes.EditItemOrderAction.updateItem(coopId, id)) {
   @inputText(theform("bulkitem_id"))
   @inputText(theform("minimumbuyers"))
