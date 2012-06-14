@@ -26,7 +26,7 @@ case class ItemOrder(id: Pk[Long] = null, item_id: Int, minimumbuyers: Int, memb
   def item = {
     Item.findById(item_id).get
   }
-  def createdBy() = Member.findById(created_by_id).get
+  def createdBy = Member.findById(created_by_id).get
 
   def coop = { Coop.findById(coop_id).get }
   def members = { Member.findByItemOrderId(id.get) }
