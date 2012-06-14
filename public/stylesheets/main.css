@@ -47,3 +47,12 @@ span.label {
   padding: 10px;
   margin: 10px;
 }
+
+label {
+    color: #B4886B;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
+}
+label:after { content: ": " }

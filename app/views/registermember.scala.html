@@ -15,7 +15,9 @@
     )
     @inputText(theform("email"))
     @inputPassword(theform("password"))
-    @inputText(theform("cell"))
+    @helper.input(theform("cell")) { (id, name, value, args) =>
+      <input type="text" placeholder="@name" name="@name" id="@id" @toHtmlArgs(args)>
+				 }
     @textarea(field = theform("address"), args = 'rows -> 3, 'cols -> 30)
       @select(
 	theform("state_id"), 
