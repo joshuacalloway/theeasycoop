@@ -37,9 +37,15 @@ case class Coop(id: Pk[Long], name: String, description: String, coop_type_id: I
   def isMember(member: Member) : Boolean = {
     Coop.isMember(this, member)
   }
+
   def memberStatus(member: Member) : MemberStatus = {
     Coop.memberStatus(this, member).get
   }
+
+  def isActive(member: Member) : Boolean = {
+    memberStatus(member) == MemberStatus.ACTIVE
+  }
+
   def suspendMember(member: Member) = {
     Coop.suspendMember(this, member)
   }

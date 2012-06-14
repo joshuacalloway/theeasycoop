@@ -17,7 +17,8 @@ object AddLoggedInUserToItemOrderAction extends Controller with Secured {
   def action(coopId: Long, id: Long) = Action 
   { implicit request =>
     val member = Utils.getLoggedInUser(request.session)
-   if (!ItemOrder.findById(id).get.isMemberIn(member)) {
+   val coop = Coop.findById(coopId).get
+   if (!ItemOrder.findById(id).get.isMemberIn(member) && coop.isActive(member)) {
      ItemOrder.addMember(id, member)
    }
    Ok(html.showitemorder(ItemOrder.findById(id).get))
