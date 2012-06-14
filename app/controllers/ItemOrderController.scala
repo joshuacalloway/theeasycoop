@@ -14,7 +14,7 @@ import anorm._
 //import anorm.SqlParser._
 import views._
 
-import models.ItemOrder
+import models.{ItemOrder, ItemOrderForm}
 import helpers.CustomFormats._
 import actions.Secured
 import models.Coop
@@ -22,20 +22,7 @@ import models.Coop
 object ItemOrderController extends AbstractCRUDController with Secured {
   override type ModelType = ItemOrder
 
-  val form: Form[ItemOrder] = Form(
-    mapping(
-      "id" -> ignored(NotAssigned:Pk[Long]),
-      "item_id" -> number,
-      "minimumbuyers" -> number,
-      "membercost" -> money,
-      "description" -> text,
-      "deadline_by" -> date("yyyy-MM-dd"),
-      "deliveryaddress" -> text,
-      "created_at" -> date("yyyy-MM-dd"),
-      "created_by_id" -> number,
-      "coop_id" -> number
-    )(ItemOrder.apply)(ItemOrder.unapply))
-
+  val form: Form[ItemOrder] = ItemOrderForm.form
 
   override protected def model_all() = ItemOrder.all
   override protected def model_findById(id: Long) = ItemOrder.findById(id)
