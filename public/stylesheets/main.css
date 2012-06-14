@@ -76,5 +76,32 @@ label:after { content: ": " }
 }
 
 #globaltitle{
-    background:url(/assets/images/bg-wood-header.jpg) left top repeat-x;height:80px
+    background:url(/assets/images/bg-wood-header.jpg) left top repeat-x;height:60px
+}
+
+dl {
+    width:100%;
+    background:#ff0;
+    overflow:hidden;
+}
+dl dt {
+    float:left;
+    width:20%;
+    background:#cc0;
+}
+dl dd {
+    float:left;
+    width:25%;
+    background:#dd0;
+    
+}
+dl dd.info {
+    float:left;
+    color: #060;
+    font-size: 85%;
+    display:block;
+    font-style:normal;
+    text-transform:uppercase;
+    background:#ee0;
+    width:25%;
 }
