@@ -45,7 +45,9 @@ case class Coop(id: Pk[Long], name: String, description: String, coop_type_id: I
   def isActive(member: Member) : Boolean = {
     memberStatus(member) == MemberStatus.ACTIVE
   }
-
+  def unSuspendMember(member: Member) = {
+    Coop.unSuspendMember(this, member)
+  }
   def suspendMember(member: Member) = {
     Coop.suspendMember(this, member)
   }
@@ -121,7 +123,12 @@ object Coop {
 		       
                      }
   }
-
+  def unSuspendMember(coop: Coop, member: Member) = {
+    DB.withConnection { implicit c =>
+      SQL("update coop_member cm set member_status_id = 1 where cm.coop_id = {coop_id} and cm.member_id = {member_id}").on('coop_id -> coop.id, 'member_id -> member.id).executeUpdate()
+		       
+                     }
+  }
 
   def suspendMember(coop: Coop, member: Member) = {
     DB.withConnection { implicit c =>

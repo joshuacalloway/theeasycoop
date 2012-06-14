@@ -85,6 +85,7 @@ GET     /coops/:id/members/         actions.ListMembersByCoopAction.members(id: 
 GET     /coops/:id/members/new      actions.AddMemberToCoopAction.actionForm(id: Long)
 POST    /coops/:id/members          actions.AddMemberToCoopAction.submitForm(id: Long)
 GET     /coops/:coopId/members/:id/suspend  actions.SuspendMemberAction.action(coopId:Long, id:Long)
+GET     /coops/:coopId/members/:id/unsuspend  actions.UnSuspendMemberAction.action(coopId:Long, id:Long)
 
 GET     /coops/:coopId/members/:id  actions.ShowMemberInCoopAction.showItem(coopId:Long, id:Long)
 
