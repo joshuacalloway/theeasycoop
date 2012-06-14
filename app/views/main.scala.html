@@ -15,7 +15,7 @@
 <div id="container">
 <div id="header">
 <div id="globaltitle">
-<h1>The Easy Coop</h1>
+The Easy Coop - @title
 </div>
 <ul id="menu">
   <li><a href="#">Browse</a>
@@ -49,9 +49,6 @@
   </li>
 </ul>
 
-<div id="pagetitle">
-<h2>@title</h2>
-</div>
 <div id="content">
 
 @content
@@ -60,7 +57,6 @@
 <div id="footer">
 @if(Utils.isLogin(session)) {
   logged in as : @Utils.getLoggedInUser(session).name
-
 }
 </div>
 </body>

@@ -67,8 +67,7 @@ label {
 }
 label:after { content: ": " }
 
-#footer,
-#pagetitle{
+#footer{
     background-color:#FFA500;clear:both;text-align:center;
 }
 #container {
@@ -76,7 +75,7 @@ label:after { content: ": " }
 }
 
 #globaltitle{
-    background:url(/assets/images/bg-wood-header.jpg) left top repeat-x;height:60px
+    background:url(/assets/images/bg-wood-header.jpg) top left repeat-x;height:60px
 }
 
 dl {
