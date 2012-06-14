@@ -1,4 +1,4 @@
-@(l:List[Member])
+@(l:List[Member])(implicit session: Session)
 
 @l.map { m => 
   @member(m)

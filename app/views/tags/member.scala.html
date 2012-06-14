@@ -1,4 +1,10 @@
-@(m:Member)
+@(m:Member)(implicit session: Session)
 
-@m.name (@m.id) at <a href="mailto:@m.email" target="_blank">@m.email</a> 
+@import helpers.Utils
 
+@m.name 
+
+@if(Utils.isLogin(session)) {
+  (@m.id)
+  at <a href="mailto:@m.email" target="_blank">@m.email</a> 
+}
