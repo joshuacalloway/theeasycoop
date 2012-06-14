@@ -3,6 +3,16 @@
 @import helpers.Utils
 @import views.html.tags._
 
+@suspendLink(coop: Coop, member: Member) = {
+  @if(coop.memberStatus(member) == MemberStatus.ACTIVE) {
+    <a href="@actions.routes.SuspendMemberAction.action(coop.id.get, member.id.get)">
+Suspend</a>
+  } else {
+    <a href="@actions.routes.UnSuspendMemberAction.action(coop.id.get, member.id.get)">
+UnSuspend</a>
+  }
+}
+
 @main(title=coop.name){
   <ul>
   @if(Utils.isManager(session, coop)) {
@@ -32,10 +42,7 @@
     <ul>
     @coop.members.map { m =>
       @if(Utils.isManager(session,coop)) {
-	<li><a href="@actions.routes.SuspendMemberAction.action(coop.id.get, m.id.get)">
-Suspend</a> - 
-<a href="@actions.routes.UnSuspendMemberAction.action(coop.id.get, m.id.get)">
-UnSuspend</a>
+	<li>@suspendLink(coop,m)  
 -  <a href="/members/@m.id">View</a>@member(m) - @coop.memberStatus(m).name
       } else {
 	
