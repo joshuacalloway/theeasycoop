@@ -7,20 +7,28 @@
   <li><a href="/members/@item.id/edit">Edit Profile</a></li>
 </ul>
 } {
-  Id: @{item.id}
+  <span class="label">id:</span>  
+  @{item.id}
   <br/>
-  Name: @{item.name}
+  <span class="label">name:</span> @{item.name}
   <br>
-  Email: @{item.email}
-  <br>
-  Cell: @{item.cell}
-  <br>
+  <span class="label">email:</span>  
 
-  Address: @{item.address}
+  @{item.email}
   <br>
-  State: @{item.state.name}
+  <span class="label">Cell:</span>  
+
+  @{item.cell}
   <br>
-  zip code: @{item.zip_code}
+  <span class="label">Address:</span>  
+
+  @{item.address}
+  <br>
+  <span class="label">state:</span> @{item.state.name}
+  <br>
+  <span class="label">zip code:</span>  
+
+   @{item.zip_code}
 
 }
 

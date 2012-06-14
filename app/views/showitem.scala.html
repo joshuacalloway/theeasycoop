@@ -8,20 +8,30 @@
     <li><a href="/items/@item.id/edit">Edit Item</a>
   }
 } {
-  
+  <span class="label">name:</span>  
   @{item.name}
   <br>
+<span class="label">Description:</span>  
+
   @{item.description}
   <br>
+<span class="label">Type:</span>  
+
   @{item.itemType.name}
   <br>
+<span class="label">vendor:</span>  
+
   @{item.vendor.name}
   <br>
+<span class="label">cost:</span>  
+
   @{item.cost}
   <br>
+<span class="label">url:</span>  
+
   <a href="@{item.url}">@{item.url}</a>
   <br>
-  Created By:
+<span class="label">Created By:</span>  
   @member(item.createdBy.get)
   <br>
   <image src="/assets/images/@{item.itemType.name}.jpg"/>

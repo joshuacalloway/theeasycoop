@@ -8,16 +8,19 @@
     <li><a href="/vendors/@item.id/edit">Edit Item</a>
   }
 } {
-  
+<span class="label">name:</span>  
   @{item.name}
   <br>
+<span class="label">address:</span> 
   @{item.address}
   <br>
+<span class="label">zip code:</span> 
   @{item.zip_code}
   <br>
+<span class="label">url:</span> 
   <a href="@{item.url}">@{item.url}</a>
   <br>
-    Items:
+   <span class="label"> Items:</span> 
   <ul>
   @item.items.map { m =>
       <li><a href="/items/@m.id">@m.name</a>
