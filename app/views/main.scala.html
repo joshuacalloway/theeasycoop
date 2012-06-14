@@ -18,21 +18,23 @@
 <h1>The Easy Coop</h1>
 </div>
 <ul id="menu">
-  <li><a href="#">Global Menu</a>
+  <li><a href="#">Browse</a>
 <ul>
 <li><a href="/vendors">Vendors</a></li>
 <li><a href="/items">Items</a></li>
 <li><a href="/coops">Coops</a></li>
+</ul>
+  <li><a href="#">Contribute</a>
+<ul>
 @if(Utils.isLogin(session)) {
   <li><a href="/vendors/new">Add Vendor</a></li>
   <li><a href="/items/new">Add Item</a></li>
   <li><a href="/coops/new">Start a Coop</a></li>
 }
-</ul>
-  <li><a href="#">Page Menu</a>
 @menu
+</ul>
   </li>
-  <li><a href="#">User Menu</a>
+  <li><a href="#">User</a>
 <ul>
 @if(Utils.isLogin(session)) {
   <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a></li>

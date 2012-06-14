@@ -4,11 +4,9 @@
 @import views.html.tags._
 
 @main("Showing Item Order") {
-<ul>
 @if(Utils.isManager(session, order.coop)) {
   <li><a href="@actions.routes.EditItemOrderAction.editItem(order.coop.id.get, order.id.get)">Edit Order</a>
 }
-</ul>
 } {
   
 <span class="label">Id:</span> @{order.id}

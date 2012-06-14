@@ -14,13 +14,11 @@ UnSuspend</a>
 }
 
 @main(title=coop.name){
-  <ul>
   @if(Utils.isManager(session, coop)) {
     <li><a href="@actions.routes.EditCoopAction.editItem(coop.id.get)">Edit Coop</a></li>
     <li><a href="@actions.routes.AddMemberToCoopAction.actionForm(coop.id.get)">Add a member</a></li>
     <li><a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a></li>
   }
-  </ul>
 } {
   
   <span class="label">Name:</span> @{coop.name}
