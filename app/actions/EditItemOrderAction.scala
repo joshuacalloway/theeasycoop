@@ -36,7 +36,7 @@ object EditItemOrderAction extends Controller with Secured {
       item => {
         item.update(id)
         Logger.info("updatedItem...")
-        Ok(html.admin.itemorder.list(ItemOrder.findByCoopId(coopId)))
+        Ok(html.showcoop(Coop.findById(coopId).get))
       }
     )
   }
