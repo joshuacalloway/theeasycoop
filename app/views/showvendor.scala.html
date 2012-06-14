@@ -4,9 +4,6 @@
 @import views.html.tags._
 
 @main(title=item.name){
- @if(item.createdBy.get == Utils.getLoggedInUser(session)) {
-    <li><a href="/vendors/@item.id/edit">Edit Item</a></li>
-  }
 } {
 <span class="label">name:</span>  
   @{item.name}

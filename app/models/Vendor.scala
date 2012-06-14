@@ -81,11 +81,12 @@ object Vendor {
 
   def update(id: Long, item: Vendor) {
     DB.withConnection { implicit c =>
-      SQL("update vendor set name={name}, address={address}, zip_code={zip_code}, url={url} where id={id}").on(
+      SQL("update vendor set name={name}, address={address}, zip_code={zip_code}, url={url},state_id={state_id} where id={id}").on(
         'name -> item.name,
         'address -> item.address,
         'url -> item.url,
         'zip_code -> item.zip_code,
+	'state_id -> item.state_id,
         'id -> id
       ).executeUpdate()
                      }

@@ -6,9 +6,17 @@
 @main("Edit Vendor") {
 } {   
   @form(actions.routes.EditVendorAction.updateVendor(id)) {
-    @inputText(theform("id"))
     @inputText(theform("name"))
     @inputText(theform("address"))
+
+    @select(
+      theform("state_id"), 
+      State.options,
+      '_label -> "State", 
+      '_default -> "-- Choose a State --", 
+      '_showConstraints -> false,
+      '_error -> theform.error("state_id"))
+
     @inputText(theform("zip_code"))
     @inputText(theform("url"))
     
@@ -16,5 +24,12 @@
 
     <input type="submit" value="Update">
   }
+
+  <ul>Items
+  @Vendor.findById(id).get.items.map { m =>
+    <li><a href="/items/@m.id">@m.name</a>
+    }
+  </ul>
+
 }
 	
