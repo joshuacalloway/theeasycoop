@@ -4,11 +4,11 @@
 @import views.html.tags._
 
 @main("Showing Item Order") {
-
+<ul>
 @if(Utils.isManager(session, item.coop)) {
-  <li><a href="@item.id/edit">Edit Order</a>
+  <li><a href="@actions.routes.EditItemOrderAction.editItem(item.coop.id.get, item.id.get)">Edit Order</a>
 }
-
+</ul>
 } {  
 Id: @{item.id},
 <br/>
