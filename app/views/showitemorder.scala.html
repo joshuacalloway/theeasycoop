@@ -1,6 +1,7 @@
 @(item: ItemOrder)(implicit session: Session)
 
 @import helpers.Utils
+@import views.html.tags._
 
 @main("Showing Item Order") {
 
@@ -9,27 +10,29 @@
 }
 
 } {  
-@{item.id},
+Id: @{item.id},
 <br/>
-@{item.item.name},
+Name: @{item.item.name},
 <br/>
 Minimum Buyers: 
 @{item.minimumbuyers},
 <br/>
-@{item.membercost},
+Item Cost: @{item.membercost},
 <br/>
-@{item.description},
+Description: @{item.description},
 <br/>
-@{item.deadline_by},
+Order deadline: @{item.deadline_by},
 <br/>
-@{item.deliveryaddress},
+Delivery Address: @{item.deliveryaddress},
 <br/>
-@{item.created_at},
+Created at: @{item.created_at},
 <br/>
-@{item.createdBy.name},
+Created by @{member(item.createdBy)},
 <br/>
-@{item.coop.name},
+In Coop: @{item.coop.name},
 <br/>
+Vendor: @{vendor(item.item.vendor)}
+<br>
 ----------------------------
 <br/>
 # of Members In: @{item.members.size}
