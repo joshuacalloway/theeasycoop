@@ -56,3 +56,7 @@ label {
     float: left;
 }
 label:after { content: ": " }
+
+#globaltitle{
+    background:url(/assets/images/bg-wood-header.jpg) left top repeat-x;height:80px
+}
