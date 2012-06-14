@@ -34,3 +34,7 @@
 }
 #menu li:hover a { background: #617F8A; }
 #menu li:hover li a:hover { background: #95A9B1; }
+
+#content {
+    background-color:#EEEEEE;height:550px;width:600px;float:left;
+}
