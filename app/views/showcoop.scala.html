@@ -13,22 +13,22 @@
   </ul>
 } {
   
-  Name: @{coop.name}
+  <span class="label">Name:</span> @{coop.name}
   <br>
-  Description: @{coop.description}
+  <span class="label">Description:</span> @{coop.description}
   <br>
-  Coop Type: @{coop.coopType.name}
+  <span class="label">Coop Type:</span> @{coop.coopType.name}
   <br>
-  State: @{coop.state.name}
+  <span class="label">State:</span> @{coop.state.name}
   <br>
-  Zip: @{coop.zip_code}
+  <span class="label">Zip:</span> @{coop.zip_code}
   <br>
 
-  Manager : @member(coop.manager)
+  <span class="label">Manager:</span> @member(coop.manager)
 
   @if(coop.isPublic || Utils.isMember(session, coop)) {
     <br>
-    Members:
+    <span class="label">Members:</span>
     <ul>
     @coop.members.map { m =>
       @if(Utils.isManager(session,coop)) {
@@ -45,7 +45,7 @@
 
 
     <br/>
-    ItemOrders
+    <span class="label">ItemOrders</span>
 
     <ul>
     @coop.itemOrders.map { itemOrder =>

@@ -41,4 +41,6 @@
 
 span.label {
   text-decoration: underline;
+  padding: 10px;
+  margin: 10px;
 }
