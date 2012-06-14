@@ -29,7 +29,7 @@
   font-size:21px;
   padding-right:32px;
   padding-left:32px;
-  background: #2C5463;
+  background: #2C546;
   margin-left: 1px;
   white-space: nowrap;
 }
@@ -46,6 +46,8 @@
 #menu li:hover li a:hover { background: #95A9B1; }
 
 #content {
+    padding-top:20px;
+    padding-bottom:20px;
     background-color:#EEEEEE;height:550px;width:600px;float:left;
 }
 #pagetitle {
