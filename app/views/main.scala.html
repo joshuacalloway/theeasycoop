@@ -20,13 +20,13 @@
 <ul id="menu">
 <li id="globalmenu"><a href="#">Global Menu</a>
 <ul>
-<li><a href="/vendors">Vendors</a>
-<li><a href="/items">Items</a>
-<li><a href="/coops">Coops</a>
+<li><a href="/vendors">Vendors</a></li>
+<li><a href="/items">Items</a></li>
+<li><a href="/coops">Coops</a></li>
 @if(Utils.isLogin(session)) {
-  <li><a href="/vendors/new">Add Vendor</a>
-  <li><a href="/items/new">Add Item</a>
-  <li><a href="/coops/new">Start a Coop</a>
+  <li><a href="/vendors/new">Add Vendor</a></li>
+  <li><a href="/items/new">Add Item</a></li>
+  <li><a href="/coops/new">Start a Coop</a></li>
 }
 </ul>
 </li>
@@ -39,13 +39,13 @@
 <li id="usermenu"><a href="#">User Menu</a>
 <ul>
 @if(Utils.isLogin(session)) {
-  <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a>
+  <li><a href="/members/@Utils.getLoggedInUser(session).id">My Profile</a></li>
   @Utils.getLoggedInUser(session).coops.map { coop =>
-    <li><a href="/coops/@coop.id">@coop.name</a>
+    <li><a href="/coops/@coop.id">@coop.name</a></li>
 					   }
-  <li><a href="/logout">Logout</a>
+  <li><a href="/logout">Logout</a></li>
 } else {
-  <li><a href="/">Login</a>
+  <li><a href="/">Login</a></li>
 }
 </ul>
 </li>
