@@ -67,6 +67,14 @@ label {
 }
 label:after { content: ": " }
 
+#footer,
+#pagetitle{
+    background-color:#FFA500;clear:both;text-align:center;
+}
+#container {
+    width:600px;
+}
+
 #globaltitle{
     background:url(/assets/images/bg-wood-header.jpg) left top repeat-x;height:80px
 }
