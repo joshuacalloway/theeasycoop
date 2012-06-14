@@ -30,6 +30,12 @@ case class ItemOrder(id: Pk[Long] = null, item_id: Int, minimumbuyers: Int, memb
 
   def coop = { Coop.findById(coop_id).get }
   def members = { Member.findByItemOrderId(id.get) }
+  def isMemberIn(m: Member) : Boolean = {
+    members.foreach{ i =>
+      if (i == m) return true
+		  }
+    return false
+  }
 }
 
 object ItemOrder {

@@ -37,5 +37,5 @@ Vendor: @{vendor(item.item.vendor)}
 <br/>
 # of Members In: @{item.members.size}
 <br/>
-<a href="@item.id/members/adduser">I'm in</a>
+<a href="@actions.routes.AddLoggedInUserToItemOrderAction.action(item.coop.id.get, item.id.get)">I'm in</a>
 }
