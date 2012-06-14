@@ -3,7 +3,6 @@ package actions
 import anorm._
 import models.Coop
 import models.CoopForm
-import models.Member
 import play.api.Play.current
 import play.api._
 import play.api.data.Forms._
@@ -18,10 +17,10 @@ object ShowCoopAction extends Controller {
   def showItem(id: Long) = Action { implicit request =>
       val itemOption = Coop.findById(id)
       itemOption match {
-      case None => Ok("no item exists")
-      case Some(item) => {
-        Ok(html.showcoop(item))
+	case Some(item) => {
+          Ok(html.showcoop(item))
+	}
+	case None => Redirect(controllers.routes.Application.index)
       }
-      }
-    }    
+				 }    
 }
