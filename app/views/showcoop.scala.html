@@ -20,19 +20,13 @@ UnSuspend</a>
     <li><a href="@actions.routes.AddItemOrderToCoopAction.newItemByCoop(coop.id.get)">Add an Order</a></li>
   }
 } {
-  
-  <span class="label">Name:</span> @{coop.name}
-  <br>
-  <span class="label">Description:</span> @{coop.description}
-  <br>
-  <span class="label">Coop Type:</span> @{coop.coopType.name}
-  <br>
-  <span class="label">State:</span> @{coop.state.name}
-  <br>
-  <span class="label">Zip:</span> @{coop.zip_code}
-  <br>
 
-  <span class="label">Manager:</span> @member(coop.manager)
+  @text(coop.name, "name")
+  @text(coop.description, "Description")
+  @text(coop.coopType.name, "Coop Type")
+  @text(coop.state.name, "State")
+  @text(coop.zip_code, "Zip Code")
+  @text(coop.manager.name, "Manager")
 
   @if(coop.isPublic || Utils.isMember(session, coop)) {
     <br>

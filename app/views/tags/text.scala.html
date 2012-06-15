@@ -1,0 +1,23 @@
+@**
+ * Generate an HTML input text.
+ *
+ * Example:
+ * {{{
+ * @inputText(field = myForm("name"), args = 'size -> 10, 'placeholder -> "Your name")
+ * }}}
+ *
+ * @param field The form field.
+ * @param args Set of extra attributes.
+ * @param handler The field constructor.
+ *@
+
+@(value:String, label:String)
+@import helper._
+
+
+<dl class=" " id="@{label}_field">
+<dt>@label</dt>
+<dd>
+<span id="@label" name="@label">@value</span>
+</dd>
+</dl>

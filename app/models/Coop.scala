@@ -106,10 +106,11 @@ object Coop {
 
   def update(id: Long, coop: Coop) {
     DB.withConnection { implicit c =>
-      SQL("update Coop set name={name}, description={description}, coop_type_id={coop_type_id} where id={id}").on(
+      SQL("update Coop set name={name}, description={description}, coop_type_id={coop_type_id}, state_id={state_id} where id={id}").on(
         'name -> coop.name,
         'description -> coop.description,
 	'coop_type_id -> coop.coop_type_id,
+	'state_id -> coop.state_id,
         'id -> id
       ).executeUpdate()
                      }
