@@ -10,11 +10,14 @@
     @inputText(
       theform("name"), 
       '_label -> null,
+      'placeholder -> "Enter Name",
       '_help -> "Please enter your name.",
       '_error -> theform.globalError
     )
-    @inputText(theform("email"))
-    @inputPassword(theform("password"))
+    @inputText(theform("email"),
+	     'placeholder -> "Enter Email")
+    @inputPassword(theform("password"),
+		 'placeholder -> "Enter Password")
     @helper.input(theform("cell")) { (id, name, value, args) =>
       <input type="text" placeholder="@name" name="@name" id="@id" @toHtmlArgs(args)>
 				 }
@@ -28,6 +31,7 @@
 	'_error -> theform.error("state_id"))
     
     @inputText(theform("zip_code"),
+	       'placeholder -> "Enter Zip Code",
 	       '_label -> "Zip Code")
     
     <input type="submit" value="Create">
