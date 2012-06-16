@@ -15,7 +15,7 @@ case class State(id: Pk[Long], name: String, code: String) extends AbstractModel
 }
 
 object State {
-
+  def UNKNOWN = new State(null, "UNKNOWN", "UNKKNOWN")
   val mapping = {
     get[Pk[Long]]("id") ~
     get[String]("name") ~

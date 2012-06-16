@@ -16,11 +16,11 @@ object MemberForm {
   val form: Form[Member] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
+      "name" -> optional(text),
       "email" -> nonEmptyText,
       "password" -> nonEmptyText,
       "cell" -> optional(text),
-      "address" -> text,
-    "state_id" -> number,
+      "address" -> optional(text),
+    "state_id" -> optional(number),
     "zip_code" -> text)(Member.apply)(Member.unapply))
 }

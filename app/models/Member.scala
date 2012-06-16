@@ -6,8 +6,8 @@ import play.api.db._
 import play.api.Play.current
 import play.Logger
 
-case class Member(id: Pk[Long], name: String, email: String, password: String, cell: Option[String], address: String, state_id: Int, zip_code:String) extends AbstractModel {
-  
+case class Member(id: Pk[Long], name2: Option[String], email: String, password: String, cell: Option[String], address: Option[String], state_id: Option[Int], zip_code:String) extends AbstractModel {
+  val name = this.name2.getOrElse("UNKNOWN")
   def save = {
     Member.save(this)
   }
@@ -16,19 +16,23 @@ case class Member(id: Pk[Long], name: String, email: String, password: String, c
   }
   def all = Member.all
   def coops = Member.coops(id)
-  def state = State.findById(state_id).get
+  def state = state_id match {
+    case Some(id) => State.findById(id).get
+    case _ => State.UNKNOWN
+  }
 }
 
 object Member {
 
+  def UNKNOWN = new Member(null, null, "UNKNOWN@mail.com", "password", None, None, None, "911")
   val mapping = {
     get[Pk[Long]]("id") ~
-    get[String]("name") ~
+    get[Option[String]]("name") ~
     get[String]("email") ~
     get[String]("password") ~
     get[Option[String]]("cell") ~
-    get[String]("address") ~
-    get[Int]("state_id") ~
+    get[Option[String]]("address") ~
+    get[Option[Int]]("state_id") ~
     get[String]("zip_code") map {
       case id~name~email~password~cell~address~state_id~zip_code => Member(id, name, email,password,cell,address,state_id,zip_code)
     }
@@ -55,11 +59,11 @@ object Member {
    * Construct the Map[String,String] needed to fill a select options set.
    */
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
-    SQL("select * from member order by name").as(Member.mapping *).map(c => c.id.toString -> c.name)
+    SQL("select * from member order by email").as(Member.mapping *).map(c => c.id.toString -> c.email)
   }
 
   def optionsByCoopId(id:Long): Seq[(String,String)] = DB.withConnection { implicit connection =>
-    SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coop_id} order by name").on('coop_id -> id ).as(Member.mapping *).map(c => c.id.toString -> c.name)
+    SQL("select m.* from member m, coop_member cm where cm.member_id = m.id and cm.coop_id = {coop_id} order by email").on('coop_id -> id ).as(Member.mapping *).map(c => c.id.toString -> c.email)
   }
 
   def findByName(name: String): Option[Member] = DB.withConnection

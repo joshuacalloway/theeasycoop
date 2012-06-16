@@ -15,7 +15,7 @@ object CoopForm {
   val form: Form[Coop] = Form(
     mapping(
       "id" -> ignored(NotAssigned:Pk[Long]),
-      "name" -> nonEmptyText,
+      "name" -> text,
       "description" -> nonEmptyText,
       "coop_type_id" -> number,
       "manager_id" -> number,
