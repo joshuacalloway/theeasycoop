@@ -72,13 +72,7 @@ label:after { content: ": " }
 #footer{
     background-color:#FFA500;clear:both;text-align:center;
 }
-#container {
-    width:600px;
-}
 
-#globaltitle{
-    background:url(/assets/images/bg-wood-header.jpg) top left repeat-x;height:60px
-}
 
 dd {
     margin:0;
