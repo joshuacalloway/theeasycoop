@@ -30,7 +30,9 @@ UnSuspend</a>
 
   @if(coop.isPublic || Utils.isMember(session, coop)) {
     <br>
-    <span class="label">Members:</span>
+    <dl class="list" id="Members_field">
+    <dt>Members</dt>
+    <dd>
     <ul>
     @coop.members.map { m =>
       @if(Utils.isManager(session,coop)) {
@@ -45,7 +47,8 @@ UnSuspend</a>
 
 		     }
     </ul>
-
+    </dd>
+    </dl>
 
     <br/>
     <span class="label">ItemOrders</span>
